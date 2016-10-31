@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace StackoverflowApplication.Models
@@ -9,6 +10,7 @@ namespace StackoverflowApplication.Models
     {
         public int postID { get; set; }
         public int parentID { get; set; }
+        public int test { get; set; }
 
     }
 }
