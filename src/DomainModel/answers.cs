@@ -10,7 +10,7 @@ namespace StackoverflowApplication.Models
     {
         public int postID { get; set; }
         public int parentID { get; set; }
-        public int test { get; set; }
+       
 
     }
 }

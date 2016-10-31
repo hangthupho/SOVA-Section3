@@ -3,52 +3,53 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using DomainModel;
+
 using Microsoft.EntityFrameworkCore;
+using StackoverflowApplication.Models;
 
 namespace DatabaseService
 {
     public class MysqlDataService : IDataService
     {
         
-        public IList<Category> GetCategories(int page, int pagesize)
+        public IList<posts> GetPost(int page, int pagesize)
         {
             using (var db = new StFlwContext())
             {
-                return db.Categories
-                    .OrderBy(c => c.Id)
+                return db.Posts
+                    .OrderBy(c => c.postID)
                     .Skip(page * pagesize)
                     .Take(pagesize)
                     .ToList();
             }
         }
 
-        public Category GetCategory(int id)
+        public posts GetPost(int id)
         {
             using (var db = new StFlwContext())
             {
-                return db.Categories.FirstOrDefault(c => c.Id == id);
+                return db.Posts.FirstOrDefault(c => c.postID == id);
             }
         }
 
-        public void AddCategory(Category category)
+        public void AddPost(posts post)
         {
             using (var db = new StFlwContext())
             {
-                category.Id = db.Categories.Max(c => c.Id) + 1;
-                db.Add(category);
+                post.postID = db.Posts.Max(c => c.postID) + 1;
+                db.Add(post);
                 db.SaveChanges();
             }
         }
 
-        public bool UpdateCategory(Category category)
+        public bool UpdatePost(posts post)
         {
             using (var db = new StFlwContext())
 
                 try
                 {
-                    db.Attach(category);
-                    db.Entry(category).State = EntityState.Modified;
+                    db.Attach(post);
+                    db.Entry(post).State = EntityState.Modified;
                     return db.SaveChanges() > 0;
                 }
                 catch (DbUpdateConcurrencyException)
@@ -58,11 +59,11 @@ namespace DatabaseService
 
         }
 
-        public bool DeleteCategory(int id)
+        public bool DeletePost(int id)
         {
             using (var db = new StFlwContext())
             {
-                var category = db.Categories.FirstOrDefault(c => c.Id == id);
+                var category = db.Posts.FirstOrDefault(c => c.postID == id);
                 if (category == null)
                 {
                     return false;
@@ -72,11 +73,11 @@ namespace DatabaseService
             }
         }
 
-        public int GetNumberOfCategories()
+        public int GetNumberOfPosts()
         {
             using (var db = new StFlwContext())
             {
-                return db.Categories.Count();
+                return db.Posts.Count();
             }
         }
     }

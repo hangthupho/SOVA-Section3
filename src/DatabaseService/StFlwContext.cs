@@ -5,21 +5,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using DomainModel;
 using Microsoft.EntityFrameworkCore;
+using StackoverflowApplication.Models;
 
 namespace DatabaseService
 {
     public class StFlwContext : DbContext
     {
 
-        public DbSet<Post> Posts { get; set; }
+        public DbSet<posts> Posts { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Post>().ToTable("post");
-          
-
-
+            modelBuilder.Entity<posts>().ToTable("posts");
             base.OnModelCreating(modelBuilder);
         }
 

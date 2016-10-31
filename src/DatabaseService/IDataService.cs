@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DomainModel;
+using StackoverflowApplication.Models;
 
 namespace DatabaseService
 {
     public interface IDataService
     {
-        IList<Post> GetCategories(int page, int pagesize);
-      Post GetPost(int id);
-        void AddPost(Post post);
-        bool UpdatePost(Category category);
+        IList<posts> GetPost(int page, int pagesize);
+        posts GetPost(int id);
+        void AddPost(posts post);
+        bool UpdatePost(posts post);
         bool DeletePost(int id);
         int GetNumberOfPosts();
     }
