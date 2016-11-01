@@ -5,10 +5,13 @@ using System.Threading.Tasks;
 
 namespace StackoverflowApplication.Models
 {
-    public class linkposts
+    public partial class linkposts
     {
+      
+       
         public int pID { get; set; }
         public int linkPostID { get; set; }
         public int postID { get; set; }
+
     }
 }
