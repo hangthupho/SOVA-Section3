@@ -4,30 +4,32 @@ using System.Linq;
 using System.Threading.Tasks;
 using DomainModel;
 using Microsoft.AspNetCore.Mvc;
+using AutoMapper;
 
 namespace WebApi.JsonModels
 {
     public class ModelFactory
     {
-        public static CategoryModel Map(Category category, IUrlHelper url)
-        {
-            // hint: use AutoMapper
-            return new CategoryModel
+       
+            private static readonly IMapper PostMapper;
+            static ModelFactory()
             {
-                Url = url.Link(Config.CategoryRoute, new { id = category.Id}),
-                Name = category.Name,
-                Description = category.Description
-            };
-        }
+                //create a map
+                var movieConfig = new MapperConfiguration(acfg => acfg.CreateMap<Post, PostViewModel>());
 
-        public static Category Map(CategoryModel model)
-        {
-            // hint: use AutoMapper
-            return new Category
+                PostMapper = movieConfig.CreateMapper();
+            }
+
+
+            public static PostViewModel Map(Post post, string url)
             {
-                Name = model.Name,
-                Description = model.Description
-            };
+                if (post == null) return null;
+                //use created map
+                var annotationModel = PostMapper.Map<PostViewModel>(post);
+                annotationModel.Url = url;
+
+                return annotationModel;
+            }
         }
     }
-}
+

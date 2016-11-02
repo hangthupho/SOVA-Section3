@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace StackoverflowApplication.Models
+namespace DomainModel
 {
     public class comments
     {
         public comments()
         {
-            this.post = new HashSet<posts>();
+            this.post = new HashSet<Post>();
             this.user = new HashSet<users>();
         }
         public int commentID { get; set; }
@@ -19,6 +19,6 @@ namespace StackoverflowApplication.Models
         public DateTime commentCreationDate { get; set; }
 
         public virtual ICollection<users> user { get; set; }
-        public virtual ICollection<posts> post { get; set; }
+        public virtual ICollection<Post> post { get; set; }
     }
 }

@@ -3,82 +3,52 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-
+using DomainModel;
 using Microsoft.EntityFrameworkCore;
-using StackoverflowApplication.Models;
 
 namespace DatabaseService
 {
     public class MysqlDataService : IDataService
     {
         
-        public IList<posts> GetPost(int page, int pagesize)
-        {
-            using (var db = new StFlwContext())
+            public IList<Post> GetPosts(int limit, int offset)
             {
-                return db.Posts
-                    .OrderBy(c => c.postID)
-                    .Skip(page * pagesize)
-                    .Take(pagesize)
-                    .ToList();
-            }
-        }
-
-        public posts GetPost(int id)
-        {
-            using (var db = new StFlwContext())
-            {
-                return db.Posts.FirstOrDefault(c => c.postID == id);
-            }
-        }
-
-        public void AddPost(posts post)
-        {
-            using (var db = new StFlwContext())
-            {
-                post.postID = db.Posts.Max(c => c.postID) + 1;
-                db.Add(post);
-                db.SaveChanges();
-            }
-        }
-
-        public bool UpdatePost(posts post)
-        {
-            using (var db = new StFlwContext())
-
-                try
+                using (var db_posts = new SovaContext())
                 {
-                    db.Attach(post);
-                    db.Entry(post).State = EntityState.Modified;
-                    return db.SaveChanges() > 0;
+                    return db_posts.Post
+                        .OrderBy(m => m.postID)
+                        .Skip(offset)
+                        .Take(limit)
+                        .ToList();
                 }
-                catch (DbUpdateConcurrencyException)
+            }
+
+            public Post GetPostById(int id)
+            {
+                using (var db = new SovaContext())
                 {
-                    return false;
+                    return db.Post.FirstOrDefault(c => c.postID == id);
+                }
+            }
+
+            public int GetNumberOfPosts()
+            {
+                using (var db = new SovaContext())
+                {
+                    return db.Post.Count();
                 }
 
-        }
-
-        public bool DeletePost(int id)
-        {
-            using (var db = new StFlwContext())
-            {
-                var category = db.Posts.FirstOrDefault(c => c.postID == id);
-                if (category == null)
-                {
-                    return false;
-                }
-                db.Remove(category);
-                return db.SaveChanges() > 0;
             }
-        }
 
-        public int GetNumberOfPosts()
-        {
-            using (var db = new StFlwContext())
+            public void AddNewPost(Post post)
             {
-                return db.Posts.Count();
+                using (var db = new SovaContext())
+                {
+                    post.postID = db.Post.Max(m => m.postID) + 1;
+                    db.Add(post);
+                    db.SaveChanges();
+                }
             }
         }
     }
-}
+
