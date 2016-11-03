@@ -5,9 +5,15 @@ using System.Threading.Tasks;
 
 namespace DomainModel
 {
-    public class tags
+    public class Tag
     {
+        public Tag()
+        {
+            //this.post = new HashSet<Post>();
+        }
         public int postID { get; set; }
         public string tag { get; set; }
+        
+        //public virtual ICollection<Post> posts { get; set; }
     }
 }

@@ -15,11 +15,15 @@ namespace DatabaseService
             {
                 using (var db_posts = new SovaContext())
                 {
-                    return db_posts.Post
+                    var p = db_posts.Posts
+                        .Include(m => m.Users)
+                        .Include(m => m.Tags)
                         .OrderBy(m => m.postID)
                         .Skip(offset)
                         .Take(limit)
                         .ToList();
+
+                    return p;
                 }
             }
 
@@ -27,7 +31,7 @@ namespace DatabaseService
             {
                 using (var db = new SovaContext())
                 {
-                    return db.Post.FirstOrDefault(c => c.postID == id);
+                    return db.Posts.FirstOrDefault(c => c.postID == id);
                 }
             }
 
@@ -35,7 +39,7 @@ namespace DatabaseService
             {
                 using (var db = new SovaContext())
                 {
-                    return db.Post.Count();
+                    return db.Posts.Count();
                 }
 
             }
@@ -44,7 +48,7 @@ namespace DatabaseService
             {
                 using (var db = new SovaContext())
                 {
-                    post.postID = db.Post.Max(m => m.postID) + 1;
+                    post.postID = db.Posts.Max(m => m.postID) + 1;
                     db.Add(post);
                     db.SaveChanges();
                 }

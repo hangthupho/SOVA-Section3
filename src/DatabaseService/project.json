@@ -3,8 +3,13 @@
 
   "dependencies": {
     "DomainModel": "1.0.0-*",
+    
+    
+
+   
     "NETStandard.Library": "1.6.0",
-    "Pomelo.EntityFrameworkCore.MySql": "1.0.1-prerelease-10019"
+    "Pomelo.EntityFrameworkCore.MySql": "1.0.1-prerelease-10019",
+   
   },
 
   "frameworks": {

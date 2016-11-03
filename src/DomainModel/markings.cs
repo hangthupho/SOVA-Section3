@@ -9,12 +9,12 @@ namespace DomainModel
     {
         public markings()
         {
-            this.post = new HashSet<Post>();
+            this.Posts = new HashSet<Post>();
         }
         public int mID { get; set; }
         public int postID { get; set; }
         public bool status { get; set; }
-    public virtual ICollection<Post> post { get; set; }
+    public virtual ICollection<Post> Posts { get; set; }
     
     }
 }

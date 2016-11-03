@@ -15,9 +15,10 @@ namespace WebApi.JsonModels
             static ModelFactory()
             {
                 //create a map
-                var movieConfig = new MapperConfiguration(acfg => acfg.CreateMap<Post, PostViewModel>());
-
-                PostMapper = movieConfig.CreateMapper();
+                var postConfig = new MapperConfiguration(acfg => acfg.CreateMap<Post, PostViewModel>());
+                
+                PostMapper = postConfig.CreateMapper();
+                
             }
 
 
@@ -25,11 +26,12 @@ namespace WebApi.JsonModels
             {
                 if (post == null) return null;
                 //use created map
+                
                 var annotationModel = PostMapper.Map<PostViewModel>(post);
                 annotationModel.Url = url;
-
                 return annotationModel;
             }
+            //public static 
         }
     }
 

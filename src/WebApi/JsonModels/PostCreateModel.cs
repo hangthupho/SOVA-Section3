@@ -3,23 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DomainModel
+namespace WebApi.JsonModels
 {
-    public class Post
+    public class PostCreateModel
     {
-        public Post()
-        {
-            //this.tag = new HashSet<Tag>();
-           
-        }
-        public int postID { get; set; }
+        public string Url { get; set; }
         public int score { get; set; }
         public string postBody { get; set; }
         public DateTime createdDate { get; set; }
         public int userID { get; set; }
-
-        public virtual User Users { get; set; }
-        public ICollection<Tag> Tags { get; set; }
-
+        public string tag { get; set; }
     }
 }

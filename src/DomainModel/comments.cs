@@ -9,8 +9,8 @@ namespace DomainModel
     {
         public comments()
         {
-            this.post = new HashSet<Post>();
-            this.user = new HashSet<users>();
+            this.Posts = new HashSet<Post>();
+            this.Users = new HashSet<User>();
         }
         public int commentID { get; set; }
         public Nullable<int> postID { get; set; }
@@ -18,7 +18,7 @@ namespace DomainModel
         public string commentBody { get; set; }
         public DateTime commentCreationDate { get; set; }
 
-        public virtual ICollection<users> user { get; set; }
-        public virtual ICollection<Post> post { get; set; }
+        public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<Post> Posts { get; set; }
     }
 }

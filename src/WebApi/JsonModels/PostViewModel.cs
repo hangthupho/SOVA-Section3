@@ -12,6 +12,7 @@ namespace WebApi.JsonModels
         public string postBody { get; set; }
         public DateTime createdDate { get; set; }
         public int userID { get; set; }
+        public string userName { get; set; }
 
     }
 }

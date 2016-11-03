@@ -9,7 +9,7 @@ using WebApi.JsonModels;
 
 namespace WebApi.Controllers
 {
-    [Route("api/movies")]
+    [Route("api/posts")]
     public class PostController : Controller
     {
         public IDataService _iDataService;
@@ -29,7 +29,10 @@ namespace WebApi.Controllers
             {
                 Url = Url.Action("Get", "Post", new { p.postID }, Url.ActionContext.HttpContext.Request.Scheme),
                 postBody = p.postBody,
-                score = p.score
+                score = p.score,
+              userID = p.userID,
+                createdDate = p.createdDate,
+                userName = p.Users.userName
             });
 
             var totalMovieNumber = _iDataService.GetNumberOfPosts();
@@ -66,9 +69,9 @@ namespace WebApi.Controllers
 
 
         [HttpPost]
-        public IActionResult Post([FromBody] PostViewModel model)
+        public IActionResult Post([FromBody] PostCreateModel model)
         {
-            var post = new Post { postBody = model.postBody, score = model.score };
+            var post = new Post { postBody = model.postBody, score = model.score, Tags = new List<Tag> { new Tag { tag = model.tag} } };
             _iDataService.AddNewPost(post);
             var url = Url.Action("Get", "Post", new { post.postID }, Url.ActionContext.HttpContext.Request.Scheme);
             var movieAdded = ModelFactory.Map(post, url);
