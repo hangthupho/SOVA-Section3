@@ -16,7 +16,7 @@ namespace DatabaseService
                 using (var db_posts = new SovaContext())
                 {
                     var p = db_posts.Posts
-                        .Include(m => m.Users)
+                      //  .Include(m => m.Users)
                         .Include(m => m.Tags)
                         .OrderBy(m => m.postID)
                         .Skip(offset)

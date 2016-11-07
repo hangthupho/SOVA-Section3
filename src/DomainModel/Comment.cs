@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace DomainModel
 {
-    public class comments
+    public class Comment
     {
-        public comments()
+        public Comment()
         {
             this.Posts = new HashSet<Post>();
             this.Users = new HashSet<User>();
@@ -16,7 +16,7 @@ namespace DomainModel
         public Nullable<int> postID { get; set; }
         public Nullable<int> userID { get; set; }
         public string commentBody { get; set; }
-        public DateTime commentCreationDate { get; set; }
+        public string commentCreationDate { get; set; }
 
         public virtual ICollection<User> Users { get; set; }
         public virtual ICollection<Post> Posts { get; set; }

@@ -28,6 +28,8 @@ namespace DatabaseService
             modelBuilder.Entity<Tag>().ToTable("tags");
             modelBuilder.Entity<Tag>().HasKey(u => new {u.postID, u.tag});
 
+            modelBuilder.Entity<Comment>().ToTable("comments");
+            modelBuilder.Entity<Comment>().HasKey(c => new { c.commentID });
            
             base.OnModelCreating(modelBuilder);
         }

@@ -66,7 +66,7 @@ namespace WebApi.Controllers
             return Ok(model);
         }
 
-
+/*
 
         [HttpPost]
         public IActionResult Post([FromBody] PostCreateModel model)
@@ -76,6 +76,6 @@ namespace WebApi.Controllers
             var url = Url.Action("Get", "Post", new { post.postID }, Url.ActionContext.HttpContext.Request.Scheme);
             var movieAdded = ModelFactory.Map(post, url);
             return Ok(movieAdded);
-        }
+        }*/
     }
 }
