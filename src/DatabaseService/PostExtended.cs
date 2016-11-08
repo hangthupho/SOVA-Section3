@@ -10,6 +10,6 @@ namespace DatabaseService
     {
         public string Title { get; internal set; }
        
-        public string ParentId { get; internal set; }
+        //public string ParentId { get; internal set; }
     }
 }

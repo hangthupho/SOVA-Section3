@@ -22,31 +22,37 @@ namespace DatabaseService
                     .ToList();
             }
         }
-        public IList<Post> GetPosts(int limit, int offset)
+        public IList<PostExtended> GetPosts(int limit, int offset)
         {
-            using (var db_posts = new SovaContext())
+            using (var db = new SovaContext())
             {
-                var p = db_posts.Posts
+                var pm =(from p in db.Posts select new PostExtended{
+                    PostBody = p.PostBody,
+                    Score = p.Score,
+                    UserId = p.UserId,
+                    CreatedDate = p.CreatedDate,
                     
-                    .Include(m => m.Users)
-                    //.Include(m => m.Answers)
+                    Title = p.Question.Title
+                })
+                    //.Include(m => m.Users)
+                    //.Include(m => m.Question)
                     .OrderBy(m => m.PostId)
                     //.Where()
                     .Skip(offset)
                     .Take(limit)
                     .ToList();
 
-                return p;
+                return pm;
             }
         }
 
-        public Post GetPostById(int id)
-        {
-            using (var db = new SovaContext())
-            {
-                return db.Posts.FirstOrDefault(c => c.PostId == id);
-            }
-        }
+        //public PostExtended GetPostById(int id)
+        //{
+        //    using (var db = new SovaContext())
+        //    {
+        //        return db.Posts.FirstOrDefault(c => c.PostId == id);
+        //    }
+        //}
 
         public int GetNumberOfPosts()
         {

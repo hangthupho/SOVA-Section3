@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using DomainModel;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
+using DatabaseService;
 
 namespace WebApi.JsonModels
 {
@@ -13,10 +14,13 @@ namespace WebApi.JsonModels
 
         private static readonly IMapper PostMapper;
         private static readonly IMapper CommentMapper;
+        private static readonly IMapper MapPostExtended;
         static ModelFactory()
         {
-            //create a map
-            var postConfig = new MapperConfiguration(acfg => acfg.CreateMap<Post, PostViewModel>());
+            var PostExtendConfig = new MapperConfiguration(acfg => acfg.CreateMap<PostExtended, PostViewModel>());
+            MapPostExtended = PostExtendConfig.CreateMapper();
+             //create a map
+             var postConfig = new MapperConfiguration(acfg => acfg.CreateMap<Post, PostViewModel>());
 
             PostMapper = postConfig.CreateMapper();
 
@@ -31,14 +35,15 @@ namespace WebApi.JsonModels
 
 
 
-        public static PostViewModel Map(Post post, string url)
+        public static PostViewModel Map(PostExtended post, IUrlHelper url)
         {
             if (post == null) return null;
             //use created map
 
-            var annotationModel = PostMapper.Map<PostViewModel>(post);
-            annotationModel.Url = url;
-            return annotationModel;
+            var Model = PostMapper.Map<Post, PostViewModel>(post);
+            Model.Url = url.Link("PostRoute", new { id = post.PostId });
+            Model.Title = post.Title;
+            return Model;
         }
         public static CommentViewModel Map(Comment comment, IUrlHelper url)
         {

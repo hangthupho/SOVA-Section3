@@ -18,7 +18,8 @@ namespace DomainModel
 
         [ForeignKey("UserId")]
         public User Users { get; set; }
-       // public virtual Answer Answers { get; set; }
-       
+        // public virtual Answer Answers { get; set; }
+        public virtual Question Question { get; set; }
+
     }
 }
