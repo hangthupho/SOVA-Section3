@@ -27,9 +27,11 @@ namespace DatabaseService
             using (var db_posts = new SovaContext())
             {
                 var p = db_posts.Posts
+                    
                     .Include(m => m.Users)
-                    // .Include(m => m.Tags)
+                    //.Include(m => m.Answers)
                     .OrderBy(m => m.PostId)
+                    //.Where()
                     .Skip(offset)
                     .Take(limit)
                     .ToList();
@@ -73,6 +75,10 @@ namespace DatabaseService
             }
 
         }
+
+      
+
+        
     }
     }
 

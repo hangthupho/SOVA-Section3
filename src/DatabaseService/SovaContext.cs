@@ -18,6 +18,8 @@ namespace DatabaseService
 
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Answer> Answers { get; set; }
+        public DbSet<Question> Questions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -29,6 +31,11 @@ namespace DatabaseService
             modelBuilder.Entity<Tag>().ToTable("tags");
             modelBuilder.Entity<Tag>().HasKey(u => new {u.PostId, u.tag});
             modelBuilder.Entity<Comment>().ToTable("comments");
+            modelBuilder.Entity<Comment>().HasKey(k => k.CommentId);
+            modelBuilder.Entity<Answer>().ToTable("answers");
+            modelBuilder.Entity<Answer>().HasKey(a =>a.PostId);
+            modelBuilder.Entity<Question>().ToTable("question");
+            modelBuilder.Entity<Question>().HasKey(q => q.PostId);
 
             // modelBuilder.Entity<>()
 
