@@ -5,13 +5,17 @@ using System.Threading.Tasks;
 
 namespace DomainModel
 {
-    public partial class linkposts
+    public class Marking
     {
-      
-       
-        public int pID { get; set; }
-        public int linkPostID { get; set; }
-        public int postID { get; set; }
 
+        public Marking()
+        {
+            this.Posts = new HashSet<Post>();
+        }
+
+        public int MId { get; set; }
+        public int PostId { get; set; }
+        public bool Status { get; set; }
+        public virtual ICollection<Post> Posts { get; set; }
     }
 }

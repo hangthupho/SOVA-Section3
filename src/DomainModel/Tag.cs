@@ -11,7 +11,7 @@ namespace DomainModel
         {
             //this.post = new HashSet<Post>();
         }
-        public int postID { get; set; }
+        public int PostId { get; set; }
         public string tag { get; set; }
         
         //public virtual ICollection<Post> posts { get; set; }

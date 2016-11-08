@@ -8,11 +8,10 @@ namespace WebApi.JsonModels
     public class PostViewModel
     {
         public string Url { get; set; }
-        public int score { get; set; }
-        public string postBody { get; set; }
-        public DateTime createdDate { get; set; }
-        public int userID { get; set; }
-        public string userName { get; set; }
-
+        public int Score { get; set; }
+        public string PostBody { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public int UserId { get; set; }
+        public string UserName { get; set; }
     }
 }

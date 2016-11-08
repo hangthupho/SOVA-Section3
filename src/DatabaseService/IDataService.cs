@@ -12,6 +12,8 @@ namespace DatabaseService
         IList<Post> GetPosts(int limit, int offset);
         Post GetPostById(int id);
         int GetNumberOfPosts();
-        void AddNewPost(Post post);
+        void AddNewComment(Comment comment);
+        IList<Comment> GetComments(int limit, int offset);
+        int GetNumberOfComments();
     }
 }

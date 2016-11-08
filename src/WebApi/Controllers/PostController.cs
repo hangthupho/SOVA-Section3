@@ -27,12 +27,12 @@ namespace WebApi.Controllers
             int offset = page * pageSize;
             var postList = _iDataService.GetPosts(limit, offset).Select(p => new PostViewModel
             {
-                Url = Url.Action("Get", "Post", new { p.postID }, Url.ActionContext.HttpContext.Request.Scheme),
-                postBody = p.postBody,
-                score = p.score,
-              userID = p.userID,
-                createdDate = p.createdDate,
-                userName = p.Users.userName
+                Url = Url.Action("Get", "Post", new { p.PostId }, Url.ActionContext.HttpContext.Request.Scheme),
+                PostBody = p.PostBody,
+                Score = p.Score,
+                UserId = p.UserId,
+                CreatedDate = p.CreatedDate,
+                UserName = p.Users.UserName
             });
 
             var totalMovieNumber = _iDataService.GetNumberOfPosts();
@@ -59,23 +59,23 @@ namespace WebApi.Controllers
             var data = _iDataService.GetPostById(id);
             if (data == null) return NotFound();
 
-            var url = Url.Action("Get", "Post", new { data.postID }, Url.ActionContext.HttpContext.Request.Scheme);
+            var url = Url.Action("Get", "Post", new { data.PostId }, Url.ActionContext.HttpContext.Request.Scheme);
 
             var model = ModelFactory.Map(data, url);
 
             return Ok(model);
         }
 
-/*
 
-        [HttpPost]
-        public IActionResult Post([FromBody] PostCreateModel model)
-        {
-            var post = new Post { postBody = model.postBody, score = model.score, Tags = new List<Tag> { new Tag { tag = model.tag} } };
-            _iDataService.AddNewPost(post);
-            var url = Url.Action("Get", "Post", new { post.postID }, Url.ActionContext.HttpContext.Request.Scheme);
-            var movieAdded = ModelFactory.Map(post, url);
-            return Ok(movieAdded);
-        }*/
+
+
+
+        //[HttpPost("{postid}/comments")]
+        //public IActionResult Comment([FromBody] CommentCreateModel model)
+        //{
+        //    var category = ModelFactory.Map(model);
+        //    DataService.AddCategory(category);
+        //    return Ok(ModelFactory.Map(category, Url));
+        //}
     }
 }
