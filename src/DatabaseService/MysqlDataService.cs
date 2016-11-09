@@ -32,7 +32,8 @@ namespace DatabaseService
                     Score = p.Score,
                     PostBody = p.PostBody,
                     CreatedDate = p.CreatedDate,
-                    UserId = p.UserId
+                    UserId = p.UserId,
+                    UserName = p.Users.UserName
                })
                     //.Include(m => m.Users)
                     //.Include(m => m.Question)

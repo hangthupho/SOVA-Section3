@@ -14,11 +14,11 @@ namespace DomainModel
        {
         //   this.Posts = new HashSet<Post>();
         }
-        [Key]
+        //[Key]
         public int PostId { get; set; }
         public int ParentId { get; set; }
-
-
+        public virtual Post Posts { get; set; }
+        
         //[ForeignKey("PostId")]
         //public Post Posts { get; set; }
 

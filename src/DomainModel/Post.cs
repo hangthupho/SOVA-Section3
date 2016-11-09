@@ -9,16 +9,16 @@ namespace DomainModel
 {
     public class Post
     {
-        [Key]
+        //[Key]
         public int PostId { get; set; }
         public int Score { get; set; }
         public string PostBody { get; set; }
         public DateTime CreatedDate { get; set; }
         public int UserId { get; set; }
 
-        [ForeignKey("UserId")]
-        public User Users { get; set; }
-        // public virtual Answer Answers { get; set; }
+       // [ForeignKey("UserId")]
+        public virtual User Users { get; set; }
+        public virtual Answer Answers { get; set; }
         public virtual Question Question { get; set; }
 
     }

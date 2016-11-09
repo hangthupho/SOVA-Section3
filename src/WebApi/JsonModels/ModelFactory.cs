@@ -37,6 +37,7 @@ namespace WebApi.JsonModels
             var model = Mapper.Map<Post, PostViewModel>(post);
             model.Url = urlHelper.Link(Config.PostRoute, new { id = post.PostId });
             model.Title = post.Title;
+            model.UserName = post.UserName;
             return model;
         }
         public static CommentViewModel MapComment(Comment comment, IUrlHelper url)

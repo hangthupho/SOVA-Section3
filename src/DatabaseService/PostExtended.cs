@@ -9,7 +9,7 @@ namespace DatabaseService
     public class PostExtended : Post
     {
         public string Title { get; internal set; }
-       
-        //public string ParentId { get; internal set; }
+        public string UserName { get; internal set; }
+        public int ParentId { get; internal set; }
     }
 }

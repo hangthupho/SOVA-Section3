@@ -8,7 +8,7 @@ namespace DomainModel
 {
     public class Question
     {
-        [Key]
+       // [Key]
         public int PostId { get; set; }
         public DateTime ClosedDate { get; set; }
         public string Title { get; set; }
