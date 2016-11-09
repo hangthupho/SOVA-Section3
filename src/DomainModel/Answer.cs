@@ -12,7 +12,7 @@ namespace DomainModel
     {
         public Answer()
        {
-        //   this.Posts = new HashSet<Post>();
+          //this.Posts = new HashSet<Post>();
         }
         //[Key]
         public int PostId { get; set; }

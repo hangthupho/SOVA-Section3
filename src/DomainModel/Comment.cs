@@ -16,15 +16,15 @@ namespace DomainModel
         }
         [Key]
         public int CommentId { get; set; }
-        public Nullable<int> PostId { get; set; }
-        public Nullable<int> UserId { get; set; }
+        public int? PostId { get; set; }
+        public int? CommentUserId { get; set; }
         public string CommentBody { get; set; }
         public string CommentCreationDate { get; set; }
 
-        [ForeignKey("PostId")]
-        public Post Posts { get; set; }
+       [ForeignKey("PostId")]
+        public virtual Post Posts { get; set; }
         [ForeignKey("UserId")]
-        public User Users { get; set; }
+        public virtual User Users { get; set; }
 
         //public virtual ICollection<User> Users { get; set; }
         // public virtual Comment Comments { get; set; }

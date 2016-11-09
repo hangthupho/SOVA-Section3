@@ -11,5 +11,9 @@ namespace DatabaseService
         public string Title { get; internal set; }
         public string UserName { get; internal set; }
         public int ParentId { get; internal set; }
+        public string CommentBody { get; set; }
+        public string CommentCreationDate { get; set; }
+        public int? CommentUserId { get; set; }
+        public string CommentUserName { get; set; }
     }
 }

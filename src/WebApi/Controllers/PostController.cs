@@ -20,8 +20,9 @@ namespace WebApi.Controllers
       
         public IActionResult Get(int page = 0, int pagesize = 5)
         {
-           // int limit = pageSize;
-           // int offset = page * pageSize;
+          
+            // int limit = pageSize;
+            // int offset = page * pageSize;
             var postList = DataService.GetPosts(page, pagesize).Select(p => ModelFactory.MapPost(p, Url));
            
             var total = DataService.GetNumberOfPosts();

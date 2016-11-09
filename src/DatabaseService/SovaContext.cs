@@ -32,6 +32,7 @@ namespace DatabaseService
             modelBuilder.Entity<Tag>().HasKey(u => new {u.PostId, u.tag});
             modelBuilder.Entity<Comment>().ToTable("comments");
             modelBuilder.Entity<Comment>().HasKey(k => k.CommentId);
+            modelBuilder.Entity<Comment>().Property(t => t.CommentUserId).HasColumnName("userID");
             modelBuilder.Entity<Answer>().ToTable("answers");
             modelBuilder.Entity<Answer>().HasKey(a =>a.PostId);
             modelBuilder.Entity<Question>().ToTable("question");

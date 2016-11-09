@@ -14,5 +14,13 @@ namespace WebApi.JsonModels
         public DateTime CreatedDate { get; set; }
         public int UserId { get; set; }
         public string UserName { get; set; }
+        public int ParentId { get; set; }
+
+        //public string Answer { get; set; }
+        public string Comment { get; }
+        public string CommentBody { get; set; }
+        public string CommentCreationDate { get; set; }
+        public int? CommentUserId { get; set; }
+        public string CommentUserName { get; set; }
     }
 }

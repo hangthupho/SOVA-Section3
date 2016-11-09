@@ -28,15 +28,20 @@ namespace DatabaseService
             {
                 var pm =(from p in db.Posts select new PostExtended{
                     PostId = p.PostId,
-                    Title = p.Question.Title,
+                    Title = p.Questions.Title,
                     Score = p.Score,
                     PostBody = p.PostBody,
                     CreatedDate = p.CreatedDate,
                     UserId = p.UserId,
-                    UserName = p.Users.UserName
-               })
+                    UserName = p.Users.UserName,
+                  // ParentId = p.Answers.ParentId,
+                    CommentBody = p.Comments.CommentBody,
+                    CommentCreationDate = p.Comments.CommentCreationDate,
+                    CommentUserId = p.Comments.CommentUserId,
+                   // CommentUserName = p.Users.UserName
+                })
                     //.Include(m => m.Users)
-                    //.Include(m => m.Question)
+                    //.Include(m => m.Answers)
                     .OrderBy(m => m.PostId)
                     //.Where()
                     .Skip(page*pagesize)
@@ -56,7 +61,7 @@ namespace DatabaseService
                         select new PostExtended
                         {
                             PostId = p.PostId,
-                            Title = p.Question.Title,
+                            Title = p.Questions.Title,
                             Score = p.Score,
                             PostBody = p.PostBody,
                             CreatedDate = p.CreatedDate,
