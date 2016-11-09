@@ -22,37 +22,47 @@ namespace DatabaseService
                     .ToList();
             }
         }
-        public IList<PostExtended> GetPosts(int limit, int offset)
+        public IList<PostExtended> GetPosts(int page, int pagesize)
         {
             using (var db = new SovaContext())
             {
                 var pm =(from p in db.Posts select new PostExtended{
-                    PostBody = p.PostBody,
+                    PostId = p.PostId,
+                    Title = p.Question.Title,
                     Score = p.Score,
-                    UserId = p.UserId,
+                    PostBody = p.PostBody,
                     CreatedDate = p.CreatedDate,
-                    
-                    Title = p.Question.Title
-                })
+                    UserId = p.UserId
+               })
                     //.Include(m => m.Users)
                     //.Include(m => m.Question)
                     .OrderBy(m => m.PostId)
                     //.Where()
-                    .Skip(offset)
-                    .Take(limit)
+                    .Skip(page*pagesize)
+                    .Take(pagesize)
                     .ToList();
 
                 return pm;
             }
         }
 
-        //public PostExtended GetPostById(int id)
-        //{
-        //    using (var db = new SovaContext())
-        //    {
-        //        return db.Posts.FirstOrDefault(c => c.PostId == id);
-        //    }
-        //}
+        public PostExtended GetPostById(int id)
+        {
+            using (var db = new SovaContext())
+            {
+                return (from p in db.Posts
+                        where p.PostId == id
+                        select new PostExtended
+                        {
+                            PostId = p.PostId,
+                            Title = p.Question.Title,
+                            Score = p.Score,
+                            PostBody = p.PostBody,
+                            CreatedDate = p.CreatedDate,
+                            UserId = p.UserId,
+                        }).FirstOrDefault();
+            }
+        }
 
         public int GetNumberOfPosts()
         {

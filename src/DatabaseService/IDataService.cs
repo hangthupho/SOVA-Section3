@@ -9,8 +9,8 @@ namespace DatabaseService
 {
     public interface IDataService
     {
-        IList<PostExtended> GetPosts(int limit, int offset);
-        //PostExtended GetPostById(int id);
+        IList<PostExtended> GetPosts(int page, int pagesize);
+        PostExtended GetPostById(int id);
         int GetNumberOfPosts();
         //comment
         void AddNewComment(Comment comment);

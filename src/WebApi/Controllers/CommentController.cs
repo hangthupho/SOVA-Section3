@@ -26,7 +26,7 @@ namespace WebApi.Controllers
         {
             int limit = pageSize;
             int offset = page * pageSize;
-            var commentList = _iDataService.GetComments(limit, offset).Select(c => ModelFactory.Map(c, Url));
+            var commentList = _iDataService.GetComments(limit, offset).Select(c => ModelFactory.MapComment(c, Url));
 
             var totalMovieNumber = _iDataService.GetNumberOfComments();
             var lastpage = totalMovieNumber / pageSize;
