@@ -13,5 +13,7 @@ namespace WebApi
         public const string PostsRouteid = "PostsRouteid";
         public const string CommentRoute = "CommentRoute";
         public const string CommentsRoute = "CommentsRoute";
+        public const string SearchRoute = "SearchRoute";
+        public const string SearchsRoute = "SearchsRoute";
     }
 }

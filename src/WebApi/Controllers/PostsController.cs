@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DatabaseService;
+using DomainModel;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.JsonModels;
 
@@ -37,27 +38,27 @@ namespace WebApi.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{searchkeyword}", Name = Config.PostRoute)]
+        //[HttpGet("{searchkeyword}", Name = Config.PostsRouteid)]
 
-        public IActionResult Get(string searchkeyword)
-        {
+        //public IActionResult Get(string searchkeyword)
+        //{
 
-            var result = DataService.GetSearchedPost(searchkeyword);
-            return Ok(result);
-            //return Ok(searchkeyword);
-        }
+        //    var result = DataService.GetSearchedPost(searchkeyword);
+        //    return Ok(result);
+        //    //return Ok(searchkeyword);
+        //}
 
 
         //// GET api/posts/19
-        //[HttpGet("{id}", Name = Config.PostsRouteid)]
-        //public IActionResult Get(int id)
-        //{
-        //    //PostExtended post = DataService.GetPost(id);
-        //    PostExtended post = DataService.GetPostDetail(id);
-        //    var dd = ModelFactory.MapPostDetail(post, Url);
-        //    if (post == null) return NotFound();
-        //    return Ok(ModelFactory.MapPostDetail(post, Url));
-        //}
+        [HttpGet("{id}", Name = Config.PostRoute)]
+        public IActionResult Get(int id)
+        {
+            //PostExtended post = DataService.GetPost(id);
+            PostExtended post = DataService.GetPostDetail(id);
+            var dd = ModelFactory.MapPostDetail(post, Url);
+            if (post == null) return NotFound();
+            return Ok(ModelFactory.MapPostDetail(post, Url));
+        }
 
     }
 }

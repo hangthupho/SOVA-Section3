@@ -36,6 +36,7 @@ namespace WebApi.JsonModels
             return new PostListModel
             {
                 Url = urlHelper.Link(Config.PostRoute, new { id = post.PostId }),
+
                 Title = post.Title,
                 UserName = post.UserName
             };
@@ -50,6 +51,16 @@ namespace WebApi.JsonModels
             postViewModel.UserName = post.UserName;
             postViewModel.Answers = post.AnswerBody;
             return postViewModel;
+        }
+
+        public static searchViewModel MapSearch(WeightedSearch post, IUrlHelper urlHelper)
+        {
+            return new searchViewModel
+            {
+                Url = urlHelper.Link(Config.PostsRouteid, new {id = post.Id}),
+                Rank = post.Rank,
+                PostBody = post.PostBody
+            };
         }
 
         //=============== Mapping Comments ================

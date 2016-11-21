@@ -37,6 +37,7 @@ namespace DatabaseService
             modelBuilder.Entity<History>().ToTable("search_history");
             modelBuilder.Entity<search_Result>().HasKey(t => t.postID);
             modelBuilder.Entity<WeightedSearch>().HasKey(p => p.Id);
+           
             //modelBuilder.Entity<search_Result>().HasKey(t => new { t.Id, t.Rank, t.PostBody });
 
             base.OnModelCreating(modelBuilder);

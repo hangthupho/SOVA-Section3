@@ -51,5 +51,16 @@ namespace WebApi.Controllers
             if (IsFirstPage(page)) return null;
             return url.Link(Config.CommentsRoute, new { page = page - 1, pagesize });
         }
+        //Navigate Search
+        protected string GetNextSearchUrl(IUrlHelper url, int page, int pagesize, int total)
+        {
+            if (IsLastPage(page, pagesize, total)) return null;
+            return url.Link(Config.SearchsRoute, new { page = page + 1, pagesize });
+        }
+        protected string GetPrevSearchUrl(IUrlHelper url, int page, int pagesize)
+        {
+            if (IsFirstPage(page)) return null;
+            return url.Link(Config.SearchsRoute, new { page = page - 1, pagesize });
+        }
     }
 }
