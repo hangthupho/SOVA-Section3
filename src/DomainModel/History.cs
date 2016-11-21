@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace DomainModel
 {
-    public class SearchHistory
+    public class History
     {
         [Key]
-        public int SId { get; set; }
+        public int sId { get; set; }
         public string SearchString { get; set; }
         public DateTime SearchTime { get; set; }
     }

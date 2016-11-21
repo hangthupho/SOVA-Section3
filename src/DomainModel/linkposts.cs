@@ -1,21 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using DomainModel;
+
 
 namespace DomainModel
 {
-    public class Marking
+    public class Linkpost
     {
+        [Key]
+        public int pId { get; set; }
+        public int LinkPostId { get; set; }
 
-        public Marking()
-        {
-            this.Posts = new HashSet<Post>();
-        }
-
-        public int MId { get; set; }
+        [ForeignKey("Post")]
         public int PostId { get; set; }
-        public bool Status { get; set; }
-        public virtual ICollection<Post> Posts { get; set; }
+        public virtual Post Post { get; set; }
     }
 }

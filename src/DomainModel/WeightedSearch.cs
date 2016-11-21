@@ -4,20 +4,17 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
-using DomainModel;
-
 
 namespace DomainModel
 {
-    public class Marking
+    public class WeightedSearch
     {
         [Key]
-        public int mId { get; set; }
+        public int Id { get; set; }
+        [Column("rank")]
+        public double? Rank { get; set; }
+        [Column("postBody")]
+        public string PostBody { get; set; }
 
-        [ForeignKey("Post")]
-        public int PostId { get; set; }
-        public virtual Post Post { get; set; }
-
-        public bool Status { get; set; }
     }
 }

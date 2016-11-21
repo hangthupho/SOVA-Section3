@@ -1,8 +1,10 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DomainModel;
+
 
 namespace DatabaseService
 {
@@ -10,10 +12,13 @@ namespace DatabaseService
     {
         public string Title { get; internal set; }
         public string UserName { get; internal set; }
-        public int ParentId { get; internal set; }
-        public string CommentBody { get; set; }
-        public string CommentCreationDate { get; set; }
-        public int? CommentUserId { get; set; }
-        public string CommentUserName { get; set; }
+
+        //public List<int> AnswerId { get; internal set; }
+        public List<string> AnswerBody { get; internal set; }
+        //public List<Post> AnswerBody { get; internal set; }
+        //public List<string> AnswerUserName { get; internal set; }
+
+        //public List<string> CommentBody { get; internal set; }
+        //public List<string> CommentUserName { get; internal set; }
     }
 }
