@@ -17,7 +17,7 @@ namespace DatabaseService
         public DbSet<Comment> comment { get; set; }
         public DbSet<Answer> answer { get; set; }
         public DbSet<Question> question { get; set; }
-        //public DbSet<Linkpost> linkpost { get; set; }
+        public DbSet<Linkpost> linkpost { get; set; }
         public DbSet<Marking> marking { get; set; }
         public DbSet<Tag> tag { get; set; }
         public DbSet<History> history { get; set; }
@@ -32,7 +32,7 @@ namespace DatabaseService
             modelBuilder.Entity<Question>().ToTable("questions");
             modelBuilder.Entity<Answer>().ToTable("answers");
             modelBuilder.Entity<Comment>().ToTable("comments");
-           // modelBuilder.Entity<Linkpost>().ToTable("linkposts");
+            modelBuilder.Entity<Linkpost>().ToTable("linkposts");
             modelBuilder.Entity<Marking>().ToTable("marks");
             modelBuilder.Entity<History>().ToTable("search_history");
 
