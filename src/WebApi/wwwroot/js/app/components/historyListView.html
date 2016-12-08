@@ -43,5 +43,7 @@
     <p data-bind="text: url"></p>
     <p data-bind="text: searchString"></p>
     <p data-bind="text: searchTime"></p>
+    <p data-bind="component:{name:'post-detail', params:{link: url, string: searchString, time: searchTime}}"></p>
     
 </div>
+<post-detail></post-detail>
