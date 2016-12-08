@@ -1,7 +1,10 @@
 ﻿
-<ul data-bind="foreach: detailHist">
+<ul data-bind="foreach: details">
     <li>
-        <span data-bind="text: $data"></span>
+        <!--<span data-bind="text: $data"></span>-->
+        <span data-bind="text: url"></span>
+        <span data-bind="text: searchString"></span>
+        <span data-bind="text: searchTime"></span>
         <!--<span data-bind="text: postBody"></span>
         <span data-bind="text: rank"></span>-->
         hello this page

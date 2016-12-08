@@ -1,7 +1,15 @@
 ﻿define([], function () {
     return {
-        pass: {
-           Search: "search"
+        events: {
+            selectPerson: "SelectPerson",
+
+            changeMenu: "ChangeMenu"
+        },
+        menuItems: {
+            histories: "Histories",
+            search: "Search",
+            details: "Details"
+
         }
     };
 });

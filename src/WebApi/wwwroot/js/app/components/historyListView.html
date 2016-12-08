@@ -1,4 +1,4 @@
-﻿<table>
+﻿<table class="table table-striped">
     <thead>
     <tr>
         <th>S.No</th>
@@ -38,3 +38,10 @@
 <!--<div id="output">Some data from github:  </div>-->
 <script>console.log(url)</script>
 <p> hello from this page</p>
+
+<div data-bind="foreach: historyDetail">
+    <p data-bind="text: url"></p>
+    <p data-bind="text: searchString"></p>
+    <p data-bind="text: searchTime"></p>
+    
+</div>

@@ -56,10 +56,22 @@
             }
         });
     });
-  
-  
+    var getHistoryDetail = function (callback) {
+        var url = "api/history/1";
+        $.getJSON(url, function (data) {
+            callback(data);
+            //console.log(data);
+
+        });
+    }
+
+    var getPostDetails = function (url, callback) {
+        $.getJSON(url, function (data) {
+            callback(data);
+        });
+    }
     return {
-        getHistory, getHistoryPage, getHistoryId , getSearch, getPost
+        getHistory, getHistoryPage, getHistoryId, getSearch, getPost, getHistoryDetail, getPostDetails
    };
 });
 

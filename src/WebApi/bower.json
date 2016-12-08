@@ -5,6 +5,7 @@
     "knockout": "3.4.1",
     "requirejs": "2.3.2",
     "requirejs-text": "2.0.15",
-    "jquery": "3.1.1"
+    "jquery": "3.1.1",
+    "bootstrap": "3.3.7"
   }
 }
