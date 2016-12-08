@@ -1,0 +1,9 @@
+﻿<input data-bind="textInput: search" />
+<button data-bind="click: clickSearch">Search</button>
+<ul data-bind="foreach: sList">
+    <li>
+       <span data-bind="text: id"></span>
+       <span data-bind="text: postBody"></span>
+       <span data-bind="text: rank"></span>
+     </li>
+</ul>

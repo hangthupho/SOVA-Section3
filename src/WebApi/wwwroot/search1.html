@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Request JSON Test</title>
+
+   
+
+</head>
+<body style="font-family: Arial">
+ 
+    <!--<div id="output">Search Results: </div>-->
+<input data-bind="textInput: search"/>
+<button data-bind="click: clickSearch">Search</button>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>postBody</th>
+        <th>rank</th>
+    </tr>
+    </thead>
+    <tbody data-bind="foreach: searchList">
+        <tr>
+            <!--<span data-bind ="text: ko.toJSON($data, null,2)"></span>
+            <input data-bind="blah: console.log($data), value: id"/>-->
+            <td data-bind="text: id"></td>
+            <td data-bind="text: postBody"></td>
+            <td data-bind="text: rank"></td>
+            <!--<div data-bind="value: postBody">search Results</div>-->
+        </tr>
+    </tbody>
+</table>
+<script src="js/lib/knockout/dist/knockout.js"></script>
+<script src="js/lib/jquery/dist/jquery.js"></script>
+<script type="text/javascript" src="js/app/search1.js"></script>
+</body>
+</html>

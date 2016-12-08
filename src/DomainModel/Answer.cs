@@ -4,10 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using DomainModel;
 
-
-namespace DomainModel
+namespace StackOverFLow.DomainModel
 {
     public class Answer
     {

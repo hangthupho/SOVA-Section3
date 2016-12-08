@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DomainModel
+namespace StackOverFLow.DomainModel
 {
     public class Tag
     {
@@ -14,6 +14,7 @@ namespace DomainModel
         public int PostId { get; set; }
         public virtual Post Post { get; set; }
 
+        [Key]
         public string TagName { get; set; }
     }
 }

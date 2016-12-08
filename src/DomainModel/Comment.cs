@@ -4,10 +4,8 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
-using DomainModel;
 
-
-namespace DomainModel
+namespace StackOverFLow.DomainModel
 {
     public class Comment
     {
@@ -24,6 +22,6 @@ namespace DomainModel
 
         public string CommentBody { get; set; }
         public DateTime CommentCreationDate { get; set; }
-
+       
     }
 }

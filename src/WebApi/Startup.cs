@@ -38,8 +38,13 @@ namespace WebApi
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-            
+            app.UseFileServer();
             app.UseMvc();
+            //app.UseMvc(routes =>
+            //{
+            //    routes.MapRoute("Default", "posts", new { controller = "posts", action = "Get" });
+            //    routes.MapRoute("TagRoute", "posts/{postid}/tags", new { controller = "tags", action = "GetTags" });
+            //});
         }
     }
 }

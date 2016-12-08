@@ -1,0 +1,40 @@
+﻿<table>
+    <thead>
+    <tr>
+        <th>S.No</th>
+        <th>total</th>
+        <th>next</th>
+        <th>previous</th>
+       </tr>
+    </thead>
+    <tbody data-bind="foreach: histories">
+    <tr>
+        <td data-bind="text:$index"></td>
+        <td data-bind="text:total"></td>
+        <td> <a data-bind="attr :{ href: next}">Next</a></td>
+        <td> <a data-bind="attr :{ href: previous}">Previous</a></td>
+    </tr>
+    </tbody>
+</table>
+<table>
+    <thead>
+    <tr>
+        <th>S.No</th>
+        <th>Url</th>
+        <th>searchString</th>
+        <th>searchTime</th>
+    </tr>
+    </thead>
+    <tbody data-bind="foreach: hdata">
+    <tr>
+        <td data-bind="text:$index"></td>
+        <td> <a href="#" data-bind="click: $parent.getDetails">See Details</a></td>
+        <td data-bind="text:searchString"></td>
+        <td data-bind="text:searchTime"></td>
+    </tr>
+    </tbody>
+</table>
+
+<!--<div id="output">Some data from github:  </div>-->
+<script>console.log(url)</script>
+<p> hello from this page</p>

@@ -4,10 +4,8 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
-using DomainModel;
 
-
-namespace DomainModel
+namespace StackOverFLow.DomainModel
 {
     public class Marking
     {
@@ -17,7 +15,6 @@ namespace DomainModel
         [ForeignKey("Post")]
         public int PostId { get; set; }
         public virtual Post Post { get; set; }
-
         public bool Status { get; set; }
     }
 }

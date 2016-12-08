@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DomainModel
+namespace StackOverFLow.DomainModel
 {
     public class Question
     {
@@ -17,6 +17,6 @@ namespace DomainModel
         public DateTime ClosedDate { get; set; }
         public string Title { get; set; }
 
-        public virtual Comment Comment { get; set; }
+        public Comment Comment { get; set; }
     }
 }

@@ -13,12 +13,16 @@ namespace WebApi.Controllers
         public SearchController(IDataService dataService) : base(dataService)
         {
         }
-        [HttpGet("{searchkeyword}",Name = Config.SearchRoute)]
+        [HttpGet(Name = Config.SearchRoute)]
         public IActionResult Get(string searchkeyword)
         {
 
-            var result = DataService.GetSearchedPost(searchkeyword);
-            return Ok(result);
+            var list = DataService.GetSearchedPost(searchkeyword);
+            var result = new
+            {
+                List = list
+            };
+            return Json(result);
             //return Ok(searchkeyword);
         }
     }
