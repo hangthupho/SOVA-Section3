@@ -39,6 +39,10 @@
                 viewModel: { require: 'app/components/AnnotationModel' },
                 template: { require: 'text!app/components/AnnotationView.html' }
             });
+            ko.components.register("search-detail", {
+                viewModel: { require: 'app/components/searchDetail' },
+                template: { require: 'text!app/components/searchDetailView.html' }
+            });
 
         });
     require(['knockout'],

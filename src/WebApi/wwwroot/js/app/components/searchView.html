@@ -4,7 +4,16 @@
     <li>
         <span data-bind="text: id"></span>
         <span> <a href="#" data-bind="click: $parent.getDetails">See Details</a></span>
-       <span data-bind="text: postBody"></span>
-       <span data-bind="text: rank"></span>
-     </li>
+        <span data-bind="html: postBody"></span>
+        <span data-bind="text: rank"></span>
+    </li>
+    
+
 </ul>
+<div data-bind="foreach: postDetail">
+
+    <p data-bind="component:{name:'search-detail', params:{pLink: url, tit: title, body: postBody, ans: answer}}"></p>
+
+</div>
+
+<search-detail></search-detail>

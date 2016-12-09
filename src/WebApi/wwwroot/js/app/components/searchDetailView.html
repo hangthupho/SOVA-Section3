@@ -1,0 +1,31 @@
+﻿<!--<span data-bind="text: $data"></span>-->
+<!--span data-bind="text: pLink"></span>
+<span data-bind="text: tit"></span>
+<span data-bind="text: body"></span>
+<span data-bind="text: ans"></span>-->
+<!--<span data-bind="text: postBody"></span>
+<span data-bind="text: rank"></span>-->
+        hello this page is post detail view
+
+
+<table>
+    <thead>
+    <tr>
+        <th>url:</th>
+        <th>title:</th>
+        <th>postBody:</th>
+        <th>answer: </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td data-bind="text:pLink"></td>
+        <td data-bind="text:tit"></td>
+        <td data-bind="text:body"></td>
+           
+    </tr>
+    </tbody>
+</table>
+<ul data-bind="foreach: ans">
+    <li data-bind="text:$data"></li>
+</ul>
