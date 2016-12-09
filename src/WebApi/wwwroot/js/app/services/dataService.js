@@ -9,6 +9,10 @@
         });
     }
 
+    var getNextHistory = function (next, callback) {
+        $.getJSON(next, callback);
+    };
+
     var getAnnotations = function (callback) {
         var url = "api/annotations/";
         $.getJSON(url, function (data) {
@@ -86,7 +90,7 @@
         });
     }
     return {
-        getHistory, getHistoryId, getSearch, getPost, getPostDetails, getPost1, getPostId, getAnnotations
+        getHistory, getHistoryId, getSearch, getPost, getPostDetails, getPost1, getPostId, getAnnotations, getNextHistory
    };
 });
 

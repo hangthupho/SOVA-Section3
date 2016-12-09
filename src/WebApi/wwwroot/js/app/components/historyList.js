@@ -4,6 +4,7 @@ define(['knockout', 'dataservice','postman', 'config'],
         return function () {
             var self = this;
             var histories = ko.observableArray([]);
+            var historynext = ko.observableArray([]);
   
             var hdata = ko.observableArray([]);
            
@@ -39,11 +40,13 @@ define(['knockout', 'dataservice','postman', 'config'],
 
             var getDetails = function (xx) {
                 dataService.getPostDetails(xx.url, callback);
-                
-                
+            }
+            var callbacknext = function(data) {
+                historynext(data);
+                console.log(data);
             }
             var getNext = function (zz) {
-                dataService.getNextHistory(zz.url, callback);
+                dataService.getNextHistory(zz.next, callbacknext);
             }
             
             dataService.getHistory(function (data1) {
@@ -61,7 +64,7 @@ define(['knockout', 'dataservice','postman', 'config'],
             });
 
             return {
-                histories, hdata, getDetails, detailHist, historyDetail
+                histories, hdata, getDetails, detailHist, historyDetail, historynext, getNext
             };
         };
     });
