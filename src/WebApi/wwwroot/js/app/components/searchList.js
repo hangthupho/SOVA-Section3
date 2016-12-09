@@ -4,6 +4,10 @@
             var self = this;
             var sList = ko.observableArray([]);
             var search = ko.observable("");
+            var getDetails = function (xx) {
+                dataservice.getPostId(xx.id);
+
+            }
             var clickSearch = function () {
                 dataservice.getSearch(search(), function(data) {
                     console.log(data);
@@ -15,7 +19,7 @@
                 });
             };
             return {
-                search, sList, clickSearch
+                search, sList, clickSearch, getDetails
             };
         };
     });

@@ -35,6 +35,10 @@
                 viewModel: { require: 'app/components/app/app' },
                 template: { require: 'text!app/components/app/appView.html' }
             });
+            ko.components.register("annotation-list", {
+                viewModel: { require: 'app/components/AnnotationModel' },
+                template: { require: 'text!app/components/AnnotationView.html' }
+            });
 
         });
     require(['knockout'],

@@ -3,7 +3,8 @@
         var menuItems = [
             { title: config.menuItems.histories, component: 'post-list' },
             { title: config.menuItems.search, component: 'search-list' },
-            { title: config.menuItems.details, component: 'post-detail' }
+            { title: config.menuItems.details, component: 'post-detail' },
+            { title: config.menuItems.comment, component: 'annotation-list' }
 
       ];
         var currentComponent = ko.observable();

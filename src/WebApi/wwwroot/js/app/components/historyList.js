@@ -4,25 +4,16 @@ define(['knockout', 'dataservice','postman', 'config'],
         return function () {
             var self = this;
             var histories = ko.observableArray([]);
-            var histories1 = ko.observableArray([]);
-            var histories2 = ko.observableArray([]);
+  
             var hdata = ko.observableArray([]);
-            var url = ko.observable("");
-            var searchString = ko.observable("");
-            var searchTime = ko.observable("");
-            var textH = {};
+           
             var detailHist = ko.observableArray("");
-            var selectedHistory = ko.observable();
+          
             var historyDetail = ko.observable();
 
-            var selectHistory = function (hist) {
-                selectedHistory(hist);
-                postman.publish(config.events.selectHistory, hist);
-            }
+          
 
-            var isSelected = function (hist) {
-                return hist === selectedHistory();
-            }
+            
             //var getDetails = function(xx) {
             //    postman.publish({
             //        component: 'post-detail',
@@ -67,7 +58,7 @@ define(['knockout', 'dataservice','postman', 'config'],
             });
 
             return {
-                histories, hdata, getDetails, detailHist, selectHistory, historyDetail
+                histories, hdata, getDetails, detailHist, historyDetail
             };
         };
     });

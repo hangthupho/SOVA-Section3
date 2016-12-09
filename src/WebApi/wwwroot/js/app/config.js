@@ -8,7 +8,8 @@
         menuItems: {
             histories: "Histories",
             search: "Search",
-            details: "Details"
+            details: "Details",
+            comment: "Personal-Comment"
 
         }
     };

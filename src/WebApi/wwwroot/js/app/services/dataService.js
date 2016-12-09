@@ -1,5 +1,5 @@
 ﻿define(['jquery'], function ($) {
-    var dataservice = {};
+ 
     var getHistory = function (callback) {
        var url = "api/history/";
         $.getJSON(url, function (data) {
@@ -9,17 +9,32 @@
         });
     }
 
+    var getAnnotations = function (callback) {
+        var url = "api/annotations/";
+        $.getJSON(url, function (data) {
+            callback(data);
+            console.log(data);
+
+        });
+    }
+
     var getPost = function(url, callback) {
         $.getJSON(url, callback);
     };
 
-    var getHistoryPage = function(callback) {
-        var url = 'api/history';
+    var getPostId= function(id, callback) 
+    {
+        alert('ok');
+        $.getJSON('api/posts/'+id, callback);
+    }
+
+    var getPost1 = function(callback) {
+        var url = 'api/posts';
         $.ajax({
-            dataType:"html",
+            dataType:"json",
             url: url,
             method: 'get',
-            data: { page:"2", pagesize: "5" },
+            data: { },
             success: function(data) {
                 callback(data);
                 console.log(data);
@@ -71,7 +86,7 @@
         });
     }
     return {
-        getHistory, getHistoryPage, getHistoryId, getSearch, getPost, getHistoryDetail, getPostDetails
+        getHistory, getHistoryId, getSearch, getPost, getPostDetails, getPost1, getPostId, getAnnotations
    };
 });
 
