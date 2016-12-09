@@ -14,18 +14,19 @@
         <th>url:</th>
         <th>title:</th>
         <th>postBody:</th>
-        <th>answer: </th>
+        
     </tr>
     </thead>
     <tbody>
     <tr>
         <td data-bind="text:pLink"></td>
         <td data-bind="text:tit"></td>
-        <td data-bind="text:body"></td>
+        <td data-bind="html:body"></td>
            
     </tr>
     </tbody>
 </table>
+<strong>Answers:</strong>
 <ul data-bind="foreach: ans">
-    <li data-bind="text:$data"></li>
+    <li data-bind="html:$data"></li>
 </ul>

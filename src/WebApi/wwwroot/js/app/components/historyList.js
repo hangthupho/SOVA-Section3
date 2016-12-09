@@ -35,11 +35,14 @@ define(['knockout', 'dataservice','postman', 'config'],
 
             var callback = function(data) {
                 historyDetail(data);
-                
-            };
+           };
 
             var getDetails = function (xx) {
                 dataService.getPostDetails(xx.url, callback);
+                //window.location.href = '';
+                postman.publish(
+                    config.events.changeMenu,
+                    config.menuItems.details);
             }
             var callbacknext = function(data) {
                 historynext(data);

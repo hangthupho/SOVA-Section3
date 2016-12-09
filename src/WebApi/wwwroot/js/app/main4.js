@@ -15,7 +15,11 @@
     });
 
     require(['knockout'],
-        function(ko) {
+        function (ko) {
+            ko.components.register("my-app", {
+                viewModel: { require: 'app/components/app/app' },
+                template: { require: 'text!app/components/app/appView.html' }
+            });
             ko.components.register('post-list',
             {
                 viewModel: { require: 'app/components/historyList' },
@@ -31,10 +35,7 @@
                 template: { require: 'text!app/components/searchView.html' },
                 viewModel: { require: 'searchList' }
             });
-            ko.components.register("my-app", {
-                viewModel: { require: 'app/components/app/app' },
-                template: { require: 'text!app/components/app/appView.html' }
-            });
+           
             ko.components.register("annotation-list", {
                 viewModel: { require: 'app/components/AnnotationModel' },
                 template: { require: 'text!app/components/AnnotationView.html' }
