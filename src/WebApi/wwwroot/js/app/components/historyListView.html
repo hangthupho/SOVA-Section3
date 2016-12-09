@@ -12,6 +12,7 @@
         <td data-bind="text:$index"></td>
         <td data-bind="text:total"></td>
         <td> <a data-bind="attr :{ href: next}">Next</a></td>
+        <td> <a href="#" data-bind="click: $parent.getNext">Next</a></td>
         <td> <a data-bind="attr :{ href: previous}">Previous</a></td>
     </tr>
     </tbody>

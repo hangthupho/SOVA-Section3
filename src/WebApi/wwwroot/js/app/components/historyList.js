@@ -42,6 +42,9 @@ define(['knockout', 'dataservice','postman', 'config'],
                 
                 
             }
+            var getNext = function (zz) {
+                dataService.getNextHistory(zz.url, callback);
+            }
             
             dataService.getHistory(function (data1) {
                 histories(data1);
