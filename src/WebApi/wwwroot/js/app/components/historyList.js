@@ -1,64 +1,66 @@
 ﻿
 define(['knockout', 'dataservice','postman', 'config'],
     function (ko, dataService, postman, config) {
-        return function () {
-            var self = this;
+        return function (params) {
+          
             var histories = ko.observableArray([]);
-            var historynext = ko.observableArray([]);
-  
+           
             var hdata = ko.observableArray([]);
            
             var detailHist = ko.observableArray("");
           
             var historyDetail = ko.observable();
-
-          
-
-            
-            //var getDetails = function(xx) {
-            //    postman.publish({
-            //        component: 'post-detail',
-            //        params: { url: xx.url }
-            //    });
-
-            //}
-
-            //var getDetails = function (xx) {
-            //    dataService.getPost(xx.url,
-            //         function (data) {
-            //             var zz = data;
-            //             detailHist(zz);
-            //             console.log(zz);
-            //         });
-
-            //}
-
+            var prevUrl = ko.observable();
+            var nextUrl = ko.observable();
+            var curPage = ko.observable(params ? params.url : undefined);
+            var total = ko.observable();
+            var selectPerson = function (person) {
+                postman.publish(config.events.selectPerson, { person, url: curPage() });
+            };
             var callback = function(data) {
                 historyDetail(data);
            };
+            var canPrev = function () {
+                return prevUrl();
+            };
+          
+            var canNext = function () {
+                return nextUrl();
+            };
+           
+            var setData = function (result) {
+                histories(result);
+                hdata(result.hist);
+               
+                total(total);
+                console.log(total);
+                prevUrl(result.previous);
+             
+                nextUrl(result.next);
+               
+                curPage(result.url);
+              
+            };
+            var showPrev = function () {
+                dataService.getHistory(prevUrl(), function (result) {
+                    setData(result);
+                });
+            }
 
-            var getDetails = function (xx) {
-                dataService.getPostDetails(xx.url, callback);
-                //window.location.href = '';
-                postman.publish(
-                    config.events.changeMenu,
-                    config.menuItems.details);
+            // show the next page
+            var showNext = function () {
+                dataService.getHistory(nextUrl(), function (result) {
+                    setData(result);
+                });
             }
-            var callbacknext = function(data) {
-                historynext(data);
-                console.log(data);
-            }
-            var getNext = function (zz) {
-                dataService.getNextHistory(zz.next, callbacknext);
-            }
-            
-            dataService.getHistory(function (data1) {
-                histories(data1);
+            dataService.getHistory(curPage(), function (result) {
+                setData(result);
+                console.log(histories);
 
-                for (var i in data1.hist) {
-                    var row = data1.hist[i];
-                    hdata.push(row);
-                }
+                //for (var i in result.hist) {
+                //    var row = result.hist[i];
+                //    hdata.push(row);
+                //}
                
                
                 console.log(hdata);
@@ -66,8 +68,22 @@ define(['knockout', 'dataservice','postman', 'config'],
 
             });
 
+            var getDetails = function (xx) {
+                dataService.getHistoryDetails(xx.url, callback);
+                //window.location.href = '';
+                //postman.publish(
+                //    config.events.changeMenu,
+                //    config.menuItems.details);
+            }
+
             return {
-                histories, hdata, getDetails, detailHist, historyDetail, historynext, getNext
+                histories, hdata, getDetails, detailHist, historyDetail,
+                total,
+             
+                canPrev,
+                canNext,
+                showPrev,
+                showNext
             };
         };
     });

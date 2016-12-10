@@ -1,17 +1,18 @@
 ﻿define(['jquery'], function ($) {
- 
-    var getHistory = function (callback) {
-       var url = "api/history/";
-        $.getJSON(url, function (data) {
-           callback(data);
-            console.log(data);
-            
-        });
-    }
+    var histUrl = "api/history/";
+    var getHistory = function(url, callback) {
+        if (url === undefined) {
+            url = histUrl;
+        }
+        $.getJSON(url,
+            function(data) {
+                callback(data);
+                console.log(data);
 
-    var getNextHistory = function (next, callback) {
-        $.getJSON(next, callback);
+            });
     };
+
+   
 
     var getAnnotations = function (callback) {
         var url = "api/annotations/";
@@ -46,20 +47,7 @@
         });
     }
    
-    var getHistoryId = function(callback) {
-        var url = 'api/history/';
-        var id = "1";
-        $.ajax({
-            dataType: "json",
-            url: url + id,
-            method: 'get',
-            data: { page: "2", pagesize: "5" },
-            success: function (data) {
-                callback(data);
-                console.log(data);
-            }
-        });
-    }
+    
     var getSearch = (function(search, callback) {
         $.ajax({
             url: '/api/search',
@@ -75,22 +63,15 @@
             }
         });
     });
-    var getHistoryDetail = function (callback) {
-        var url = "api/history/1";
-        $.getJSON(url, function (data) {
-            callback(data);
-            //console.log(data);
+   
 
-        });
-    }
-
-    var getPostDetails = function (url, callback) {
+    var getHistoryDetails = function (url, callback) {
         $.getJSON(url, function (data) {
             callback(data);
         });
     }
     return {
-        getHistory, getHistoryId, getSearch, getPost, getPostDetails, getPost1, getPostId, getAnnotations, getNextHistory
+        getHistory, getSearch, getPost, getHistoryDetails, getPost1, getPostId, getAnnotations
    };
 });
 
