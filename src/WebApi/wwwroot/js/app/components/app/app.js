@@ -3,7 +3,7 @@
         var menuItems = [
             { title: config.menuItems.histories, component: 'post-list' },
             { title: config.menuItems.search, component: 'search-list' },
-            { title: config.menuItems.details, component: 'post-detail' },
+            { title: config.menuItems.details, component: 'search-detail' },
             { title: config.menuItems.comment, component: 'annotation-list' }
 
         ];
@@ -20,9 +20,9 @@
         var isSelected = function (menu) {
             return menu === selectedMenu();
         }
-        postman.subscribe(config.events.selectHistory, function (params) {
+        postman.subscribe(config.events.selectSearch, function (params) {
             currentParams(params);
-            currentComponent("post-detail");
+            currentComponent("search-detail");
         });
 
         postman.subscribe(config.events.changeMenu, function (data) {

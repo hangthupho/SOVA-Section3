@@ -66,12 +66,10 @@ define(['knockout', 'dataservice','postman', 'config'],
                 //console.log(histories);
 
             });
-            var selectHistory = function (histo) {
-                postman.publish(config.events.selectHistory, { histo, url: curPage() });
-            };
+           
             var getDetails = function(xx) {
                 dataService.getHistoryDetails(xx.url, callback);
-                postman.publish(config.events.selectHistory, { xx, url: curPage() });
+                
 
                 //window.location.href = '';
                 //postman.publish(
@@ -85,8 +83,7 @@ define(['knockout', 'dataservice','postman', 'config'],
                 canPrev,
                 canNext,
                 showPrev,
-                showNext,
-                selectHistory
+                showNext
             };
         };
     });

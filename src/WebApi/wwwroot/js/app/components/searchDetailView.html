@@ -3,8 +3,8 @@
 <span data-bind="text: tit"></span>
 <span data-bind="text: body"></span>
 <span data-bind="text: ans"></span>-->
-<!--<span data-bind="text: postBody"></span>
-<span data-bind="text: rank"></span>-->
+<!--<span data-bind="text: title"></span>-->
+<!--<span data-bind="text: rank"></span>-->
         hello this page is post detail view
 
 
@@ -19,14 +19,14 @@
     </thead>
     <tbody>
     <tr>
-        <td data-bind="text:pLink"></td>
-        <td data-bind="text:tit"></td>
-        <td data-bind="html:body"></td>
+        <td data-bind="text:title"></td>
+        <td data-bind="text:url"></td>
+        <td data-bind="html:postBody"></td>
            
     </tr>
     </tbody>
 </table>
 <strong>Answers:</strong>
-<ul data-bind="foreach: ans">
+<ul data-bind="foreach: answers">
     <li data-bind="html:$data"></li>
 </ul>

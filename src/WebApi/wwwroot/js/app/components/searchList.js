@@ -1,27 +1,34 @@
-﻿define(['knockout', 'dataservice', 'jquery'],
-    function (ko, dataservice,$) {
-        return function () {
+﻿define(['knockout', 'dataservice', 'jquery', 'postman', 'config'],
+    function (ko, dataservice,$,postman, config) {
+        return function (params) {
             var self = this;
             var sList = ko.observableArray([]);
             var search = ko.observable("");
             var postDetail = ko.observableArray([]);
             var callback = function (data) {
                 postDetail(data);
+               
+                postman.publish(config.events.selectSearch, { data });
                 console.log(data);
 
             };
-            var getDetails = function (xx) {
-                dataservice.getPostId(xx.id, callback);
+            var setData = function (result) {
+                sList(result.list);
+               
+                //historyDetail(result.hist);
+              
 
+            };
+            var getDetails = function (xx) {
+                var sId = xx.id;
+                dataservice.getPostId(sId, callback);
+                
             }
             var clickSearch = function () {
-                dataservice.getSearch(search(), function(data) {
-                    console.log(data);
+                dataservice.getSearch(search(), function(result) {
+                    console.log(result);
+                    setData(result);
 
-                    for (var i in data.list) {
-                        var row = data.list[i];
-                        sList.push(row);
-                    }
                 });
             };
             return {

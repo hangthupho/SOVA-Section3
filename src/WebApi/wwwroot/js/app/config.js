@@ -2,7 +2,7 @@
     return {
         events: {
             selectHistory: "SelectHistory",
-
+            selectSearch: "SelectSearch",
             changeMenu: "ChangeMenu"
         },
         menuItems: {

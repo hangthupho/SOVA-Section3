@@ -285,7 +285,7 @@ namespace DatabaseService
             }
         }
         //======= Search posts =============
-        public IList<WeightedSearch> GetSearchedPost(string keyword1)
+        public IList<WeightedSearch> GetSearchedPost(string keyword1, int page, int pagesize)
         {
             using (var db = new SovaContext())
             {

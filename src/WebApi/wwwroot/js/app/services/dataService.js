@@ -29,7 +29,7 @@
 
     var getPostId= function(id, callback) 
     {
-        alert('ok');
+        //alert('ok');
         $.getJSON('api/posts/'+id, callback);
     }
 
@@ -56,7 +56,7 @@
             dataType: 'json',
             success: function(sdat) {
                 callback(sdat);
-                alert('ok');
+                //alert('ok');
            },
             error: function(err) {
                 alert('not ok');
