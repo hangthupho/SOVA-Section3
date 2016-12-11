@@ -6,23 +6,29 @@
             { title: config.menuItems.details, component: 'post-detail' },
             { title: config.menuItems.comment, component: 'annotation-list' }
 
-      ];
+        ];
+        var currentParams = ko.observable();
         var currentComponent = ko.observable();
         var selectedMenu = ko.observable();
 
-        var selectMenu = function (menu) {
+        var selectMenu = function (menu, params) {
             selectedMenu(menu);
+            currentParams(params);
             currentComponent(menu.component);
         }
 
         var isSelected = function (menu) {
             return menu === selectedMenu();
         }
+        postman.subscribe(config.events.selectHistory, function (params) {
+            currentParams(params);
+            currentComponent("post-detail");
+        });
 
-        postman.subscribe(config.events.changeMenu, function (title) {
+        postman.subscribe(config.events.changeMenu, function (data) {
             for (var i = 0; i < menuItems.length; i++) {
-                if (menuItems[i].title === title) {
-                    selectMenu(menuItems[i]);
+                if (menuItems[i].title === data.title) {
+                    selectMenu(menuItems[i], data.params);
                     break;
                 }
             }
@@ -33,6 +39,7 @@
         return {
             menuItems,
             currentComponent,
+            currentParams,
             selectMenu,
             isSelected
         }

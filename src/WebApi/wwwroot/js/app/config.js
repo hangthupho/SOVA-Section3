@@ -1,7 +1,7 @@
 ﻿define([], function () {
     return {
         events: {
-            selectPerson: "SelectPerson",
+            selectHistory: "SelectHistory",
 
             changeMenu: "ChangeMenu"
         },

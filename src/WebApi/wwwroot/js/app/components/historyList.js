@@ -14,12 +14,11 @@ define(['knockout', 'dataservice','postman', 'config'],
             var nextUrl = ko.observable();
             var curPage = ko.observable(params ? params.url : undefined);
             var total = ko.observable();
-            var selectPerson = function (person) {
-                postman.publish(config.events.selectPerson, { person, url: curPage() });
-            };
+           
             var callback = function(data) {
                 historyDetail(data);
-           };
+                
+            };
             var canPrev = function () {
                 return prevUrl();
             };
@@ -31,9 +30,9 @@ define(['knockout', 'dataservice','postman', 'config'],
             var setData = function (result) {
                 histories(result);
                 hdata(result.hist);
-               
+                //historyDetail(result.hist);
                 total(total);
-                console.log(total);
+               // console.log(total);
                 prevUrl(result.previous);
              
                 nextUrl(result.next);
@@ -55,7 +54,7 @@ define(['knockout', 'dataservice','postman', 'config'],
             }
             dataService.getHistory(curPage(), function (result) {
                 setData(result);
-                console.log(histories);
+               // console.log(histories);
 
                 //for (var i in result.hist) {
                 //    var row = result.hist[i];
@@ -63,27 +62,31 @@ define(['knockout', 'dataservice','postman', 'config'],
                 //}
                
                
-                console.log(hdata);
+               // console.log(hdata);
                 //console.log(histories);
 
             });
-
-            var getDetails = function (xx) {
+            var selectHistory = function (histo) {
+                postman.publish(config.events.selectHistory, { histo, url: curPage() });
+            };
+            var getDetails = function(xx) {
                 dataService.getHistoryDetails(xx.url, callback);
+                postman.publish(config.events.selectHistory, { xx, url: curPage() });
+
                 //window.location.href = '';
                 //postman.publish(
                 //    config.events.changeMenu,
                 //    config.menuItems.details);
-            }
+            };
 
             return {
                 histories, hdata, getDetails, detailHist, historyDetail,
                 total,
-             
                 canPrev,
                 canNext,
                 showPrev,
-                showNext
+                showNext,
+                selectHistory
             };
         };
     });

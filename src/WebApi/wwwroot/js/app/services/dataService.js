@@ -7,7 +7,7 @@
         $.getJSON(url,
             function(data) {
                 callback(data);
-                console.log(data);
+                //console.log(data);
 
             });
     };
