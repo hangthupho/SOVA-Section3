@@ -1,66 +1,61 @@
-﻿var urlPath = window.location.pathname;
-$(function () {
-    var postListVm = new PostListVM();
-    ko.applyBindings(postListVm);
-   
-});
+﻿(function (undefined) {
+    require.config({
+        baseUrl: "js",
+        paths: {
+            "jquery": "lib/jquery/dist/jquery.min",
+            "knockout": "lib/knockout/dist/knockout",
+            "text": "lib/requirejs-text/text",
+            "boostrap": "lib/boostrap/dist/bootstrap",
+            "toastr": "lib/toastr/toastr.min",
+            "dataservice": "app/services/dataService",
+            "postbox": "app/services/postbox",
+            "config": "app/config"
+        },
+        shim: {
+            "bootstrap": { "deps": ['jquery'] }
+        }
+    });
 
-//View Model
-function PostListVM() {
-    
-   
-        var self = this;
-        self.PostList = ko.observableArray([]);
-        self.dataList = ko.observableArray([]);
-        self.StringList = ko.observableArray([]);
-        self.TimeList = ko.observableArray([]);
-       
-        $.ajax({
-            cache: false,
-            type: "GET",
-            url: "/api/history",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            
-           
-            success: function (data1) {
-                alert('ok');
-                //var data2 = $.parseJSON(data1);
-                var output = "";
-                self.PostList(data1); //Put the response in ObservableArray
-                //self.dataList(data1.hist);
-                for (var i in data1.hist) {
-                    var row = data1.hist[i];
-
-                    var url = row['url'];
-                    var searchString = row['searchString'];
-                    var searchTime = row['searchTime'];
-
-                    $('#output').append("<tr width='50%'><td>" + url + "</td><td>" + searchString + "</td><td>" + searchTime + "</td></tr>");
-                }
-                //var jdata1 = JSON.stringify(output);
-                //data1.push(jdata1);
-                
-                console.log(output);
-                //self.dataList(output);
-            },
-            error: function (err) {
-                alert('not ok');
-                alert(err.status + " : " + err.statusText);
-            }
+    require(['knockout'], function (ko) {
+        ko.components.register("my-app", {
+            viewModel: { require: 'app/components/app/app' },
+            template: { require: 'text!app/components/app/appView.html' }
         });
-    }
+        ko.components.register("annotation-list",
+        {
+            viewModel: { require: "app/components/annotation/annotationList" },
+            template: { require: "text!app/components/annotation/annotationListView.html" }
+        });
+        ko.components.register("annotation-details",
+        {
+            viewModel: { require: "app/components/annotation/annotationDetails" },
+            template: { require: "text!app/components/annotation/annotationDetailsView.html" }
+        });
+        ko.components.register("search-list",
+        {
+            viewModel: {
+                require: "app/components/search/search" },
+            template: { require: "text!app/components/search/searchView.html" }
+        });
+        ko.components.register("search-detail", {
+            viewModel: { require: 'app/components/search/searchDetail' },
+            template: { require: 'text!app/components/search/searchDetailView.html' }
+        });
 
+        ko.components.register('search-history',
+            {
+                viewModel: { require: 'app/components/history/historyList' },
+                template: { require: 'text!app/components/history/historyListView.html' }
+            });
+        ko.components.register('history-detail',
+        {
+            viewModel: { require: 'app/components/history/historyDetail' },
+            template: { require: 'text!app/components/history/historyDetailView.html' }
+        });
+    });
 
+    require(['knockout'], function (ko) {
+        ko.applyBindings();
+    });
 
-//Model
-function PostViewModel(data1) {
-   this.total = ko.observable(data1.total);
-   this.previous = ko.observable(data1.previous);
-   this.next = ko.observable(data1.next);
-   //this.hist = ko.observable(data1.hist);
-   //this.url = ko.observable(data1.hist.url);
-   //this.searchString = ko.observable(data1.output.searchString);
-   //this.searchTime = ko.observable(data1.output.searchTime);
-   
-}
+})();

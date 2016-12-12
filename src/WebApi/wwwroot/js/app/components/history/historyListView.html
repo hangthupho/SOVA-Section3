@@ -1,0 +1,57 @@
+﻿<table class="table table-striped">
+    <thead>
+        <tr>
+
+            <th>total</th>
+            <th>next</th>
+            <th>previous</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+
+            <td></td>
+            <td> <button data-bind="enable: canNext(),click: showNext">Next</button></td>
+            <td> <button data-bind="enable: canPrev(), click: showPrev">Previous</button></td>
+        </tr>
+    </tbody>
+</table>
+<table>
+
+
+    <thead>
+        <tr>
+
+            <th>Url</th>
+            <th>searchString</th>
+            <th>searchTime</th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: hdata">
+        <tr>
+
+            <td> <a href="#" data-bind="click: $parent.getDetails">See Details</a></td>
+            <td data-bind="text:searchString"></td>
+            <td data-bind="text:searchTime"></td>
+        </tr>
+    </tbody>
+</table>
+
+<!--<div id="output">Some data from github:  </div>-->
+<script>console.log(url)</script>
+<p> hello from this page</p>
+
+<div data-bind="foreach: historyDetail">
+
+    <p data-bind="component:{name:'history-detail', params:{link: url, string: searchString, time: searchTime}}"></p>
+
+</div>
+<history-detail></history-detail>
+
+
+<!--<ul class="list-group" data-bind="foreach: hdata">
+    <li class="list-group-item" data-bind="click: $parent.selectHistory">
+        <span data-bind="text: url"></span>
+        <span data-bind="component:{name:'post-detail', params:{histo: histo}}"></span>
+    </li>
+</ul>-->

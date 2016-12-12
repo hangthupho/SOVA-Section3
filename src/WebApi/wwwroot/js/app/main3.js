@@ -4,9 +4,9 @@ $(document).ready(function () {
          .click(function() {
             var search = $('#txtString').val();
              $.ajax({
-                 url: '/api/search',
-                 data: { searchkeyword:search },
-                 method: 'get',
+                 url: '/api/annotations',
+                 data: ko.toJSON(annoPost),
+                 method: 'post',
                 dataType: 'json',
                 success: function (sdat) {
                     for (var i in sdat.list) {

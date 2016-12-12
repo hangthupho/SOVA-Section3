@@ -1,54 +1,15 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <title></title>
-
-    <script src="js/lib/jquery/dist/jquery.js"></script>
-    <script src="js/lib/knockout/dist/knockout.js"></script>
-    <!--<script type="text/javascript">
-
-    </script>-->
-    <script type="text/javascript" src="js/app/main.js"></script>
+    <title>index</title>
+    <link href="js\lib\boostrap\dist\css\bootstrap.css" rel="stylesheet" />
+    <link href="css/appTheme.css" rel="stylesheet" />
+    <link href="js/lib/toastr/toastr.css" rel="stylesheet" />
+    <link href="css/site.css" rel="stylesheet" />
 </head>
-<body style="font-family: Arial">
-  
-<table>
-    <thead>
-    <tr>
-        <th>S.No</th>
-        <th>Url</th>
-        <th>searchString</th>
-        <th>searchTime</th>
-        <th>peter</th>
-    </tr>
-    </thead>
-    <tbody data-bind="foreach: PostList">
-    <tr>
-        <td data-bind="text:$index"></td>
-        <td data-bind="text:total"></td>
-        <td data-bind="text:previous"></td>
-        <td data-bind="text:next"></td>
-    </tr>
-    </tbody>  
-    <tbody data-bind="foreach: dataList">
-        <tr>
-            <td data-bind="text: $data"> </td>
-        </tr>
-    </tbody> 
-    <tbody data-bind="foreach: StringList">
-        <tr>
-            <td data-bind="text: $data"> </td>
-        </tr>
-    </tbody> 
-    <tbody data-bind="foreach: TimeList">
-        <tr>
-            <td data-bind="text: $data"> </td>
-        </tr>
-    </tbody> 
-     
-</table>
-<button id="button">Search</button>
-    <div id="output">Some data from github</div>
+<body class="container">
+    <my-app></my-app>
+
+    <script data-main="js/app/main.js" src="js/lib/requirejs/require.js"></script>
 </body>
 </html>

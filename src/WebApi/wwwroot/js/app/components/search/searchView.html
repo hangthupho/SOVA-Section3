@@ -1,0 +1,112 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-4">
+            <img src="../../../../css/images/stack-overflow-logo.png" width="50" height="60" /> <strong>StackOverFlow Search</strong> 
+        </div>
+    </div><!-- /.row -->
+    <div class="form-group">
+        &nbsp;
+    </div>
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-6">
+                <div class="input-group">
+                     
+                    <input class="form-control"
+                           id="system-search"
+                           name="search"
+                           type="text"
+                           placeholder="Search for" required
+                           data-bind="value: searchfor, valueUpdate: 'afterkeydown'"/>                
+
+                    <span class="input-group-btn">
+                        <button type="submit"
+                                class="btn btn-default"
+                                id="btnSearch"
+                                data-bind="click: search">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <!-- Dropdown button -->
+            <div class="col-sm-2">                       
+               <select class="form-control">
+                  <option value="relevance">Sort: Relevance</option>
+                  <option value="bestmatch">Sort: Best Match</option>
+               </select>
+            </div>
+                </div>
+            
+            <div class="col-sm-2"></div>
+    <div class="form-group">
+        &nbsp;
+    </div>
+    
+    <div class="col-sm-12">
+        <table class="table table-list-search" data-bind="visible:posts().length">         
+            <thead>
+            <tr>
+                <th colspan="3">
+                    Search results: <span data-bind="text: totalItemCount()"></span> 
+                    <!-- Pagination -->
+                    <div class="pagination" style="float:right">
+                        <span data-bind="style:  { display: isFirstPage() == true ? 'none' : ''  }">
+                                <a href="#" data-bind="click: function() { previousPage() }"><< Previous</a>
+                            </span>
+                        <span data-bind="foreach: allPages()">
+                              <span data-bind="">
+                                <a href="#" data-bind="text: $index() + 1 , 
+                                                       click: function() { $parent.moveToPage($index() + 1) }, 
+                                                       css: { 'filterItemSelect': $parent.isCurrentPage() == $index() + 1 }">
+                                </a>
+                              </span>                                                       
+                            </span>
+                        <span data-bind="style: { display: isLastPage() == true ? 'none' : '' }">
+                                <a href="#" data-bind="click: function() { nextPage() }">Next >></a>
+                            </span>
+                    </div>
+                </th>
+            </tr>
+            <tr>             
+                <th>Mark</th>    
+                <th>Title</th>
+                <th>Rank</th>
+            </tr>
+            </thead>
+            <tbody data-bind="foreach: posts">
+            <tr>
+                <!-- <td data-bind="text: id">Post ID</td>      -->
+                <td><input id="cbmark" type="checkbox" data-bind="checkedValue: id, checked: status === 1, click: function() { $parent.markPost(id) }"></td>
+                <td>
+                    <a data-bind="click: $parent.getDetails">
+                        <span data-bind="text: title"></span>
+                    </a><br>
+                   
+                    <!--<a href="#" data-bind="text: title"></a>-->
+                    <span class="label label-info" data-bind="text: tag"></span>
+                    
+                    <!--<input type="text" data-bind="value: tagName" data-role="tagsinput"/>-->
+                </td>
+                <td data-bind="text: rank">Rank</td>
+                    
+                  
+                    
+            </tr>
+            </tbody>
+        </table>
+        
+
+        <span data-bind="foreach: postDetail">
+            <p data-bind="component:{name:'search-detail', params:{pLink: url, tit: title, body: postBody, ans: answers}}"></p>
+        </span>
+    </div>
+   
+</div>
+
+    <!-- data-bind="click: $parent.selectAnnotation, css: {active: $parent.isSelected($data)}"
+
+        css: { 'background-color' :  $parent.isCurrentPage() == $index() +  1 ? 'pink' : 'yellow' }
+        -->
+

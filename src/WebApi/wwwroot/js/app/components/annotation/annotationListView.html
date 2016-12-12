@@ -1,0 +1,10 @@
+﻿<div class="col-sm-6">
+    <ul class="list-group" data-bind="foreach: annotations">
+        <li class="list-group-item" data-bind="click: $parent.selectAnnotation, css: {active: $parent.isSelected($data)}">
+          
+                <span data-bind="text: postId">PostId</span> 
+        </li>
+    </ul>
+</div>
+
+<annotation-details></annotation-details>

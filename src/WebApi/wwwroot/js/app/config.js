@@ -1,16 +1,18 @@
-﻿define([], function () {
+﻿
+define([], function () {
     return {
         events: {
-            selectHistory: "SelectHistory",
-            selectSearch: "SelectSearch",
+            selectAnnotation: "SelectAnnotation",
+            saveAnnotation: "SaveAnnotation",
+            searchPost: "SearchPost",
             changeMenu: "ChangeMenu"
         },
         menuItems: {
-            histories: "Histories",
-            search: "Search",
-            details: "Details",
-            comment: "Personal-Comment"
-
+            search: "Search Posts",
+            history: "Search History",
+            annotations: "Personal Comments",          
+            cloud: "Word Cloud",
+            about: "About"
         }
     };
 });
