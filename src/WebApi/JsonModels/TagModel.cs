@@ -8,6 +8,6 @@ namespace WebApi.JsonModels
     public class TagModel
     {
         public string Url { get; set; }
-        public string TagName { get; set; }
+        public string Tag { get; set; }
     }
 }

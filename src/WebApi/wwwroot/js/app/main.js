@@ -33,7 +33,8 @@
         });
         ko.components.register("search-list",
         {
-            viewModel: { require: "app/components/search/search" },
+            viewModel: {
+                require: "app/components/search/search" },
             template: { require: "text!app/components/search/searchView.html" }
         });
     });

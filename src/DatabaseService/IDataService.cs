@@ -47,6 +47,6 @@ namespace DatabaseService
         //Search procedure
         IList<SearchedResult> GetAllMatchPostsWithKeyword(string keyword);
         IList<WeightedSearch> GetSearchedPost(string keyword1);
-
+        //IList<WeightedSearchExtended> GetSearchedPost(string keyword1);
     }
 }

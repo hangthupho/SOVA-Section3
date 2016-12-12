@@ -285,16 +285,39 @@ namespace DatabaseService
             }
         }
         //======= Search posts =============
+        //public IList<WeightedSearchExtended> GetSearchedPost(string keyword1)
         public IList<WeightedSearch> GetSearchedPost(string keyword1)
         {
             using (var db = new SovaContext())
             {
                 var result = db.weightedSearch.FromSql("call weighted_Search({0})", keyword1);
                 var result1 = new List<WeightedSearch>();
+               
                 foreach (var data in result)
                 {
-                    result1.Add(data);
+                    result1.Add(data);                  
                 }
+
+                //var listOfPostId = (from item in result1 select item.Id).ToArray();
+
+                //var step1 = db.tag.Where(y => listOfPostId.Contains(y.PostId));
+                //var step2 = step1.GroupBy(l => new { l.PostId });
+                //var step3 = step2.Select(groupResults => new { groupResults.Key.PostId,TagWithCommaBetween = string.Join(", ", groupResults.Select(itemInTagsRow => itemInTagsRow.TagName)) });
+
+                //int[] statusArray = (from item in db.marking where item.Status == 1 select item.PostId).ToArray();
+
+                //List< WeightedSearchExtended> weightedSearchExtended = 
+                //    (from item in result1 select new WeightedSearchExtended {
+                //        Id = item.Id,
+                //        PostBody = item.PostBody,
+                //        Title = item.Title,
+                //        Rank = item.Rank,
+                //        Status = statusArray.Contains(item.Id) ? 1 : 0,
+                //        TagName = (from itemStep3 in step3 where item.Id == itemStep3.PostId select itemStep3.TagWithCommaBetween).FirstOrDefault()
+                //    }).ToList();
+
+                //return weightedSearchExtended;
+
                 return result1;
             }
         }

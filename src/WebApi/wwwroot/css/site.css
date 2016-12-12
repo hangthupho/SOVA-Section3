@@ -1,3 +1,19 @@
 ﻿.selectedAnnotation {
     color: red;
 }
+
+.filterItemSelect {
+    color: black;
+}
+
+.pagination a:hover {
+    color: black;
+}
+
+/*.pagination a:active {
+    color: black;
+}
+
+.pagination a:visited {
+    color: black;
+}*/
