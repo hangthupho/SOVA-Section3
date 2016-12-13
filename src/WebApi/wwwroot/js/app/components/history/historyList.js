@@ -31,7 +31,7 @@ define(['knockout', 'dataservice', 'postbox', 'config'],
                 histories(result);
                 hdata(result.data);
             
-                total(total);
+                total(result.total);
          
                 prevUrl(result.previous);
 

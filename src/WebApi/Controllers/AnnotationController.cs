@@ -28,6 +28,7 @@ namespace WebApi.Controllers
             var result = new
             {
                 Total = total,
+                Url = Url.Link(Config.HistoriesRoute, new { page, pagesize }),
                 Previous = PrevUrl(Url, Config.AnnotationsRoute, page, pagesize),
                 Next = NextUrl(Url, Config.AnnotationsRoute, page, pagesize, total),
                 Data = data

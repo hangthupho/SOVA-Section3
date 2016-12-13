@@ -1,5 +1,5 @@
-﻿define(['knockout', 'dataservice', 'postbox', 'config'],
-    function (ko, dataService, postbox, config) {
+﻿define(['knockout', 'dataservice', 'postbox', 'config', 'toastr'],
+    function (ko, dataService, postbox, config, toastr) {
         return function(params) {
             //var detailHist1 = ko.observableArray([""]);
             //    return function(params) {
@@ -28,9 +28,9 @@
                     { postId: loc, commentBody: comment() },
                     function() {
                         console.log(annoPost);
-
+                        
                     });
-            };
+              };
             return {
                 pLink,
                 tit,

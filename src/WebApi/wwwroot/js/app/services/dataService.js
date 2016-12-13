@@ -1,8 +1,12 @@
 ﻿define(['jquery'], function ($) {
-
-    var getAnnotations = function (callback) {
-        $.getJSON("api/annotations", function (data) {
-            callback(data.data);
+    var anUrl = "api/annotations";
+    var getAnnotations = function (url,callback) {
+        if (url === undefined) {
+            url = anUrl;
+        }
+        $.getJSON(url, function (data) {
+            callback(data);
+            console.log(data);
         });  
     };
     

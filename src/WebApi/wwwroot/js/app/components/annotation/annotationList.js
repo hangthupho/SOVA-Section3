@@ -1,8 +1,28 @@
 ﻿define(['knockout', 'dataservice', 'postbox', 'config'], function (ko, dataService, postbox, config) {
-    return function () {
+    return function (params) {
         var annotations = ko.observableArray([]);
         var selectedAnnotation = ko.observable();
+        var prevUrl = ko.observable();
+        var nextUrl = ko.observable();
+        var curPage = ko.observable(params ? params.url : undefined);
+        var total = ko.observable();
+        var canPrev = function () {
+            return prevUrl();
+        };
 
+        var canNext = function () {
+            return nextUrl();
+        };
+        var setData = function (result) {
+            annotations(result.data);
+            console.log(result.data);
+            total(result.total);
+            prevUrl(result.previous);
+            nextUrl(result.next);
+            console.log(result.next);
+            curPage(result.url);
+        };
+      
         var selectAnnotation = function (annotation) {
             selectedAnnotation(annotation);
             postbox.publish(config.events.selectAnnotation, annotation);
@@ -23,15 +43,32 @@
             annotations(annotationArray);
             selectedAnnotation(annotation);
         });
+        var showPrev = function () {
+            dataService.getAnnotations(prevUrl(), function (result) {
+                setData(result);
+            });
+        }
 
-        dataService.getAnnotations(function (data) {
-            annotations(data);
+        // show the next page
+        var showNext = function () {
+            dataService.getAnnotations(nextUrl(), function (result) {
+                setData(result);
+            });
+        }
+        dataService.getAnnotations(curPage(), function (result) {
+            setData(result);
         });
 
         return {
             annotations,
             selectAnnotation,
-            isSelected
+            isSelected,
+            total,
+            canPrev,
+            canNext,
+            showPrev,
+            showNext
         };
-    };
-});
+        };
+    });
+
