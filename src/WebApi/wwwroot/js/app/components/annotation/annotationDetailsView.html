@@ -12,6 +12,17 @@
             </div>
         </div>
         <div class="form-group">
+            <label for="commentcreationdate" class="col-sm-2 control-label">Date:</label>
+            <div class="col-sm-10">
+                <textarea type="number"
+                          class="form-control"
+                          id="commentCreationDate"
+                          readonly="readonly"
+                          data-bind="textInput: commentCreationDate"
+                          placeholder="CommentCreationDate"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
             <label for="postid" class="col-sm-2 control-label">Post No.:</label>
             <div class="col-sm-10">
                 <input type="number"
@@ -32,6 +43,7 @@
                  </textarea>
             </div>
         </div>
+      
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <button type="submit"

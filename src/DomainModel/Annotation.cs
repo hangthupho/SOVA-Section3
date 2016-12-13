@@ -14,5 +14,6 @@ namespace DomainModel
         public virtual Post Post { get; set; }
 
         public string CommentBody { get; set; }
+        public string CommentCreationDate { get; set; }
     }
 }

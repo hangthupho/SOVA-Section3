@@ -18,7 +18,7 @@
                 console.log(result);
                 
             });
-            console.log(JSON.stringify(ko.toJS(annotation)));
+           
         };
         
         

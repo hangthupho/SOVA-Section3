@@ -28,8 +28,8 @@
                     { postId: loc, commentBody: comment() },
                     function() {
                         console.log(annoPost);
-                        
                     });
+                toastr.success("Comment Posted!");
               };
             return {
                 pLink,

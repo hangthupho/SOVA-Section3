@@ -51,5 +51,14 @@ namespace DatabaseService
             optionsBuilder.UseMySql("server=localhost;database=sova;uid=root;pwd=copenhagen");
             base.OnConfiguring(optionsBuilder);
         }
+        public static String GetTimestamp(DateTime value)
+        {
+            return value.ToString("yyyy-MM-dd HH:mm:ss");
+        }
+
+        public String GetTimestamp()
+        {
+            return GetTimestamp(DateTime.Now);
+        }
     }
 }
