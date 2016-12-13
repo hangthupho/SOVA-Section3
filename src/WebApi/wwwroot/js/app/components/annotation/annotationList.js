@@ -15,7 +15,7 @@
         postbox.subscribe(config.events.saveAnnotation, function (annotation) {
             var annotationArray = annotations();
             for (var i = 0; i < annotationArray.length; i++) {
-                if (annotationArray[i].AnnotationId === annotation.AnnotationId) {
+                if (annotationArray[i].annotationId === annotation.annotationId) {
                     annotationArray[i] = annotation;
                     break;
                 }

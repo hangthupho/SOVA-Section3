@@ -53,21 +53,49 @@
             statusCode: {
                 404: function() {
                     alert('Failed');
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-                    alert(xhr.status);
-                    alert(xhr.responseText);
-                    alert(thrownError);
-                },
-                failure: function (errMsg) {
-                    alert(errMsg);
                 }
+            }
+        });
+    };
+
+    var putAnno = function (annoPut, id) {
+      
+       $.ajax({
+            url: "/api/annotations/" +id,
+            type: 'PUT',
+            data: JSON.stringify(annoPut),
+            contentType: "application/json; charset=utf-8",
+            dataType: 'application/json',
+            success: function (data) {
+                alert(data);
+            },
+            statusCode: {
+                404: function () {
+                    alert('Failed');
+                }
+                
+            }
+        });
+    };
+    var delAnno = function (id) {
+
+        $.ajax({
+            url: "/api/annotations/" + id,
+            type: 'DELETE',
+            success: function (data) {
+                alert(data);
+            },
+            statusCode: {
+                404: function () {
+                    alert('Failed');
+                }
+
             }
         });
     };
     return {
         getAnnotations,
-        getSearchedResults, getPostId, getHistoryDetails, getHistory, postAnno
+        getSearchedResults, getPostId, getHistoryDetails, getHistory, postAnno, putAnno, delAnno
     };
 });
 

@@ -14,9 +14,9 @@
         <div class="form-group">
             <label for="postid" class="col-sm-2 control-label">Post No.:</label>
             <div class="col-sm-10">
-                <input type="text"
+                <input type="number"
                        class="form-control"
-                       id="postid"
+                       id="postId"
                        data-bind="textInput: postId"
                        placeholder="PostId">
             </div>
@@ -25,10 +25,10 @@
             <label for="commentbody" class="col-sm-2 control-label">Comment:</label>
             <div class="col-sm-10">
                 <textarea type="text"
-                       class="form-control"
-                       id="commentbody"
-                       data-bind="textInput: commentBody"
-                       placeholder="CommentBody"
+                          class="form-control"
+                          id="commentBody"
+                          data-bind="textInput: commentBody"
+                          placeholder="CommentBody">
                  </textarea>
             </div>
         </div>
@@ -38,6 +38,11 @@
                         class="btn btn-success"
                         data-bind="click: $parent.saveAnnotation">
                     Save
+                </button>
+                <button type="submit"
+                        class="btn btn-success"
+                        data-bind="click: $parent.deleteAnnotation">
+                    Delete
                 </button>
             </div>
         </div>

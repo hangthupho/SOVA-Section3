@@ -80,7 +80,7 @@
                 <!-- <td data-bind="text: id">Post ID</td>      -->
                 <td><input id="cbmark" type="checkbox" data-bind="checkedValue: id, checked: status === 1, click: function() { $parent.markPost(id) }"></td>
                 <td>
-                    <a data-bind="click: $parent.getDetails">
+                    <a href="#popup1" data-bind="click: $parent.getDetails">
                         <span data-bind="text: title"></span>
                     </a><br>
                    
@@ -97,10 +97,13 @@
             </tbody>
         </table>
         
+        <div>
+           
+              <span {display:none; visibility:hidden;} data-bind="foreach: postDetail">
+                <p data-bind="component:{name:'search-detail', params:{pLink: url, tit: title, body: postBody, ans: answers}}"></p>
+                        </span>
+                    </div>
+                    </div>
+              
 
-        <span data-bind="foreach: postDetail">
-            <p data-bind="component:{name:'search-detail', params:{pLink: url, tit: title, body: postBody, ans: answers}}"></p>
-        </span>
-    </div>
-   
-</div>
+ 

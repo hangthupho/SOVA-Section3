@@ -29,7 +29,7 @@ define(['knockout', 'dataservice', 'postbox', 'config'],
 
             var setData = function (result) {
                 histories(result);
-                hdata(result.hist);
+                hdata(result.data);
                 //historyDetail(result.hist);
                 total(total);
                 // console.log(total);

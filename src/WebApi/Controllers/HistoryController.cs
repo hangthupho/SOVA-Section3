@@ -20,7 +20,7 @@ namespace WebApi.Controllers
 
             public IActionResult Get(int page = 0, int pagesize = Config.DefaultPageSize)
             {
-                var hist = DataService.GetHistory(page, pagesize)
+                var data = DataService.GetHistory(page, pagesize)
                     .Select(h => ModelFactory.MapHistory(h, Url));
                 var total = DataService.GetNumberOfHistories();
 
@@ -30,7 +30,7 @@ namespace WebApi.Controllers
                     Url = Url.Link(Config.HistoriesRoute, new { page, pagesize }),
                     Previous = PrevUrl(Url, Config.HistoriesRoute, page, pagesize),
                     Next = NextUrl(Url, Config.HistoriesRoute, page, pagesize, total),
-                    Hist = hist
+                    Data = data
                 };
 
                 return Json(result);

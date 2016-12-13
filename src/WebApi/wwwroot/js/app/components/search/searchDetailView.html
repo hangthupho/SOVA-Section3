@@ -5,31 +5,50 @@
 <span data-bind="text: ans"></span>-->
 <!--<span data-bind="text: postBody"></span>
 <span data-bind="text: rank"></span>-->
-        hello this page is post detail view
-<input data-bind="textInput: comment" />
-<button data-bind="click: clickPost">Post</button>
+     
+<div class="container text-center">
+    <div class="row">
+       
+    </div>
+</div>
 
-<table>
-    <thead>
-        <tr>
-            <th>url:</th>
-            <th>title:</th>
-            <th>id:</th>
-            <th>postBody:</th>
+<div class="popup-box chat-popup" id="qnimate">
+    <div class="popup-head">
 
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td data-bind="text:pLink"></td>
-            <td data-bind="text:tit"></td>
-            <td data-bind="text:id"></td>
-            <td data-bind="html:body"></td>
+        <div class="popup-head-right pull-right">
 
-        </tr>
-    </tbody>
-</table>
-<strong>Answers:</strong>
-<ul data-bind="foreach: ans">
-    <li data-bind="html:$data"></li>
-</ul>
+
+            <button data-widget="remove" id="removeClass" class="chat-header-button pull-right" type="button"><i class="glyphicon glyphicon-off"></i></button>
+        </div>
+    </div>
+    <div class="popup-messages">
+
+        <div class="direct-chat-messages">
+            <div>
+                <strong> Post detail:</strong>
+
+
+                <ul>
+                        Title: <li data-bind="text:tit"></li>
+                        ID: <li data-bind="text:id"></li>
+                        postBody: <li data-bind="html:body"></li>
+                     
+                        
+                </ul>
+
+                Answers:
+                <ul data-bind="foreach: ans">
+                    <li data-bind="html:$data"></li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="popup-messages-footer">
+            <textarea data-bind="textInput: comment" id="status_message" placeholder="Type a comment..." rows="10" cols="40" name="message"></textarea>
+            <div class="btn-footer">
+
+                <button  data-bind="click: clickPost" class="bg_none pull-right">Post </button>
+            </div>
+        </div>
+    </div>
+</div>
