@@ -39,9 +39,35 @@
 
             });
     };
+    var postAnno = function (annoPost) {
+        
+        $.ajax({
+            url: "/api/annotations/",
+            type: 'POST',
+            data: JSON.stringify(annoPost),
+            contentType: "application/json; charset=utf-8",
+            dataType: 'application/json',
+            success: function(data) {
+                alert(data);
+            },
+            statusCode: {
+                404: function() {
+                    alert('Failed');
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status);
+                    alert(xhr.responseText);
+                    alert(thrownError);
+                },
+                failure: function (errMsg) {
+                    alert(errMsg);
+                }
+            }
+        });
+    };
     return {
         getAnnotations,
-        getSearchedResults, getPostId, getHistoryDetails, getHistory
+        getSearchedResults, getPostId, getHistoryDetails, getHistory, postAnno
     };
 });
 

@@ -6,13 +6,15 @@
 <!--<span data-bind="text: postBody"></span>
 <span data-bind="text: rank"></span>-->
         hello this page is post detail view
-
+<input data-bind="textInput: comment" />
+<button data-bind="click: clickPost">Post</button>
 
 <table>
     <thead>
         <tr>
             <th>url:</th>
             <th>title:</th>
+            <th>id:</th>
             <th>postBody:</th>
 
         </tr>
@@ -21,6 +23,7 @@
         <tr>
             <td data-bind="text:pLink"></td>
             <td data-bind="text:tit"></td>
+            <td data-bind="text:id"></td>
             <td data-bind="html:body"></td>
 
         </tr>
