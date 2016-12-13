@@ -30,9 +30,9 @@ define(['knockout', 'dataservice', 'postbox', 'config'],
             var setData = function (result) {
                 histories(result);
                 hdata(result.data);
-                //historyDetail(result.hist);
+            
                 total(total);
-                // console.log(total);
+         
                 prevUrl(result.previous);
 
                 nextUrl(result.next);
@@ -54,16 +54,7 @@ define(['knockout', 'dataservice', 'postbox', 'config'],
             }
             dataService.getHistory(curPage(), function (result) {
                 setData(result);
-                // console.log(histories);
-
-                //for (var i in result.hist) {
-                //    var row = result.hist[i];
-                //    hdata.push(row);
-                //}
-
-
-                // console.log(hdata);
-                //console.log(histories);
+               
 
             });
 
@@ -71,10 +62,6 @@ define(['knockout', 'dataservice', 'postbox', 'config'],
                 dataService.getHistoryDetails(xx.url, callback);
 
 
-                //window.location.href = '';
-                //postman.publish(
-                //    config.events.changeMenu,
-                //    config.menuItems.details);
             };
 
             return {
