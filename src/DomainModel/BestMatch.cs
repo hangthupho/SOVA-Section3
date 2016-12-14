@@ -13,7 +13,7 @@ namespace DomainModel
         [Key]
         public int Id { get; set; }
         [Column("rank")]
-        public double? Rank { get; set; }
+        public decimal? Rank { get; set; }
         [Column("postBody")]
         public string PostBody { get; set; }
         [Column("title")]

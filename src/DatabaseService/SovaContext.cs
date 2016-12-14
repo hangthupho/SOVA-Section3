@@ -23,7 +23,9 @@ namespace DatabaseService
         public DbSet<History> history { get; set; }
         public DbSet<Annotation> annotation { get; set; }
         public DbSet<SearchedResult> searchedResult { get; set; }
+        public DbSet<SearchResultBM> searchResultBM { get; set; }
         public DbSet<WeightedSearch> weightedSearch { get; set; }
+        public DbSet<BestMatch> bestMatch { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

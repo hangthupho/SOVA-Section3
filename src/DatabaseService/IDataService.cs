@@ -48,5 +48,8 @@ namespace DatabaseService
         IList<SearchedResult> GetAllMatchPostsWithKeyword(string keyword);
         IList<WeightedSearch> GetSearchedPost(string keyword1);
 
+        IList<SearchResultBM> GetAllMatchedPostsWithKeyword(string keyword2);
+        IList<BestMatch> GetSearchedMatchedPost(string keyword3);
+
     }
 }

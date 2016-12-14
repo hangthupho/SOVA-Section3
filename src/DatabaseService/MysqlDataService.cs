@@ -325,5 +325,45 @@ namespace DatabaseService
                 return result.ToList();
             }
         }
+
+        public IList<SearchResultBM> GetAllMatchedPostsWithKeyword(string keyword2)
+        {
+            using (var db = new SovaContext())
+            {
+                var conn = (MySqlConnection)db.Database.GetDbConnection();
+                conn.Open();
+                var cmd = new MySqlCommand("call post", conn);
+                var result = new List<SearchResultBM>();
+                using (var rdr = cmd.ExecuteReader())
+                {
+                    while (rdr.Read())
+                    {
+
+                        result.Add(new SearchResultBM()
+                        {
+                            PostId = rdr.GetInt16(0),
+                            Score = rdr.GetInt16(2),
+                            PostBody = rdr.GetString(1),
+                            UserId = rdr.GetInt16(3)
+                        });
+                    }
+                }
+                return result.ToList();
+            }
+        }
+
+        public IList<BestMatch> GetSearchedMatchedPost(string keyword3)
+        {
+            using (var db = new SovaContext())
+            {
+                var result = db.bestMatch.FromSql("call sova.binary_Search({0})", keyword3);
+                var result1 = new List<BestMatch>();
+                foreach (var data in result)
+                {
+                    result1.Add(data);
+                }
+                return result1;
+            }
+        }
     }
 }
