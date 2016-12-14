@@ -12,8 +12,6 @@ namespace DatabaseService
 {
     public class MysqlDataService : IDataService
     {
-
-
         public int GetNumberOfPosts()
         {
             using (var db = new SovaContext())
@@ -60,7 +58,7 @@ namespace DatabaseService
         }
 
         public bool UpdateAnnotation(Annotation annotation)
-        { 
+        {
             using (var db = new SovaContext())
 
                 try
@@ -97,6 +95,58 @@ namespace DatabaseService
                 return db.annotation.Count();
             }
         }
+        //======= CRUD on markings =============
+        public IList<Marking> GetMarking(int page, int pagesize)
+        {
+            using (var db = new SovaContext())
+            {
+                var tmp = (from a in db.marking
+                           select a)
+                           .OrderBy(o => o.PostId)
+                           .Skip(page * pagesize)
+                           .Take(pagesize)
+                           .ToList();
+                return tmp;
+            }
+        }
+
+        public Marking GetMarking(int id)
+        {
+            using (var db = new SovaContext())
+            {
+                var result = (from p in db.marking
+                              where p.PostId == id
+                              select p).FirstOrDefault();
+                return result;
+            }
+        }
+
+
+
+        public bool UpdateMarking(Marking marking)
+        {
+            using (var db = new SovaContext())
+
+                try
+                {
+                    db.Attach(marking);
+                    db.Entry(marking).State = EntityState.Modified;
+                    return db.SaveChanges() > 0;
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    return false;
+                }
+
+        }
+
+        public int GetNumberOfMarkings()
+        {
+            using (var db = new SovaContext())
+            {
+                return db.marking.Count();
+            }
+        }
         //======= Get question posts as a list =============
         public List<PostExtended> GetListOfPosts(int page, int pagesize)
         {
@@ -104,12 +154,12 @@ namespace DatabaseService
             {
                 var list = (from p in db.post
                             where !db.answer.Any(f => f.PostId == p.PostId) //select those which are post questions, not answers                           
-                           select new PostExtended
-                           {
-                               PostId = p.PostId,
-                               Title = p.Question.Title,
-                               UserName = p.User.UserName
-                           }) .OrderBy(o => o.PostId)
+                            select new PostExtended
+                            {
+                                PostId = p.PostId,
+                                Title = p.Question.Title,
+                                UserName = p.User.UserName
+                            }).OrderBy(o => o.PostId)
                               .Skip(page * pagesize)
                               .Take(pagesize)
                               .ToList();
@@ -122,8 +172,8 @@ namespace DatabaseService
             using (var db = new SovaContext())
             {
                 var getParentId = from a in db.answer
-                        where a.ParentId == id
-                        select a.PostId;
+                                  where a.ParentId == id
+                                  select a.PostId;
 
                 //select posts.postBody from posts
                 //where postID in (select answers.postID
@@ -144,7 +194,7 @@ namespace DatabaseService
                                   UserName = p.User.UserName,
                                   Answers = getAnswerList
                               }).FirstOrDefault();
-                return result;            
+                return result;
             }
         }
         //======= Get tags related to a post =============
@@ -153,13 +203,13 @@ namespace DatabaseService
             using (var db = new SovaContext())
             {
                 var result = (from t in db.tag
-                            where t.PostId == id
-                            select new Tag
-                            {
-                                PostId = t.PostId,
-                                TagName = t.TagName
-                            }).ToList();
-                return result;                       
+                              where t.PostId == id
+                              select new Tag
+                              {
+                                  PostId = t.PostId,
+                                  TagName = t.TagName
+                              }).ToList();
+                return result;
             }
         }
 
@@ -176,8 +226,8 @@ namespace DatabaseService
                                UserId = c.UserId,
                                CommentBody = c.CommentBody,
                                PostTitle = c.Post.Question.Title,
-                               CommentCreationDate = c.CommentCreationDate,   
-                               UserName = c.User.UserName                          
+                               CommentCreationDate = c.CommentCreationDate,
+                               UserName = c.User.UserName
                            }).OrderBy(o => o.CommentId)
                               .Skip(page * pagesize)
                               .Take(pagesize)
@@ -217,7 +267,7 @@ namespace DatabaseService
         {
             using (var db = new SovaContext())
             {
-    
+
                 var tmp = (from u in db.user
                            select u)
                           .OrderBy(o => o.UserId)
@@ -254,7 +304,7 @@ namespace DatabaseService
                            {
                                sId = h.sId,
                                SearchString = h.SearchString,
-                               SearchTime = h.SearchTime                         
+                               SearchTime = h.SearchTime
                            }).OrderBy(o => o.sId)
                               .Skip(page * pagesize)
                               .Take(pagesize)
@@ -292,10 +342,10 @@ namespace DatabaseService
             {
                 var result = db.weightedSearch.FromSql("call weighted_Search({0})", keyword1);
                 var result1 = new List<WeightedSearch>();
-               
+
                 foreach (var data in result)
                 {
-                    result1.Add(data);                  
+                    result1.Add(data);
                 }
 
                 //var listOfPostId = (from item in result1 select item.Id).ToArray();
@@ -346,6 +396,23 @@ namespace DatabaseService
                 }
                 return result.ToList();
             }
+        }
+
+        //Get weighted word list for word cloud
+        public IList<WordCloud> GetWordCloud(string word)
+        {
+            using (var db = new SovaContext())
+            {
+                var wordlist = db.wordCloud.FromSql("call weighted_Wordlist({0})", word);
+                var result = new List<WordCloud>();
+
+                foreach (var data in wordlist.Take(50))
+                {
+                    result.Add(data);
+                }
+                return result;
+            }
+
         }
     }
 }

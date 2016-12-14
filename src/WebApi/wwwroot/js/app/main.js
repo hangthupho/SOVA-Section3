@@ -9,7 +9,8 @@
             "toastr": "lib/toastr/toastr.min",
             "dataservice": "app/services/dataService",
             "postbox": "app/services/postbox",
-            "config": "app/config"
+            "config": "app/config",
+            "jqcloud2": "lib/jqcloud2/dist/jqcloud.min"
         },
         shim: {
             "bootstrap": { "deps": ['jquery'] }
@@ -36,6 +37,12 @@
             viewModel: {
                 require: "app/components/search/search" },
             template: { require: "text!app/components/search/searchView.html" }
+        });
+        ko.components.register("word-cloud",
+        {
+            viewModel: {
+                require: "app/components/wordcloud/wordcloud" },
+            template: { require: "text!app/components/wordcloud/wordcloudView.html" }
         });
     });
 

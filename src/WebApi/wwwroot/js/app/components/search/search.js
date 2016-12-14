@@ -2,8 +2,8 @@
     return function () {
         var posts = ko.observableArray([]);
         var searchfor = ko.observable("");
-        var checkedStatus = ko.observable(false);
-
+        var markedPost = ko.observableArray();
+        var data;
         var isFirstPage = ko.observable(true);
         var isLastPage = ko.observable(true);
         var isCurrentPage = ko.observable(1);
@@ -11,10 +11,6 @@
         var items = ko.observableArray([]);
         
         var totalItemCount = ko.observable(1);
-        //var moveToPage;
-        //var nextPage;
-
-        var currentSelected = ko.observable(1);
 
         //Search on enter
         $('#system-search').keyup(function (event) {
@@ -23,12 +19,25 @@
             }
         });
        
-        var selectItem = function (value) {
-            currentSelected(value);
-
-            console.log("selectItem called");
-            console.log(currentSelected(value));
+        var checked = function (data) {
+            console.log(data.status);
+            console.log(data.status === 1);
+            return data.status === 1;
+        }
+        var markPost = function (id, index, data) {
+            var tmp = data;
+            tmp.status = tmp.status === 0 ? 1 : 0;
+            //posts[index].status = 0;
+            posts()[posts.indexOf(data)] = tmp;
+  
+           
+            postbox.publish(config.events.markPost, id);
         };
+
+        var isChecked = function (id) {
+            return id === markedPost();
+        }
+
 
         var moveToPage = function (value) {
             pagination.moveToPage(value);
@@ -54,22 +63,23 @@
         };
 
         //Get PostID when mark it
-        var markPost = function (id) {           
-            //console.log("postId: " + id);
-            //if(id.checkedStatus() === true) 
-            //    console.log("dissociate item " + id.checkedStatus());
-            //else console.log("associate item " + id.checkedStatus());
-            //id.checkedStatus(!(id.checkedStatus()));
-            //return true;
-            console.log("postId: " + id);
-        };
+        //var markPost = function () {
+        //    if (status === 1) {
+        //        console.log("current status is checked");
+        //        checkedStatus = false;
+        //    }
+        //    else 
+        //        checkedStatus = true;
+        //    dataService.updateStatus(id, checkedStatus);
 
-        self.toggleAssociation = function (item) {
-            if (item.Selected() === true) console.log("dissociate item " + item.id());
-            else console.log("associate item " + item.id());
-            item.Selected(!(item.Selected()));
-            return true;
-        };
+            //ko.utils.arrayForEach(this.posts(), function (post) {
+            //    post.status = checkedStatus;
+
+            //    console.log("checkedStatus: " + checkedStatus);
+            //    console.log("post.status: " + post.status);
+            //});
+            //console.log(checkedStatus);
+        //};
 
         //Search posts
         var search = function () {
@@ -77,7 +87,7 @@
             var searchfor = jQuery('#system-search').val();
             dataService.getSearchedResults(searchfor, function (data) {
                 items(data);                           
-                console.log(isFirstPage);
+                console.log(data);
                 pagination.PagerModel(items);
                   
                 isFirstPage( new ko.observable(pagination.isFirstPage()));
@@ -104,9 +114,9 @@
             posts,
             search,
             markPost,
+            //markedPost,
+            //isChecked,
             searchfor,
-            checkedStatus,
-            items,
             pagination,
             isCurrentPage,
             isFirstPage,
@@ -116,8 +126,8 @@
             totalItemCount,
             nextPage,
             previousPage,
-            currentSelected,
-            selectItem
+            checked
+
         };
     };
 });

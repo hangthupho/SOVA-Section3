@@ -24,6 +24,7 @@ namespace DatabaseService
         public DbSet<Annotation> annotation { get; set; }
         public DbSet<SearchedResult> searchedResult { get; set; }
         public DbSet<WeightedSearch> weightedSearch { get; set; }
+        public DbSet<WordCloud> wordCloud { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

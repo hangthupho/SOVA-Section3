@@ -5,6 +5,7 @@ define([], function () {
             selectAnnotation: "SelectAnnotation",
             saveAnnotation: "SaveAnnotation",
             searchPost: "SearchPost",
+            markPost: "MarkPost",
             changeMenu: "ChangeMenu"
         },
         menuItems: {

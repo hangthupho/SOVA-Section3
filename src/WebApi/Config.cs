@@ -19,6 +19,9 @@ namespace WebApi
         public const string UsersRoute = "UsersRoute";
         public const string HistoryRoute = "HistoryRoute";
         public const string HistoriesRoute = "HistoriesRoute";
+        public const string MarkingRoute = "MarkingRoute";
+        public const string MarkingsRoute = "MarkingsRoute";
         public const string SearchRoute = "SearchRoute";
+        public const string WordCloud = "WordCloud";
     }
 }

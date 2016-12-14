@@ -10,8 +10,6 @@ namespace StackOverFLow.DomainModel
     public class Marking
     {
         [Key]
-        public int mId { get; set; }
-
         [ForeignKey("Post")]
         public int PostId { get; set; }
         public virtual Post Post { get; set; }
