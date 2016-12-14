@@ -59,9 +59,10 @@ define(['knockout', 'dataservice', 'postbox', 'config'],
             });
 
             var getDetails = function (xx) {
-                dataService.getHistoryDetails(xx.url, callback);
-
-
+                var str = xx.searchString;
+                //dataService.getHistoryDetails(xx.url, callback);
+                postbox.publish(config.events.selectSearch, { str });
+                
             };
 
             return {

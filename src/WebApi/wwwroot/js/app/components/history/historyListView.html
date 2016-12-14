@@ -10,7 +10,7 @@
     <tbody>
         <tr>
 
-            <td></td>
+            <td data-bind ="text: total"></td>
             <td> <button data-bind="enable: canNext(),click: showNext">Next</button></td>
             <td> <button data-bind="enable: canPrev(), click: showPrev">Previous</button></td>
         </tr>
@@ -30,7 +30,7 @@
     <tbody data-bind="foreach: hdata">
         <tr>
 
-            <td> <a href="#" data-bind="click: $parent.getDetails">See Details</a></td>
+            <td> <a href="#" data-bind="click: $parent.getDetails">Search again</a></td>
             <td data-bind="text:searchString"></td>
             <td data-bind="text:searchTime"></td>
         </tr>
@@ -38,8 +38,6 @@
 </table>
 
 
-<script>console.log(url)</script>
-<p> hello from this page</p>
 
 <div data-bind="foreach: historyDetail">
 

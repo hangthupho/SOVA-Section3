@@ -22,7 +22,7 @@
             console.log(result.next);
             curPage(result.url);
         };
-      
+        
         var selectAnnotation = function (annotation) {
             selectedAnnotation(annotation);
             postbox.publish(config.events.selectAnnotation, annotation);
@@ -43,6 +43,11 @@
             annotations(annotationArray);
             selectedAnnotation(annotation);
         });
+        postbox.subscribe(config.events.deleteAnnotation, function (annotationsR) {
+            JSON.stringify(annotationsR);
+            //annotations(annotationsR);
+           
+        });
         var showPrev = function () {
             dataService.getAnnotations(prevUrl(), function (result) {
                 setData(result);
@@ -58,7 +63,7 @@
         dataService.getAnnotations(curPage(), function (result) {
             setData(result);
         });
-
+        
         return {
             annotations,
             selectAnnotation,

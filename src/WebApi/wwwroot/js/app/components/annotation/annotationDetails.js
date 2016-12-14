@@ -1,6 +1,9 @@
 ﻿define(['knockout', 'postbox', 'config', 'toastr','dataservice'], function (ko, postbox, config, toastr, dataservice) {
     return function (params) {
         var annotation = ko.observable(params.annotation);
+        var annotationsR = ko.observableArray(params.annotations);
+        console.log(params.annotations);
+        console.log(params.annotation);
         console.log(JSON.stringify(ko.toJS(annotation)));
         var saveAnnotation = function () {
             postbox.publish(config.events.saveAnnotation, ko.toJS(annotation));
@@ -11,7 +14,8 @@
             });
            };
         var deleteAnnotation = function () {
-            postbox.publish(config.events.saveAnnotation, ko.toJS(annotation));
+            postbox.publish(config.events.deleteAnnotation, ko.toJS(annotationsR));
+            console.log(ko.toJS(annotationsR));
             var annoDel = ko.toJS(annotation);
             toastr.success("Annotation deleted!");
             dataservice.delAnno(annoDel.annotationId, function (result) {

@@ -1,7 +1,8 @@
 ﻿define(['knockout', 'dataservice', 'postbox', 'config', 'toastr','../app/pagination'], function (ko, dataService, postbox, config, toastr, pagination) {
-    return function () {
+    return function (params) {
+        
         var posts = ko.observableArray([]);
-        var searchfor = ko.observable("");
+        var searchfor = ko.observable(params ? params.str : undefined);
         var checkedStatus = ko.observable(false);
         var postDetail = ko.observableArray([]);
         var isFirstPage = ko.observable(true);
