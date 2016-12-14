@@ -1,5 +1,6 @@
-﻿define(['jquery'], function ($) {
+﻿define(['jquery','postbox', 'config'], function ($, postbox, config) {
     var anUrl = "api/annotations";
+    var histUrl = "api/history/";
     var getAnnotations = function (url,callback) {
         if (url === undefined) {
             url = anUrl;
@@ -18,6 +19,25 @@
             contentType: "application/json",
             success: function (data) {
                 callback(data);
+            }
+        });
+    };
+
+    var getHistoryPage = function (page, callback) {
+        var pageSize = 30;
+       
+        $.ajax({
+            url: histUrl,
+            data: { page: page, pagesize:pageSize },
+            method: 'get',
+            dataType: 'json',
+            success: function (data) {
+                callback(data);
+                alert('ok');
+                console.log(data);
+            },
+            error: function (err) {
+                alert('not ok');
             }
         });
     };
@@ -43,11 +63,19 @@
             callback(data);
         });
     }
-    var histUrl = "api/history/";
+   
     var getHistory = function (url, callback) {
+        
+        
         if (url === undefined) {
             url = histUrl;
         }
+        var text = url.charAt(40);
+        postbox.publish(config.events.pageNumber, { text });
+        //var noi = (url1[url1.length - 2]);
+        //var noi1 = noi.charAt(0);
+       
+        console.log(text);
         $.getJSON(url,
             function (data) {
                 callback(data);
@@ -110,7 +138,7 @@
         });
     };
     return {
-        getAnnotations,
+        getAnnotations,getHistoryPage,
         getSearchedResults, getPostId, getHistoryDetails, getHistory, postAnno, putAnno, delAnno, getSearchedBmResults
     };
 });

@@ -14,7 +14,7 @@
             });
            };
         var deleteAnnotation = function () {
-            postbox.publish(config.events.deleteAnnotation, ko.toJS(annotationsR));
+            postbox.publish(config.events.deleteAnnotation);
             console.log(ko.toJS(annotationsR));
             var annoDel = ko.toJS(annotation);
             toastr.success("Annotation deleted!");

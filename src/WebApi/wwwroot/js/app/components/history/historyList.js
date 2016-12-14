@@ -8,7 +8,7 @@ define(['knockout', 'dataservice', 'postbox', 'config'],
             var hdata = ko.observableArray([]);
 
             var detailHist = ko.observableArray("");
-
+            var page = ko.observable(params ? params.text : undefined);
             var historyDetail = ko.observable();
             var prevUrl = ko.observable();
             var nextUrl = ko.observable();
@@ -47,11 +47,24 @@ define(['knockout', 'dataservice', 'postbox', 'config'],
             }
 
             // show the next page
-            var showNext = function () {
-                dataService.getHistory(nextUrl(), function (result) {
+            var showNext = function() {
+                dataService.getHistory(nextUrl(),
+                    function(result) {
+                        setData(result);
+                        postbox.subscribe(config.events.pageNumber,
+                            function(params) {
+                                page(params.text);
+                                console.log(params);
+                                
+                            });
+                    });
+            }
+            var showJump = function () {
+                dataService.getHistoryPage(page, function (result) {
                     setData(result);
                 });
             }
+
             dataService.getHistory(curPage(), function (result) {
                 setData(result);
                
@@ -71,7 +84,7 @@ define(['knockout', 'dataservice', 'postbox', 'config'],
                 canPrev,
                 canNext,
                 showPrev,
-                showNext
+                showNext, showJump, page
             };
         };
     });

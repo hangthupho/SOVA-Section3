@@ -43,9 +43,9 @@
             annotations(annotationArray);
             selectedAnnotation(annotation);
         });
-        postbox.subscribe(config.events.deleteAnnotation, function (annotationsR) {
-            JSON.stringify(annotationsR);
-            //annotations(annotationsR);
+        postbox.subscribe(config.events.deleteAnnotation, function () {
+           
+            annotations();
            
         });
         var showPrev = function () {

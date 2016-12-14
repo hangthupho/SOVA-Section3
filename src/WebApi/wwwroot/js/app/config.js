@@ -8,6 +8,7 @@ define([], function () {
             changeMenu: "ChangeMenu",
             deleteAnnotation: "DeleteAnnotation",
             selectSearch: "SelectSearch",
+            pageNumber: "pageNumber"
         },
         menuItems: {
             search: "Search Posts",

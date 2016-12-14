@@ -14,16 +14,17 @@
         <tr>
 
             <th>total</th>
-            <th>next</th>
             <th>previous</th>
+            <th>next</th>
         </tr>
     </thead>
     <tbody>
         <tr>
 
             <td data-bind="text: total"></td>
-            <td> <button data-bind="click: showNext">Next</button></td>
             <td> <button data-bind="enable: canPrev(), click: showPrev">Previous</button></td>
+            <td> <button data-bind="enable: canNext(),click: showNext">Next</button></td>
+           
         </tr>
     </tbody>
 </table>
