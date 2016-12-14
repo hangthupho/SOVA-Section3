@@ -9,12 +9,16 @@
         var isCurrentPage = ko.observable(1);
         var allPages  = ko.observableArray([]);
         var items = ko.observableArray([]);
-        var selectedSearch = ko.observable("");
-        var selectedSearch1 = ("Relevance");
-        var searchMethod = ko.observableArray([1, 2]);
+        var selectedSearch = ko.observable();
+        var selectedSearch1 = ko.observable();
+        var searchMethod = ko.observableArray(["Relevance", "Best Match"]);
+       
+        var searchMethod1 = ko.observableArray([{id: 1,name:"Relevance"}, {id: 2, name:"Best Match"} ]);
         var totalItemCount = ko.observable(1);
         //var moveToPage;
         //var nextPage;
+
+        
         var update = function() {
             
             return selectedSearch;
@@ -81,13 +85,9 @@
         var search = function () {
             console.log('Search function called');
             update();
-
-            console.log(ko.toString(ko.toJS(selectedSearch)));
-            console.log(JSON.stringify(ko.toJS((selectedSearch))));
-            var heo = JSON.stringify(ko.toJS((selectedSearch)));
-            console.log(heo);
+            
             var searchfor = jQuery('#system-search').val();
-            if (heo === "1") {
+            if (selectedSearch() === "Relevance") {
                 console.log('ok');
                 dataService.getSearchedResults(searchfor,
                     function(data) {
@@ -114,7 +114,7 @@
                         }
                     });
             }
-            else if (heo === "2") {
+            else if (selectedSearch() === "Best Match") {
                 console.log('ok');
                 dataService.getSearchedBmResults(searchfor,
                     function(data) {
@@ -177,7 +177,9 @@
             getDetails,
             postDetail,
             selectedSearch,
-            searchMethod
+            searchMethod,
+            selectedSearch1,
+            searchMethod1
         };
     };
 });

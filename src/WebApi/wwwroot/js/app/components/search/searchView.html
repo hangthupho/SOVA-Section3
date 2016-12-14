@@ -34,7 +34,8 @@
             <div class="col-sm-2">                       
                 <select class="form-control"
                         data-bind = "options: searchMethod,
-                    value: selectedSearch,
+                 
+                         value: selectedSearch,
                     optionsCaption: 'Choose search method...'">
                     <!--<option value="relevance">Sort: Relevance</option>
                     <option value="bestmatch">Sort: Best Match</option>-->
@@ -103,10 +104,10 @@
         </table>
         
         <div>
-            <ul>
+           <ul>
                 <li>
-                    You selected:
-                    <input type="text" data-bind="value: selectedSearch" />
+                    You selected: 
+                    <input type="text" data-bind="value: selectedSearch"/>
                 </li>
             </ul>
               <span {display:none; visibility:hidden;} data-bind="foreach: postDetail">
