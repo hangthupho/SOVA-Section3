@@ -9,11 +9,16 @@
         var isCurrentPage = ko.observable(1);
         var allPages  = ko.observableArray([]);
         var items = ko.observableArray([]);
-        
+        var selectedSearch = ko.observable("");
+        var selectedSearch1 = ("Relevance");
+        var searchMethod = ko.observableArray([1, 2]);
         var totalItemCount = ko.observable(1);
         //var moveToPage;
         //var nextPage;
-
+        var update = function() {
+            
+            return selectedSearch;
+        }
         var currentSelected = ko.observable(1);
 
         //Search on enter
@@ -70,34 +75,47 @@
             item.Selected(!(item.Selected()));
             return true;
         };
-
+        //JSON.stringify(ko.toJS(
+        console.log(JSON.stringify(ko.toJS((selectedSearch))));
         //Search posts
         var search = function () {
-            console.log('Search function called');            
+            console.log('Search function called');
+            update();
+
+            console.log(ko.toString(ko.toJS(selectedSearch)));
+            console.log(JSON.stringify(ko.toJS((selectedSearch))));
+            var heo = JSON.stringify(ko.toJS((selectedSearch)));
+            console.log(heo);
             var searchfor = jQuery('#system-search').val();
-            dataService.getSearchedResults(searchfor, function (data) {
-                items(data);                           
-                console.log(isFirstPage);
-                pagination.PagerModel(items);
-                  
-                isFirstPage( new ko.observable(pagination.isFirstPage()));
-                isLastPage(new ko.observable(pagination.isLastPage()));
+            if (heo === "1") {
+                console.log('ok');
+                dataService.getSearchedResults(searchfor,
+                    function(data) {
+                        items(data);
+                        console.log(isFirstPage);
+                        pagination.PagerModel(items);
 
-                allPages([]);
-                pagination.moveToPage(1);
-                allPages( new ko.observableArray(pagination.allPages()));
+                        isFirstPage(new ko.observable(pagination.isFirstPage()));
+                        isLastPage(new ko.observable(pagination.isLastPage()));
 
-                console.log(allPages);
-                var page = pagination.pagedItems();
+                        allPages([]);
+                        pagination.moveToPage(1);
+                        allPages(new ko.observableArray(pagination.allPages()));
 
-                totalItemCount(new ko.observable(pagination.totalItemCount()));
+                        console.log(allPages);
+                        var page = pagination.pagedItems();
 
-                posts(page);
-                console.log("posts(page): " + posts(page));
-                if (data === null || data.length === 0) {
-                    toastr.warning('No posts found!');
-                }
-            });
+                        totalItemCount(new ko.observable(pagination.totalItemCount()));
+
+                        posts(page);
+                        console.log("posts(page): " + posts(page));
+                        if (data === null || data.length === 0) {
+                            toastr.warning('No posts found!');
+                        }
+                    });
+            } else {
+                console.log('do ngu');
+            }
         };
 
       
@@ -130,7 +148,9 @@
             currentSelected,
             selectItem,
             getDetails,
-            postDetail
+            postDetail,
+            selectedSearch,
+            searchMethod
         };
     };
 });

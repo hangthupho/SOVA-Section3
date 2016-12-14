@@ -32,13 +32,18 @@
             </div>
             <!-- Dropdown button -->
             <div class="col-sm-2">                       
-               <select class="form-control">
-                  <option value="relevance">Sort: Relevance</option>
-                  <option value="bestmatch">Sort: Best Match</option>
-               </select>
+                <select class="form-control"
+                        data-bind = "options: searchMethod,
+                    value: selectedSearch,
+                    optionsCaption: 'Choose search method...'">
+                    <!--<option value="relevance">Sort: Relevance</option>
+                    <option value="bestmatch">Sort: Best Match</option>-->
+                </select>
             </div>
-                </div>
+           
             
+                </div>
+          
             <div class="col-sm-2"></div>
     <div class="form-group">
         &nbsp;
@@ -98,7 +103,12 @@
         </table>
         
         <div>
-           
+            <ul>
+                <li>
+                    You selected:
+                    <input type="text" data-bind="value: selectedSearch" />
+                </li>
+            </ul>
               <span {display:none; visibility:hidden;} data-bind="foreach: postDetail">
                 <p data-bind="component:{name:'search-detail', params:{pLink: url, tit: title, body: postBody, ans: answers}}"></p>
                         </span>
