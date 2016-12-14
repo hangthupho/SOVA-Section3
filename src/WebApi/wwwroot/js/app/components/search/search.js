@@ -9,7 +9,7 @@
         var isCurrentPage = ko.observable(1);
         var allPages  = ko.observableArray([]);
         var items = ko.observableArray([]);
-        
+        var gtmp;
         var totalItemCount = ko.observable(1);
 
         //Search on enter
@@ -19,26 +19,28 @@
             }
         });
        
+        //Mark post
         var checked = function (data) {
-            console.log(data.status);
-            console.log(data.status === 1);
             return data.status === 1;
         }
+
         var markPost = function (id, index, data) {
             var tmp = data;
-            tmp.status = tmp.status === 0 ? 1 : 0;
-            //posts[index].status = 0;
-            posts()[posts.indexOf(data)] = tmp;
-  
-           
+            dataService.updateStatus(id, tmp.status, function (data) {
+                posts(data);
+            });
+
+            tmp.status = data.status === 0 ? 1 : 0;
+            gtmp = tmp;
+            gtmp.index = index;
+            setTimeout(function () {
+                //still doesn't work with the set timeout 
+                $('#isChecked' + gtmp.index).prop('checked', gtmp.status === 0 ? false : true);
+            }, 0);
             postbox.publish(config.events.markPost, id);
         };
 
-        var isChecked = function (id) {
-            return id === markedPost();
-        }
-
-
+        //Pagination
         var moveToPage = function (value) {
             pagination.moveToPage(value);
             if (value > pagination.pageCount())
@@ -47,7 +49,6 @@
             console.log(isCurrentPage());
             var page = pagination.pagedItems();
             posts(page);
-            //selectItem(value);
         };
 
         var nextPage = function () {
@@ -61,25 +62,6 @@
             var page = pagination.pagedItems();
             posts(page);
         };
-
-        //Get PostID when mark it
-        //var markPost = function () {
-        //    if (status === 1) {
-        //        console.log("current status is checked");
-        //        checkedStatus = false;
-        //    }
-        //    else 
-        //        checkedStatus = true;
-        //    dataService.updateStatus(id, checkedStatus);
-
-            //ko.utils.arrayForEach(this.posts(), function (post) {
-            //    post.status = checkedStatus;
-
-            //    console.log("checkedStatus: " + checkedStatus);
-            //    console.log("post.status: " + post.status);
-            //});
-            //console.log(checkedStatus);
-        //};
 
         //Search posts
         var search = function () {
@@ -114,8 +96,6 @@
             posts,
             search,
             markPost,
-            //markedPost,
-            //isChecked,
             searchfor,
             pagination,
             isCurrentPage,

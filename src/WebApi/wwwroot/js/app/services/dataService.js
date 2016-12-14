@@ -30,7 +30,8 @@
         });
     };
 
-    var updateStatus = function (id, status) {
+    var updateStatus = function (id, status, callback) {
+        status = status === 1 ? 0 : 1;
         var tmp = JSON.stringify({ PostId: id, Status: status });
         $.ajax({
             contentType: "application/json",
