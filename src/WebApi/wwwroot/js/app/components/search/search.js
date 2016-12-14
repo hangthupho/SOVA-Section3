@@ -113,8 +113,35 @@
                             toastr.warning('No posts found!');
                         }
                     });
+            }
+            else if (heo === "2") {
+                console.log('ok');
+                dataService.getSearchedBmResults(searchfor,
+                    function(data) {
+                        items(data);
+                        console.log(isFirstPage);
+                        pagination.PagerModel(items);
+
+                        isFirstPage(new ko.observable(pagination.isFirstPage()));
+                        isLastPage(new ko.observable(pagination.isLastPage()));
+
+                        allPages([]);
+                        pagination.moveToPage(1);
+                        allPages(new ko.observableArray(pagination.allPages()));
+
+                        console.log(allPages);
+                        var page = pagination.pagedItems();
+
+                        totalItemCount(new ko.observable(pagination.totalItemCount()));
+
+                        posts(page);
+                        console.log("posts(page): " + posts(page));
+                        if (data === null || data.length === 0) {
+                            toastr.warning('No posts found!');
+                        }
+                    });
             } else {
-                console.log('do ngu');
+                toastr.warning('PLease choose search method!');
             }
         };
 

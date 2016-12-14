@@ -22,6 +22,18 @@
         });
     };
 
+    var getSearchedBmResults = function (searchValue, callback) {
+        return $.ajax({
+            type: "GET",
+            url: "api/searchbm/" + searchValue,
+            dataType: 'json',
+            contentType: "application/json",
+            success: function (data) {
+                callback(data);
+            }
+        });
+    };
+
     var getPostId = function (id, callback) {
         //alert('ok');
         $.getJSON('api/posts/' + id, callback);
@@ -99,7 +111,7 @@
     };
     return {
         getAnnotations,
-        getSearchedResults, getPostId, getHistoryDetails, getHistory, postAnno, putAnno, delAnno
+        getSearchedResults, getPostId, getHistoryDetails, getHistory, postAnno, putAnno, delAnno, getSearchedBmResults
     };
 });
 
