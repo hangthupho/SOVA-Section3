@@ -33,9 +33,7 @@
             dataType: 'json',
             success: function (data) {
                 callback(data);
-                alert('ok');
-                console.log(data);
-            },
+                },
             error: function (err) {
                 alert('not ok');
             }
@@ -83,18 +81,13 @@
         if (url === undefined) {
             url = histUrl;
         }
-        var text = url.charAt(40);
-        postbox.publish(config.events.pageNumber, { text });
-        //var noi = (url1[url1.length - 2]);
-        //var noi1 = noi.charAt(0);
-       
-        console.log(text);
+        var text1 = (url.substring(url.indexOf("&")-1));
+        var text = text1.substring(0, text1.indexOf("&"));
+       postbox.publish(config.events.pageNumber, { text });
         $.getJSON(url,
             function (data) {
                 callback(data);
-                //console.log(data);
-
-            });
+           });
     };
     var postAnno = function (annoPost) {
         

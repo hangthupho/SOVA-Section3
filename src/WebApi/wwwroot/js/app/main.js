@@ -48,11 +48,7 @@
                 viewModel: { require: 'app/components/history/historyList' },
                 template: { require: 'text!app/components/history/historyListView.html' }
             });
-        ko.components.register('history-detail',
-        {
-            viewModel: { require: 'app/components/history/historyDetail' },
-            template: { require: 'text!app/components/history/historyDetailView.html' }
-        });
+       
         ko.components.register("word-cloud",
         {
             viewModel: { require: "app/components/wordcloud/wordcloud" },

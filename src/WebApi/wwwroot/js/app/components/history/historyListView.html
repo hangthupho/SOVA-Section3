@@ -1,26 +1,23 @@
 ﻿
 <div class="container-fluid">
-    Jump to page:
-
-    <input data-bind="value: page" />
-
-    <button data-bind="click: showJump">Jump</button>
-
+   
     <table class="table table-striped">
         <thead>
             <tr>
 
                 <th>total</th>
-                <th>previous</th>
-                <th>next</th>
+                <th></th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             <tr>
 
                 <td data-bind="text: total"></td>
-                <td> <button data-bind="enable: canPrev(), click: showPrev">Previous</button></td>
-                <td> <button data-bind="enable: canNext(),click: showNext">Next</button></td>
+                <td>  </td>
+                <td>Jump to Page: <input data-bind="value: page" style="width: 40px"><button data-bind="click: showJump">Jump!</button></td>
+                <td><button data-bind="enable: canPrev(), click: showPrev">Previous</button> <button data-bind="enable: canNext(),click: showNext">Next</button></td>
             </tr>
         </tbody>
     </table>

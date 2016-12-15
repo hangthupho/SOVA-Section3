@@ -2,23 +2,14 @@
 define(['knockout', 'dataservice', 'postbox', 'config', 'toastr'],
     function (ko, dataService, postbox, config, toastr) {
         return function (params) {
-
             var histories = ko.observableArray([]);
-
             var hdata = ko.observableArray([]);
-
-            var detailHist = ko.observableArray("");
             var page = ko.observable(params ? params.text : undefined);
-            var historyDetail = ko.observable();
             var prevUrl = ko.observable();
             var nextUrl = ko.observable();
             var curPage = ko.observable(params ? params.url : undefined);
             var total = ko.observable();
         
-            var callback = function (data) {
-                historyDetail(data);
-
-            };
             var canPrev = function () {
                 return prevUrl();
             };
@@ -68,14 +59,15 @@ define(['knockout', 'dataservice', 'postbox', 'config', 'toastr'],
                 console.log(total());
                 console.log(page());
                 var totalPage = total() / 20;
-                if (page() > totalPage) {
-                    toastr.warning('PLease enter valid Value! max: '+ parseInt(totalPage) + ' page(s)');
-                }
-                else {
+                if (page() < totalPage && page().match(/^-?\d+$/)) {
                     dataService.getHistoryPage(page,
-                        function(result) {
+                        function (result) {
                             setData(result);
                         });
+                }
+                else {
+                    toastr.warning('PLease enter valid Value! max: ' + parseInt(totalPage) + ' page(s)');
+                   
                 }
             }
 
@@ -87,13 +79,12 @@ define(['knockout', 'dataservice', 'postbox', 'config', 'toastr'],
 
             var getDetails = function (xx) {
                 var str = xx.searchString;
-                //dataService.getHistoryDetails(xx.url, callback);
                 postbox.publish(config.events.selectSearch, { str });
                 
             };
 
             return {
-                histories, hdata, getDetails, detailHist, historyDetail,
+                histories, hdata, getDetails, 
                 total,
                 canPrev,
                 canNext,

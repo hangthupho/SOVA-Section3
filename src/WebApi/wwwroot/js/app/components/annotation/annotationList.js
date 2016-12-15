@@ -31,7 +31,7 @@
         var isSelected = function (annotation) {
             return annotation === selectedAnnotation();
         };
-
+        //
         postbox.subscribe(config.events.saveAnnotation, function (annotation) {
             var annotationArray = annotations();
             for (var i = 0; i < annotationArray.length; i++) {
@@ -43,6 +43,7 @@
             annotations(annotationArray);
             selectedAnnotation(annotation);
         });
+        //update the array after delete function called
         postbox.subscribe(config.events.deleteAnnotation, function (id) {
             var list = annotations();
             list = list.filter(function(e) {
@@ -50,10 +51,7 @@
                 return true;
             });
             annotations(list);
-            //dataService.getAnnotations(curPage(), function (result) {
-            //    //setData(result);
-            //    annotations(result.data);
-            //});
+         
 
         });
         var showPrev = function () {
@@ -62,7 +60,7 @@
             });
         }
 
-        // show the next page
+ 
         var showNext = function () {
             dataService.getAnnotations(nextUrl(), function (result) {
                 setData(result);

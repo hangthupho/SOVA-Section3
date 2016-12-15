@@ -51,7 +51,7 @@ namespace DatabaseService
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("server=localhost;database=sova;uid=root;pwd=copenhagen");
+            optionsBuilder.UseMySql("server=wt-220.ruc.dk;database=raw7;uid=raw7;pwd=raw7");
             base.OnConfiguring(optionsBuilder);
         }
         public static String GetTimestamp(DateTime value)
