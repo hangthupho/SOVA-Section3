@@ -26,6 +26,7 @@ namespace DatabaseService
         public DbSet<SearchResultBM> searchResultBM { get; set; }
         public DbSet<WeightedSearch> weightedSearch { get; set; }
         public DbSet<BestMatch> bestMatch { get; set; }
+        public DbSet<WordCloud> wordCloud { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

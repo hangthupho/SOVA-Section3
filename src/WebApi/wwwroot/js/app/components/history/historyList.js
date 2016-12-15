@@ -14,7 +14,7 @@ define(['knockout', 'dataservice', 'postbox', 'config', 'toastr'],
             var nextUrl = ko.observable();
             var curPage = ko.observable(params ? params.url : undefined);
             var total = ko.observable();
-
+        
             var callback = function (data) {
                 historyDetail(data);
 
@@ -56,17 +56,20 @@ define(['knockout', 'dataservice', 'postbox', 'config', 'toastr'],
                             });
                     });
             }
+            
             var update = function () {
-                return page;
-                return total;
+                return page,
+                    total;
+
             }
+       
             var showJump = function() {
                 update();
                 console.log(total());
                 console.log(page());
                 var totalPage = total() / 20;
-                if (page > totalPage) {
-                    toastr.warning('PLease enter valid Value! max:'+ totalPage + 'page');
+                if (page() > totalPage) {
+                    toastr.warning('PLease enter valid Value! max: '+ parseInt(totalPage) + ' page(s)');
                 }
                 else {
                     dataService.getHistoryPage(page,

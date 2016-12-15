@@ -365,5 +365,73 @@ namespace DatabaseService
                 return result1;
             }
         }
+        public IList<WordCloud> GetWordCloud(string word)
+        {
+            using (var db = new SovaContext())
+            {
+                var wordlist = db.wordCloud.FromSql("call weighted_Wordlist({0})", word);
+                var result = new List<WordCloud>();
+
+                foreach (var data in wordlist.Take(50))
+                {
+                    result.Add(data);
+                }
+                return result;
+            }
+
+        }
+        //======= CRUD on markings =============
+        public IList<Marking> GetMarking(int page, int pagesize)
+        {
+            using (var db = new SovaContext())
+            {
+                var tmp = (from a in db.marking
+                           select a)
+                           .OrderBy(o => o.PostId)
+                           .Skip(page * pagesize)
+                           .Take(pagesize)
+                           .ToList();
+                return tmp;
+            }
+        }
+
+        public Marking GetMarking(int id)
+        {
+            using (var db = new SovaContext())
+            {
+                var result = (from p in db.marking
+                              where p.PostId == id
+                              select p).FirstOrDefault();
+                return result;
+            }
+        }
+
+
+
+        public bool UpdateMarking(Marking marking)
+        {
+            using (var db = new SovaContext())
+
+                try
+                {
+                    db.Attach(marking);
+                    db.Entry(marking).State = EntityState.Modified;
+                    return db.SaveChanges() > 0;
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    return false;
+                }
+
+        }
+
+        public int GetNumberOfMarkings()
+        {
+            using (var db = new SovaContext())
+            {
+                return db.marking.Count();
+            }
+        }
+        
     }
 }

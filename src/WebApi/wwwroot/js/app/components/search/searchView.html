@@ -84,7 +84,7 @@
             <tbody data-bind="foreach: posts">
             <tr>
                 <!-- <td data-bind="text: id">Post ID</td>      -->
-                <td><input id="cbmark" type="checkbox" data-bind="checkedValue: id, checked: status === 1, click: function() { $parent.markPost(id) }"></td>
+                <td><input id="cbmark" type="checkbox" data-bind="checked: status"></td>
                 <td>
                     <a href="#popup1" data-bind="click: $parent.getDetails">
                         <span data-bind="text: title"></span>

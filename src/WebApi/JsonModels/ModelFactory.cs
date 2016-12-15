@@ -67,6 +67,17 @@ namespace WebApi.JsonModels
             historyViewModel.Url = urlHelper.Link(Config.HistoryRoute, new { id = history.sId });
             return historyViewModel;
         }
+        //=============== Mapping Markings ================
+        public static MarkingModel MapMarking(Marking marking, IUrlHelper urlHelper)
+        {
+            var markingViewModel = MappingConfig<Marking, MarkingModel>.Convert(marking);
+            markingViewModel.Url = urlHelper.Link(Config.MarkingRoute, new { id = marking.PostId });
+            return markingViewModel;
+        }
+        public static Marking MapMarking(MarkingModel model)
+        {
+            return MappingConfig<MarkingModel, Marking>.Convert(model);
+        }
 
 
 

@@ -3,6 +3,7 @@
         
         var posts = ko.observableArray([]);
         var searchfor = ko.observable(params ? params.str : undefined);
+        var markedPost = ko.observableArray();
         var checkedStatus = ko.observable(false);
         var postDetail = ko.observableArray([]);
         var isFirstPage = ko.observable(true);
@@ -107,8 +108,23 @@
                         var page = pagination.pagedItems();
 
                         totalItemCount(new ko.observable(pagination.totalItemCount()));
-
-                        posts(page);
+                        var list = page.map(function (p) {
+                            //var x = {
+                            //    id: p.id,
+                            //    ...
+                            //    status: ko.observable(p.status),
+                            //    ...
+                            //    body: p.body
+                            //};
+                            var x = Object.assign(p, { status: ko.observable(p.status) });
+                            x.status.subscribe(function () {
+                                dataService.updateStatus(x.id, x.status(), function (data) {
+                                    //posts(data);
+                                });
+                            });
+                            return x;
+                        });
+                        posts(list);
                         console.log("posts(page): " + posts(page));
                         if (data === null || data.length === 0) {
                             toastr.warning('No posts found!');

@@ -50,6 +50,11 @@ namespace DatabaseService
 
         IList<SearchResultBM> GetAllMatchedPostsWithKeyword(string keyword2);
         IList<BestMatch> GetSearchedMatchedPost(string keyword3);
-
+        IList<WordCloud> GetWordCloud(string word);
+        //View, add, update, delete markings
+        IList<Marking> GetMarking(int page, int pagesize);
+        Marking GetMarking(int id);
+        int GetNumberOfMarkings();
+        bool UpdateMarking(Marking marking);
     }
 }

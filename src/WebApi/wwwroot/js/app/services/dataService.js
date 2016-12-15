@@ -24,7 +24,7 @@
     };
 
     var getHistoryPage = function (page, callback) {
-        var pageSize = 30;
+        var pageSize = 20;
        
         $.ajax({
             url: histUrl,
@@ -41,6 +41,19 @@
             }
         });
     };
+
+    var getWordCloud = function (searchValue, callback) {
+        return $.ajax({
+            type: "GET",
+            url: "api/wordcloud/" + searchValue,
+            dataType: 'json',
+            contentType: "application/json",
+            success: function (data) {
+                callback(data);
+            }
+        });
+    };
+
 
     var getSearchedBmResults = function (searchValue, callback) {
         return $.ajax({
@@ -140,9 +153,23 @@
             }
         });
     };
+    var updateStatus = function (id, status, callback) {
+        status = status ? 1 : 0;
+        var tmp = JSON.stringify({ PostId: id, Status: status });
+        $.ajax({
+            contentType: "application/json",
+            url: 'api/marking/' + id,
+            data: tmp,
+            type: 'PUT',
+            dataType: 'json',
+            success: function (data) {
+                callback(data);
+            }
+        });
+    };
     return {
-        getAnnotations,getHistoryPage,
-        getSearchedResults, getPostId, getHistoryDetails, getHistory, postAnno, putAnno, delAnno, getSearchedBmResults
+        getAnnotations, getHistoryPage, updateStatus,
+        getSearchedResults, getPostId, getHistoryDetails, getHistory, postAnno, putAnno, delAnno, getSearchedBmResults, getWordCloud
     };
 });
 
