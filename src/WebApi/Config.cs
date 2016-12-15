@@ -22,6 +22,7 @@ namespace WebApi
         public const string MarkingRoute = "MarkingRoute";
         public const string MarkingsRoute = "MarkingsRoute";
         public const string SearchRoute = "SearchRoute";
+        public const string BestMatchSearchRoute = "BestMatchSearchRoute";
         public const string WordCloud = "WordCloud";
     }
 }

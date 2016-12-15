@@ -51,9 +51,9 @@ namespace DatabaseService
         bool UpdateMarking(Marking marking);
        
         //Search procedure
-        IList<SearchedResult> GetAllMatchPostsWithKeyword(string keyword);
+        IList<BestMatchSearch> GetAllMatchPostsWithKeyword(string keyword);
         IList<WeightedSearch> GetSearchedPost(string keyword1);
-        IList<WordCloud> GetWordCloud(string word);
+        IList<WordCloud> GetWordCloud(string word); 
         //IList<WeightedSearchExtended> GetSearchedPost(string keyword1);
     }
 }

@@ -1,4 +1,4 @@
-﻿<div class="container">
+﻿<div class="container-fluid">
     <div class="row">
         <div class="col-sm-2"></div>
         <div class="col-sm-4">
@@ -10,7 +10,7 @@
     </div>
         <div class="row">
             <div class="col-sm-2"></div>
-            <div class="col-sm-6">
+            <div class="col-sm-5">
                 <div class="input-group">
                      
                     <input class="form-control"
@@ -31,11 +31,11 @@
                 </div>
             </div>
             <!-- Dropdown button -->
-            <div class="col-sm-2">                       
-               <select class="form-control">
-                  <option value="relevance">Sort: Relevance</option>
-                  <option value="bestmatch">Sort: Best Match</option>
-               </select>
+            <div class="col-sm-3">                       
+                <select class="form-control" data-bind="options: searchMethod, 
+                                                        value: selectedSearch,  
+                                                        optionsCaption: 'Choose search method...'">
+                </select>
             </div>
                 </div>
             
@@ -76,15 +76,13 @@
                 </tr>
             </thead>
             <tbody data-bind="foreach: posts">
-                <tr> <!-- click: function() {$parent.markPost(id, $index(),$data)},checkedValue : $data, checked:  $parent.checked($data) -->
-                    <td>
-                    
+                <tr> 
+                    <td>                   
                     <input id="cbmark" type="checkbox" data-bind="checked: status === 1 ,attr: { id: 'isChecked' + $index() },
                                                                   click: function() {$parent.markPost(id, $index(),$data)}" ></td>                  
                     <td>
-                        <a href="#" data-bind="text: title"></a> <br>
+                        <a href="#" data-bind="text: title" ></a> <br>
                         <span class = "label label-info" data-bind="text: tag"></span>
-                        <!--<input type="text" data-bind="value: tagName" data-role="tagsinput" />-->
                     </td>              
                     <td data-bind="text: rank">Rank</td>
                 </tr>
@@ -93,9 +91,3 @@
     </div>
    
 </div>
-
-    <!-- data-bind="click: $parent.selectAnnotation, css: {active: $parent.isSelected($data)}"
-
-        css: { 'background-color' :  $parent.isCurrentPage() == $index() +  1 ? 'pink' : 'yellow' }
-        -->
-

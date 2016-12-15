@@ -4,6 +4,7 @@ define([], function () {
         events: {
             selectAnnotation: "SelectAnnotation",
             saveAnnotation: "SaveAnnotation",
+            deleteAnnotation: "DeleteAnnotation",
             searchPost: "SearchPost",
             markPost: "MarkPost",
             changeMenu: "ChangeMenu"

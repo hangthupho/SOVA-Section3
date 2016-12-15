@@ -12,6 +12,9 @@
         var gtmp;
         var totalItemCount = ko.observable(1);
 
+        var selectedSearch = ko.observable();
+        var searchMethod = ko.observableArray(["Relevance", "Best Match"]);
+
         //Search on enter
         $('#system-search').keyup(function (event) {
             if (event.keyCode === 13) {
@@ -19,6 +22,11 @@
             }
         });
        
+        //Update selected search option
+        var update = function () {
+            return selectedSearch;
+        }
+
         //Mark post
         var checked = function (data) {
             return data.status === 1;
@@ -65,31 +73,53 @@
 
         //Search posts
         var search = function () {
-            console.log('Search function called');            
+            update();                  
             var searchfor = jQuery('#system-search').val();
-            dataService.getSearchedResults(searchfor, function (data) {
-                items(data);                           
-                console.log(data);
-                pagination.PagerModel(items);
+            if (selectedSearch() === "Relevance") {   
+                dataService.getSearchedResults(searchfor, function (data) {
+                    items(data);                           
+                    pagination.PagerModel(items);
                   
-                isFirstPage( new ko.observable(pagination.isFirstPage()));
-                isLastPage(new ko.observable(pagination.isLastPage()));
+                    isFirstPage( new ko.observable(pagination.isFirstPage()));
+                    isLastPage(new ko.observable(pagination.isLastPage()));
 
-                allPages([]);
-                pagination.moveToPage(1);
-                allPages( new ko.observableArray(pagination.allPages()));
+                    allPages([]);
+                    pagination.moveToPage(1);
+                    allPages( new ko.observableArray(pagination.allPages()));
 
-                console.log(allPages);
-                var page = pagination.pagedItems();
+                    var page = pagination.pagedItems();
 
-                totalItemCount(new ko.observable(pagination.totalItemCount()));
+                    totalItemCount(new ko.observable(pagination.totalItemCount()));
 
-                posts(page);
-                console.log("posts(page): " + posts(page));
-                if (data === null || data.length === 0) {
-                    toastr.warning('No posts found!');
-                }
-            });
+                    posts(page);
+                    if (data === null || data.length === 0) {
+                        toastr.warning('No posts found!');
+                    }
+                });
+            }
+            else if (selectedSearch() === "Best Match") {
+                dataService.getSearchedBmResults(searchfor,
+                    function (data) {
+                        items(data);
+                        pagination.PagerModel(items);
+                        isFirstPage(new ko.observable(pagination.isFirstPage()));
+                        isLastPage(new ko.observable(pagination.isLastPage()));
+
+                        allPages([]);
+                        pagination.moveToPage(1);
+                        allPages(new ko.observableArray(pagination.allPages()));
+
+                        var page = pagination.pagedItems();
+                        totalItemCount(new ko.observable(pagination.totalItemCount()));
+                        posts(page);
+
+                        if (data === null || data.length === 0) {
+                            toastr.warning('No posts found!');
+                        }
+                    });
+            } else {
+                toastr.warning('PLease choose search method!');
+            }
         };
 
         return {
@@ -106,7 +136,9 @@
             totalItemCount,
             nextPage,
             previousPage,
-            checked
+            checked,
+            searchMethod,
+            selectedSearch
 
         };
     };

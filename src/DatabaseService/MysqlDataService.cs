@@ -372,29 +372,18 @@ namespace DatabaseService
             }
         }
 
-        public IList<SearchedResult> GetAllMatchPostsWithKeyword(string keyword)
+        public IList<BestMatchSearch> GetAllMatchPostsWithKeyword(string keyword)
         {
             using (var db = new SovaContext())
             {
-                var conn = (MySqlConnection)db.Database.GetDbConnection();
-                conn.Open();
-                var cmd = new MySqlCommand("call post", conn);
-                var result = new List<SearchedResult>();
-                using (var rdr = cmd.ExecuteReader())
-                {
-                    while (rdr.Read())
-                    {
+                var bestMatch = db.bestMatchSearch.FromSql("call binary_Search({0})", keyword);
+                var result = new List<BestMatchSearch>();
 
-                        result.Add(new SearchedResult()
-                        {
-                            PostId = rdr.GetInt16(0),
-                            Score = rdr.GetInt16(2),
-                            PostBody = rdr.GetString(1),
-                            UserId = rdr.GetInt16(3)
-                        });
-                    }
+                foreach (var data in bestMatch)
+                {
+                    result.Add(data);
                 }
-                return result.ToList();
+                return result;
             }
         }
 

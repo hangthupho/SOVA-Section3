@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DomainModel
 {
-    public class SearchedResult
+    public class BestMatchSearch
     {
         [Key]
         public int PostId { get; set; }

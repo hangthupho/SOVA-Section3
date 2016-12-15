@@ -22,7 +22,7 @@ namespace DatabaseService
         public DbSet<Tag> tag { get; set; }
         public DbSet<History> history { get; set; }
         public DbSet<Annotation> annotation { get; set; }
-        public DbSet<SearchedResult> searchedResult { get; set; }
+        public DbSet<BestMatchSearch> bestMatchSearch { get; set; }
         public DbSet<WeightedSearch> weightedSearch { get; set; }
         public DbSet<WordCloud> wordCloud { get; set; }
 
@@ -51,6 +51,15 @@ namespace DatabaseService
         {
             optionsBuilder.UseMySql("server=localhost;database=sova2;uid=root;pwd=root");
             base.OnConfiguring(optionsBuilder);
+        }
+        public static String GetTimestamp(DateTime value)
+        {
+            return value.ToString("yyyy-MM-dd HH:mm:ss");
+        }
+
+        public String GetTimestamp()
+        {
+            return GetTimestamp(DateTime.Now);
         }
     }
 }

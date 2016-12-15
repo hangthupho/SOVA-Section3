@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace WebApi.JsonModels
 {
-    public class SearchViewModel
+    public class WeightedSearchViewModel
     {
         public string Url { get; set; }
         public double? Rank { get; set; }
