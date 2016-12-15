@@ -31,7 +31,7 @@
     };
 
     var updateStatus = function (id, status, callback) {
-        status = status === 1 ? 0 : 1;
+        status = status ? 1 : 0;
         var tmp = JSON.stringify({ PostId: id, Status: status });
         $.ajax({
             contentType: "application/json",

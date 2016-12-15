@@ -2,66 +2,65 @@
     <div class="row">
         <div class="col-sm-2"></div>
         <div class="col-sm-4">
-            <img src="../../../../css/images/stack-overflow-logo.png" width="50" height="60" /> <strong>StackOverFlow Search</strong> 
+            <img src="../../../../css/images/stack-overflow-logo.png" width="50" height="60" /> <strong>StackOverFlow Search</strong>
         </div>
     </div><!-- /.row -->
     <div class="form-group">
         &nbsp;
     </div>
-        <div class="row">
-            <div class="col-sm-2"></div>
-            <div class="col-sm-5">
-                <div class="input-group">
-                     
-                    <input class="form-control"
-                           id="system-search"
-                           name="search"
-                           type="text"
-                           placeholder="Search for" required
-                           data-bind="value: searchfor, valueUpdate: 'afterkeydown'"/>                
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-5">
+            <div class="input-group">
 
-                    <span class="input-group-btn">
-                        <button type="submit"
-                                class="btn btn-default"
-                                id="btnSearch"
-                                data-bind="click: search">
-                            <i class="glyphicon glyphicon-search"></i>
-                        </button>
-                    </span>
-                </div>
+                <input class="form-control"
+                       id="system-search"
+                       name="search"
+                       type="text"
+                       placeholder="Search for" required
+                       data-bind="value: searchfor, valueUpdate: 'afterkeydown'" />
+
+                <span class="input-group-btn">
+                    <button type="submit"
+                            class="btn btn-default"
+                            id="btnSearch"
+                            data-bind="click: search">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                </span>
             </div>
-            <!-- Dropdown button -->
-            <div class="col-sm-3">                       
-                <select class="form-control" data-bind="options: searchMethod, 
-                                                        value: selectedSearch,  
-                                                        optionsCaption: 'Choose search method...'">
-                </select>
-            </div>
-                </div>
-            
-            <div class="col-sm-2"></div>
+        </div>
+        <!-- Dropdown button -->
+        <div class="col-sm-3">
+            <select class="form-control" data-bind="options: searchMethod,
+                                                        value: selectedSearch,
+                                                        optionsCaption: 'Choose search method...'"></select>
+        </div>
+    </div>
+
+    <div class="col-sm-2"></div>
     <div class="form-group">
         &nbsp;
     </div>
-    
+
     <div class="col-sm-12">
-        <table class="table table-list-search" data-bind="visible:posts().length">         
+        <table class="table table-list-search" data-bind="visible:posts().length">
             <thead>
                 <tr>
                     <th colspan="3">
-                        Search results: <span data-bind="text: totalItemCount()"></span> 
+                        Search results: <span data-bind="text: totalItemCount()"></span>
                         <!-- Pagination -->
                         <div class="pagination" style="float:right">
                             <span data-bind="style:  { display: isFirstPage() == true ? 'none' : ''  }">
                                 <a href="#" data-bind="click: function() { previousPage() }"><< Previous</a>
                             </span>
                             <span data-bind="foreach: allPages()">
-                              <span data-bind="">
-                                <a href="#" data-bind="text: $index() + 1 , 
-                                                       click: function() { $parent.moveToPage($index() + 1) }, 
+                                <span data-bind="">
+                                    <a href="#" data-bind="text: $index() + 1 ,
+                                                       click: function() { $parent.moveToPage($index() + 1) },
                                                        css: { 'filterItemSelect': $parent.isCurrentPage() == $index() + 1 }">
-                                </a>
-                              </span>                                                       
+                                    </a>
+                                </span>
                             </span>
                             <span data-bind="style: { display: isLastPage() == true ? 'none' : '' }">
                                 <a href="#" data-bind="click: function() { nextPage() }">Next >></a>
@@ -69,25 +68,25 @@
                         </div>
                     </th>
                 </tr>
-                <tr>             
-                    <th>Mark</th>    
+                <tr>
+                    <th>Mark</th>
                     <th>Title</th>
                     <th>Rank</th>
                 </tr>
             </thead>
             <tbody data-bind="foreach: posts">
-                <tr> 
-                    <td>                   
-                    <input id="cbmark" type="checkbox" data-bind="checked: status === 1 ,attr: { id: 'isChecked' + $index() },
-                                                                  click: function() {$parent.markPost(id, $index(),$data)}" ></td>                  
+                <tr>
                     <td>
-                        <a href="#" data-bind="text: title" ></a> <br>
-                        <span class = "label label-info" data-bind="text: tag"></span>
-                    </td>              
+                        <input id="cbmark" type="checkbox" data-bind="checked: status">
+                    </td>
+                    <td>
+                        <a href="#" data-bind="text: title"></a> <br>
+                        <span class="label label-info" data-bind="text: tag"></span>
+                    </td>
                     <td data-bind="text: rank">Rank</td>
                 </tr>
             </tbody>
         </table>
     </div>
-   
+    <pre data-bind="text: ko.toJSON($data, null, 2)"></pre>
 </div>

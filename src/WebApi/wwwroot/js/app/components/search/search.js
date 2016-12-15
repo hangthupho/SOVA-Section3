@@ -32,20 +32,19 @@
             return data.status === 1;
         }
 
-        var markPost = function (id, index, data) {
-            var tmp = data;
-            dataService.updateStatus(id, tmp.status, function (data) {
-                posts(data);
-            });
+        var markPost = function (post) {
+            //dataService.updateStatus(post.id, post.status(), function (data) {
+            //    //posts(data);
+            //});
 
-            tmp.status = data.status === 0 ? 1 : 0;
-            gtmp = tmp;
-            gtmp.index = index;
-            setTimeout(function () {
-                //still doesn't work with the set timeout 
-                $('#isChecked' + gtmp.index).prop('checked', gtmp.status === 0 ? false : true);
-            }, 0);
-            postbox.publish(config.events.markPost, id);
+            //tmp.status = data.status === 0 ? 1 : 0;
+            //gtmp = tmp;
+            //gtmp.index = index;
+            //setTimeout(function () {
+            //    //still doesn't work with the set timeout 
+            //    $('#isChecked' + gtmp.index).prop('checked', gtmp.status === 0 ? false : true);
+            //}, 0);
+            //postbox.publish(config.events.markPost, id);
         };
 
         //Pagination
@@ -91,7 +90,24 @@
 
                     totalItemCount(new ko.observable(pagination.totalItemCount()));
 
-                    posts(page);
+                    var list = page.map(function (p) {
+                        //var x = {
+                        //    id: p.id,
+                        //    ...
+                        //    status: ko.observable(p.status),
+                        //    ...
+                        //    body: p.body
+                        //};
+                        var x = Object.assign(p, { status: ko.observable(p.status) });
+                        x.status.subscribe(function () {
+                            dataService.updateStatus(x.id, x.status(), function (data) {
+                                //posts(data);
+                            });
+                        });
+                        return x;
+                    });
+
+                    posts(list);
                     if (data === null || data.length === 0) {
                         toastr.warning('No posts found!');
                     }
