@@ -5,49 +5,53 @@
 <span data-bind="text: ans"></span>-->
 <!--<span data-bind="text: postBody"></span>
 <span data-bind="text: rank"></span>-->
-     
-<div class="container text-center">
+
+<div class="container-fluid">
     <div class="row">
-       
-    </div>
-</div>
-
-<div class="popup-box chat-popup" id="qnimate">
-    <div class="popup-head">
-
-        <div class="popup-head-right pull-right">
 
 
-            <button data-widget="remove" id="removeClass" class="chat-header-button pull-right" type="button"><i class="glyphicon glyphicon-off"></i></button>
-        </div>
-    </div>
-    <div class="popup-messages">
 
-        <div class="direct-chat-messages">
-            <div>
-                <strong> Post detail:</strong>
+        <div class="popup-box chat-popup" id="qnimate">
+            <div class="popup-head">
+
+                <div class="popup-head-right pull-right">
 
 
-                <ul>
-                        Title: <li data-bind="text:tit"></li>
-                        ID: <li data-bind="text:id"></li>
-                        postBody: <li data-bind="html:body"></li>
-                     
-                        
-                </ul>
-
-                Answers:
-                <ul data-bind="foreach: ans">
-                    <li data-bind="html:$data"></li>
-                </ul>
+                    <button data-widget="remove" id="removeClass" class="chat-header-button pull-right" type="button"><i class="glyphicon glyphicon-off"></i></button>
+                </div>
             </div>
+            <div class="popup-messages">
 
-        </div>
-        <div class="popup-messages-footer">
-            <textarea data-bind="textInput: comment" id="status_message" placeholder="Type a comment..." rows="10" cols="40" name="message"></textarea>
-            <div class="btn-footer">
+                <div class="direct-chat-messages">
+                    <div>
+                        <strong> Post detail:</strong>
 
-                <button  data-bind="click: clickPost" class="bg_none pull-right">Post </button>
+
+                        <ul>
+                            Title:
+                            <li data-bind="text:tit"></li>
+                            ID:
+                            <li data-bind="text:id"></li>
+                            postBody:
+                            <li data-bind="html:body"></li>
+
+
+                        </ul>
+
+                        Answers:
+                        <ul data-bind="foreach: ans">
+                            <li data-bind="html:$data"></li>
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="popup-messages-footer">
+                    <textarea data-bind="textInput: comment" id="status_message" placeholder="Type a comment..." rows="10" cols="40" name="message"></textarea>
+                    <div class="btn-footer">
+
+                        <button data-bind="click: clickPost" class="bg_none pull-right">Post </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

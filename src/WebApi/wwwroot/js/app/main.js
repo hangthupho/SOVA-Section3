@@ -58,6 +58,10 @@
             viewModel: { require: "app/components/wordcloud/wordcloud" },
             template: { require: "text!app/components/wordcloud/wordcloudView.html" }
         });
+        ko.components.register("about",
+       {
+           template: { require: "text!app/components/about/about.html" }
+       });
     });
 
     require(['knockout'], function (ko) {
