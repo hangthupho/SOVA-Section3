@@ -43,10 +43,18 @@
             annotations(annotationArray);
             selectedAnnotation(annotation);
         });
-        postbox.subscribe(config.events.deleteAnnotation, function () {
-           
-            annotations();
-           
+        postbox.subscribe(config.events.deleteAnnotation, function (id) {
+            var list = annotations();
+            list = list.filter(function(e) {
+                if (e.annotationId === id) return false;
+                return true;
+            });
+            annotations(list);
+            //dataService.getAnnotations(curPage(), function (result) {
+            //    //setData(result);
+            //    annotations(result.data);
+            //});
+
         });
         var showPrev = function () {
             dataService.getAnnotations(prevUrl(), function (result) {

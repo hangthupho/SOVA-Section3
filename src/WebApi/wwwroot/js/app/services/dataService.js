@@ -121,13 +121,16 @@
             }
         });
     };
-    var delAnno = function (id) {
+    var delAnno = function (id, callback) {
 
         $.ajax({
             url: "/api/annotations/" + id,
             type: 'DELETE',
             success: function (data) {
-                alert(data);
+                callback(id);
+            },
+            error: function(error) {
+                console.log(error);
             },
             statusCode: {
                 404: function () {

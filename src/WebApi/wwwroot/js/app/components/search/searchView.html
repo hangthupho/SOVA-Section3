@@ -104,12 +104,7 @@
         </table>
         
         <div>
-           <ul>
-                <li>
-                    You selected: 
-                    <input type="text" data-bind="value: selectedSearch"/>
-                </li>
-            </ul>
+          
               <span {display:none; visibility:hidden;} data-bind="foreach: postDetail">
                 <p data-bind="component:{name:'search-detail', params:{pLink: url, tit: title, body: postBody, ans: answers}}"></p>
                         </span>

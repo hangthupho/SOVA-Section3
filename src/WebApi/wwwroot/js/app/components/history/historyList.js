@@ -43,6 +43,7 @@ define(['knockout', 'dataservice', 'postbox', 'config'],
             var showPrev = function () {
                 dataService.getHistory(prevUrl(), function (result) {
                     setData(result);
+
                 });
             }
 

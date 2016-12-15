@@ -14,13 +14,12 @@
             });
            };
         var deleteAnnotation = function () {
-            postbox.publish(config.events.deleteAnnotation);
             console.log(ko.toJS(annotationsR));
             var annoDel = ko.toJS(annotation);
             toastr.success("Annotation deleted!");
             dataservice.delAnno(annoDel.annotationId, function (result) {
                 console.log(result);
-                
+                postbox.publish(config.events.deleteAnnotation, result);
             });
            
         };
