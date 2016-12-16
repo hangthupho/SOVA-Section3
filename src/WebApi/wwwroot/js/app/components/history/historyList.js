@@ -57,7 +57,7 @@
                 update();
                 console.log(total());
                 console.log(page());
-                var totalPage = total() / 20;
+                var totalPage = total() / 10;
                 //set the limit
                 if (page() < totalPage && page().match(/^-?\d+$/)) {
                     dataService.getHistoryPage(page,

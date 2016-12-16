@@ -61,7 +61,7 @@
     var getSearchedBmResults = function (searchValue, callback) {
         return $.ajax({
             type: "GET",
-            url: "api/searchbm/" + searchValue,
+            url: "api/bestmatchsearch/" + searchValue,
             dataType: 'json',
             contentType: "application/json",
             success: function (data) {
