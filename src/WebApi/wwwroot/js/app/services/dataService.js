@@ -5,23 +5,28 @@
         if (url === undefined) {
             url = anUrl;
         }
-        $.getJSON(url, function (data) {
+        var gotData = function (data) {
+            console.log('after callback');
             callback(data);
-            console.log(data);
-        });  
+            }
+        $.getJSON(url,gotData );
+        console.log('after post');
     };
     
-    var getSearchedResults = function (searchValue, callback) {
-       return $.ajax({
+    var getSearchedResults = function (searchValue,callback) {
+       console.log("first");
+      return $.ajax({
             type: "GET",
             url: "api/search/" + searchValue,
             dataType: 'json',
             contentType: "application/json",
-            success: function (data) {
+           success: function (data) {
                 callback(data);
-            }
-        });
-    };
+                console.log(data);
+           }
+
+       });
+       };
 
     var getHistoryPage = function (page, callback) {
         var pageSize = 20;

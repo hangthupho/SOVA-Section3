@@ -27,6 +27,7 @@ define(['knockout', 'dataservice', 'postbox', 'config', 'toastr'],
                 curPage(result.url);
 
             };
+            //turn to previous page then refresh the page by getting data from dataservice
             var showPrev = function () {
                 dataService.getHistory(prevUrl(), function (result) {
                     setData(result);
@@ -34,7 +35,8 @@ define(['knockout', 'dataservice', 'postbox', 'config', 'toastr'],
                 });
             }
            
-            // show the next page
+            // show the next page, refresh th page by getiing data from dataservice and get parameter 
+            //from dataservice by postbox to show page number
             var showNext = function() {
                 dataService.getHistory(nextUrl(),
                     function(result) {
@@ -48,6 +50,7 @@ define(['knockout', 'dataservice', 'postbox', 'config', 'toastr'],
                     });
             }
             
+            //get update value page and total from observable value page and total
             var update = function () {
                 return page,
                     total;
@@ -71,11 +74,9 @@ define(['knockout', 'dataservice', 'postbox', 'config', 'toastr'],
                    
                 }
             }
-
+            //get data from url by dataservice
             dataService.getHistory(curPage(), function (result) {
                 setData(result);
-               
-
             });
 
             var getDetails = function (xx) {

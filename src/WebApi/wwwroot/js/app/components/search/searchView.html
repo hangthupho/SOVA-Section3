@@ -34,12 +34,9 @@
             <div class="col-sm-2">                       
                 <select class="form-control"
                         data-bind = "options: searchMethod,
-                 
-                         value: selectedSearch,
-                    optionsCaption: 'Choose search method...'">
-                    <!--<option value="relevance">Sort: Relevance</option>
-                    <option value="bestmatch">Sort: Best Match</option>-->
-                </select>
+                        value: selectedSearch,
+                      optionsCaption: 'Choose search method...'">
+                  </select>
             </div>
            
             
@@ -83,23 +80,15 @@
             </thead>
             <tbody data-bind="foreach: posts">
             <tr>
-                <!-- <td data-bind="text: id">Post ID</td>      -->
-                <td><input id="cbmark" type="checkbox" data-bind="checked: status"></td>
+            <td><input id="cbmark" type="checkbox" data-bind="checked: status"></td>
                 <td>
                     <a href="#popup1" data-bind="click: $parent.getDetails">
                         <span data-bind="text: title"></span>
                     </a><br>
-                   
-                    <!--<a href="#" data-bind="text: title"></a>-->
-                    <span class="label label-info" data-bind="text: tag"></span>
-                    
-                    <!--<input type="text" data-bind="value: tagName" data-role="tagsinput"/>-->
-                </td>
+                   <span class="label label-info" data-bind="text: tag"></span>
+                  </td>
                 <td data-bind="text: rank">Rank</td>
-                    
-                  
-                    
-            </tr>
+          </tr>
             </tbody>
         </table>
         

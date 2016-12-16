@@ -21,7 +21,7 @@
 
             var clickPost = function() {
                 dataService.postAnno(annoPost =
-                    { postId: loc, commentBody: comment() },
+                    { postId: loc, annotationBody: comment() },
                     function() {
                         console.log(annoPost);
                     });

@@ -15,11 +15,9 @@
         };
         var setData = function (result) {
             annotations(result.data);
-            console.log(result.data);
             total(result.total);
             prevUrl(result.previous);
             nextUrl(result.next);
-            console.log(result.next);
             curPage(result.url);
         };
         
@@ -68,6 +66,7 @@
         }
         dataService.getAnnotations(curPage(), function (result) {
             setData(result);
+            console.log(result);
         });
         
         return {
