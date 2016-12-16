@@ -5,13 +5,16 @@
         if (url === undefined) {
             url = anUrl;
         }
-        $.getJSON(url, function (data) {
+        var gotData = function (data) {
+            console.log('after callback');
             callback(data);
-            console.log(data);
-        });
+        }
+        $.getJSON(url, gotData);
+        console.log('after post');
     };
 
     var getSearchedResults = function (searchValue, callback) {
+        console.log("first");
         return $.ajax({
             type: "GET",
             url: "api/search/" + searchValue,
@@ -19,7 +22,9 @@
             contentType: "application/json",
             success: function (data) {
                 callback(data);
+                console.log(data);
             }
+
         });
     };
 
@@ -162,7 +167,6 @@
     };
     return {
         getAnnotations, getHistoryPage, updateStatus,
-        getSearchedResults, getPostId, getHistoryDetails,
-        getHistory, postAnno, putAnno, delAnno, getSearchedBmResults, getWordCloud
+        getSearchedResults, getPostId, getHistoryDetails, getHistory, postAnno, putAnno, delAnno, getSearchedBmResults, getWordCloud
     };
 });
