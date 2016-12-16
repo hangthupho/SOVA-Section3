@@ -34,9 +34,21 @@
         });
         ko.components.register("search-list",
         {
-            viewModel: { require: "app/components/search/search" },
+            viewModel: {
+                require: "app/components/search/search"
+            },
             template: { require: "text!app/components/search/searchView.html" }
         });
+        ko.components.register("search-detail", {
+            viewModel: { require: 'app/components/search/searchDetail' },
+            template: { require: 'text!app/components/search/searchDetailView.html' }
+        });
+
+        ko.components.register('search-history',
+            {
+                viewModel: { require: 'app/components/history/historyList' },
+                template: { require: 'text!app/components/history/historyListView.html' }
+            });
         ko.components.register("word-cloud",
         {
             viewModel: { require: "app/components/wordcloud/wordcloud" },

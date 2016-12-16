@@ -19,7 +19,6 @@
                        type="text"
                        placeholder="Search for" required
                        data-bind="value: searchfor, valueUpdate: 'afterkeydown'" />
-
                 <span class="input-group-btn">
                     <button type="submit"
                             class="btn btn-default"
@@ -32,10 +31,17 @@
         </div>
         <!-- Dropdown button -->
         <div class="col-sm-3">
-            <select class="form-control" data-bind="options: searchMethod,
-                                                        value: selectedSearch,
-                                                        optionsCaption: 'Choose search method...'"></select>
+            <select class="form-control"
+                    data-bind="options: searchMethod,
+
+                         value: selectedSearch,
+                    optionsCaption: 'Choose sort method...'">
+                <!--<option value="relevance">Sort: Relevance</option>
+                <option value="bestmatch">Sort: Best Match</option>-->
+            </select>
         </div>
+
+
     </div>
 
     <div class="col-sm-2"></div>
@@ -76,17 +82,33 @@
             </thead>
             <tbody data-bind="foreach: posts">
                 <tr>
+                    <!-- <td data-bind="text: id">Post ID</td>      -->
+                    <td><input id="cbmark" type="checkbox" data-bind="checked: status"></td>
                     <td>
-                        <input id="cbmark" type="checkbox" data-bind="checked: status">
-                    </td>
-                    <td>
-                        <a href="#" data-bind="text: title"></a> <br>
+                        <a href="#popup1" data-bind="click: $parent.getDetails">
+                            <span data-bind="text: title"></span>
+                        </a><br>
+
+                        <!--<a href="#" data-bind="text: title"></a>-->
                         <span class="label label-info" data-bind="text: tag"></span>
+
+                        <!--<input type="text" data-bind="value: tagName" data-role="tagsinput"/>-->
                     </td>
                     <td data-bind="text: rank">Rank</td>
+
+
+
                 </tr>
             </tbody>
         </table>
+
+        <div>
+
+            <span {display:none; visibility:hidden;} data-bind="foreach: postDetail">
+                <p data-bind="component:{name:'search-detail', params:{pLink: url, tit: title, body: postBody, ans: answers}}"></p>
+            </span>
+        </div>
     </div>
-    <pre data-bind="text: ko.toJSON($data, null, 2)"></pre>
 </div>
+
+

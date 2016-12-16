@@ -1,19 +1,27 @@
-﻿define(['knockout', 'dataservice', 'postbox', 'config', 'toastr','../app/pagination'], function (ko, dataService, postbox, config, toastr, pagination) {
-    return function () {
+﻿define(['knockout', 'dataservice', 'postbox', 'config', 'toastr', '../app/pagination'], function (ko, dataService, postbox, config, toastr, pagination) {
+    return function (params) {
+
         var posts = ko.observableArray([]);
-        var searchfor = ko.observable("");
-        var markedPost = ko.observableArray();
-        var data;
+        var searchfor = ko.observable(params ? params.str : undefined);
+
+        var checkedStatus = ko.observable(false);
+        var postDetail = ko.observableArray([]);
         var isFirstPage = ko.observable(true);
         var isLastPage = ko.observable(true);
         var isCurrentPage = ko.observable(1);
-        var allPages  = ko.observableArray([]);
+        var allPages = ko.observableArray([]);
         var items = ko.observableArray([]);
-        var gtmp;
+        var selectedSearch = ko.observable();
+
+        var searchMethod = ko.observableArray(["Relevance", "Best Match"]);
+
         var totalItemCount = ko.observable(1);
 
-        var selectedSearch = ko.observable();
-        var searchMethod = ko.observableArray(["Relevance", "Best Match"]);
+        var update = function () {
+
+            return selectedSearch;
+        }
+        var currentSelected = ko.observable(1);
 
         //Search on enter
         $('#system-search').keyup(function (event) {
@@ -21,33 +29,14 @@
                 search();
             }
         });
-       
-        //Update selected search option
-        var update = function () {
-            return selectedSearch;
-        }
 
-        //Mark post
-        var checked = function (data) {
-            return data.status === 1;
-        }
+        var selectItem = function (value) {
+            currentSelected(value);
 
-        var markPost = function (post) {
-            //dataService.updateStatus(post.id, post.status(), function (data) {
-            //    //posts(data);
-            //});
-
-            //tmp.status = data.status === 0 ? 1 : 0;
-            //gtmp = tmp;
-            //gtmp.index = index;
-            //setTimeout(function () {
-            //    //still doesn't work with the set timeout 
-            //    $('#isChecked' + gtmp.index).prop('checked', gtmp.status === 0 ? false : true);
-            //}, 0);
-            //postbox.publish(config.events.markPost, id);
+            console.log("selectItem called");
+            console.log(currentSelected(value));
         };
 
-        //Pagination
         var moveToPage = function (value) {
             pagination.moveToPage(value);
             if (value > pagination.pageCount())
@@ -56,6 +45,7 @@
             console.log(isCurrentPage());
             var page = pagination.pagedItems();
             posts(page);
+            //selectItem(value);
         };
 
         var nextPage = function () {
@@ -70,54 +60,21 @@
             posts(page);
         };
 
+        console.log(JSON.stringify(ko.toJS((selectedSearch))));
         //Search posts
         var search = function () {
-            update();                  
+            console.log('Search function called');
+            update();
+
             var searchfor = jQuery('#system-search').val();
-            if (selectedSearch() === "Relevance") {   
-                dataService.getSearchedResults(searchfor, function (data) {
-                    items(data);                           
-                    pagination.PagerModel(items);
-                  
-                    isFirstPage( new ko.observable(pagination.isFirstPage()));
-                    isLastPage(new ko.observable(pagination.isLastPage()));
-
-                    allPages([]);
-                    pagination.moveToPage(1);
-                    allPages( new ko.observableArray(pagination.allPages()));
-
-                    var page = pagination.pagedItems();
-
-                    totalItemCount(new ko.observable(pagination.totalItemCount()));
-
-                    var list = page.map(function (p) {
-                        //var x = {
-                        //    id: p.id,
-                        //    ...
-                        //    status: ko.observable(p.status),
-                        //    ...
-                        //    body: p.body
-                        //};
-                        var x = Object.assign(p, { status: ko.observable(p.status) });
-                        x.status.subscribe(function () {
-                            dataService.updateStatus(x.id, x.status(), function (data) {
-                                //posts(data);
-                            });
-                        });
-                        return x;
-                    });
-
-                    posts(list);
-                    if (data === null || data.length === 0) {
-                        toastr.warning('No posts found!');
-                    }
-                });
-            }
-            else if (selectedSearch() === "Best Match") {
-                dataService.getSearchedBmResults(searchfor,
+            if (selectedSearch() === "Relevance") {
+                console.log('ok');
+                dataService.getSearchedResults(searchfor,
                     function (data) {
                         items(data);
+                        console.log(isFirstPage);
                         pagination.PagerModel(items);
+
                         isFirstPage(new ko.observable(pagination.isFirstPage()));
                         isLastPage(new ko.observable(pagination.isLastPage()));
 
@@ -125,10 +82,50 @@
                         pagination.moveToPage(1);
                         allPages(new ko.observableArray(pagination.allPages()));
 
+                        console.log(allPages);
                         var page = pagination.pagedItems();
-                        totalItemCount(new ko.observable(pagination.totalItemCount()));
-                        posts(page);
 
+                        totalItemCount(new ko.observable(pagination.totalItemCount()));
+                        var list = page.map(function (p) {
+
+                            var postObject = Object.assign(p, { status: ko.observable(p.status) });
+                            postObject.status.subscribe(function () {
+                                dataService.updateStatus(postObject.id, postObject.status(), function (data) {
+
+                                });
+                            });
+                            return postObject;
+                        });
+
+                        posts(list);
+
+                        if (data === null || data.length === 0) {
+                            toastr.warning('No posts found!');
+                        }
+                    });
+            }
+            else if (selectedSearch() === "Best Match") {
+
+                dataService.getSearchedBmResults(searchfor,
+                    function (data) {
+                        items(data);
+                        console.log(isFirstPage);
+                        pagination.PagerModel(items);
+
+                        isFirstPage(new ko.observable(pagination.isFirstPage()));
+                        isLastPage(new ko.observable(pagination.isLastPage()));
+
+                        allPages([]);
+                        pagination.moveToPage(1);
+                        allPages(new ko.observableArray(pagination.allPages()));
+
+                        console.log(allPages);
+                        var page = pagination.pagedItems();
+
+                        totalItemCount(new ko.observable(pagination.totalItemCount()));
+
+                        posts(page);
+                        console.log("posts(page): " + posts(page));
                         if (data === null || data.length === 0) {
                             toastr.warning('No posts found!');
                         }
@@ -138,11 +135,23 @@
             }
         };
 
+
+        var callback = function (data) {
+            postDetail(data);
+            console.log(data);
+
+        };
+        var getDetails = function (xx) {
+            dataService.getPostId(xx.id, callback);
+
+        }
+
         return {
             posts,
             search,
-            markPost,
             searchfor,
+            checkedStatus,
+            items,
             pagination,
             isCurrentPage,
             isFirstPage,
@@ -152,9 +161,12 @@
             totalItemCount,
             nextPage,
             previousPage,
-            checked,
-            searchMethod,
-            selectedSearch
+            currentSelected,
+            selectItem,
+            getDetails,
+            postDetail,
+            selectedSearch,
+            searchMethod
 
         };
     };

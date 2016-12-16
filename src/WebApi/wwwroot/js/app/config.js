@@ -4,15 +4,16 @@ define([], function () {
         events: {
             selectAnnotation: "SelectAnnotation",
             saveAnnotation: "SaveAnnotation",
-            deleteAnnotation: "DeleteAnnotation",
             searchPost: "SearchPost",
-            markPost: "MarkPost",
-            changeMenu: "ChangeMenu"
+            changeMenu: "ChangeMenu",
+            deleteAnnotation: "DeleteAnnotation",
+            selectSearch: "SelectSearch",
+            pageNumber: "pageNumber"
         },
         menuItems: {
             search: "Search Posts",
             history: "Search History",
-            annotations: "Personal Comments",          
+            annotations: "Personal Comments",
             cloud: "Word Cloud",
             about: "About"
         }
