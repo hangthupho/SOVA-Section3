@@ -51,7 +51,7 @@ namespace DatabaseService
         {
 
             optionsBuilder.UseMySql("server=wt-220.ruc.dk;database=raw7;uid=raw7;pwd=raw7");
-            //optionsBuilder.UseMySql("server=localhost;database=sova2;uid=root;pwd=root");
+
             base.OnConfiguring(optionsBuilder);
         }
         public static String GetTimestamp(DateTime value)
