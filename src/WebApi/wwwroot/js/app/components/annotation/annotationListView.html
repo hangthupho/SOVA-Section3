@@ -1,10 +1,29 @@
-﻿<div class="col-sm-6">
-    <ul class="list-group" data-bind="foreach: annotations">
-        <li class="list-group-item" data-bind="click: $parent.selectAnnotation, css: {active: $parent.isSelected($data)}">
-          
-                <span data-bind="text: postId">PostId</span> 
-        </li>
-    </ul>
-</div>
+﻿
+<div class="container-fluid">
+    <div class="col-sm-3">
+        <ul class="list-group" data-bind="foreach: annotations">
+            <li class="list-group-item" data-bind="click: $parent.selectAnnotation, css: {active: $parent.isSelected($data)}">
+                <span>Post number:</span>
+                <span data-bind="text: postId"></span>
+            </li>
+        </ul>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Total</th>
+                    <th>Previous</th>
+                    <th>Next</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td data-bind="text: total"></td>
+                    <td> <button data-bind="enable: canPrev(), click: showPrev">Previous</button></td>
+                    <td> <button data-bind="enable: canNext(),click: showNext">Next</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <annotation-details></annotation-details>
 
-<annotation-details></annotation-details>
+</div>

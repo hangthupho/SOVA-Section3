@@ -22,8 +22,9 @@ namespace DatabaseService
         public DbSet<Tag> tag { get; set; }
         public DbSet<History> history { get; set; }
         public DbSet<Annotation> annotation { get; set; }
-        public DbSet<SearchedResult> searchedResult { get; set; }
+        public DbSet<BestMatchSearch> bestMatchSearch { get; set; }
         public DbSet<WeightedSearch> weightedSearch { get; set; }
+        public DbSet<WordCloud> wordCloud { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -48,8 +49,19 @@ namespace DatabaseService
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("server=localhost;database=sova2;uid=root;pwd=root");
+
+            optionsBuilder.UseMySql("server=wt-220.ruc.dk;database=raw7;uid=raw7;pwd=raw7");
+            //optionsBuilder.UseMySql("server=localhost;database=sova2;uid=root;pwd=root");
             base.OnConfiguring(optionsBuilder);
+        }
+        public static String GetTimestamp(DateTime value)
+        {
+            return value.ToString("yyyy-MM-dd HH:mm:ss");
+        }
+
+        public String GetTimestamp()
+        {
+            return GetTimestamp(DateTime.Now);
         }
     }
 }

@@ -7,6 +7,7 @@
             { title: config.menuItems.cloud, component: 'word-cloud' },
             { title: config.menuItems.about, component: 'about' }
         ];
+        var currentParams = ko.observable();
         var currentComponent = ko.observable();
         var selectedMenu = ko.observable();
 
@@ -18,7 +19,11 @@
         var isSelected = function (menu) {
             return menu === selectedMenu();
         };
-
+        postbox.subscribe(config.events.selectSearch, function (params) {
+            currentParams(params);
+            console.log(params);
+            currentComponent("search-list");
+        });
         postbox.subscribe(config.events.changeMenu, function (title) {
             for (var i = 0; i < menuItems.length; i++) {
                 if (menuItems[i].title === title) {
@@ -33,6 +38,7 @@
         return {
             menuItems,
             currentComponent,
+            currentParams,
             selectMenu,
             isSelected
         };

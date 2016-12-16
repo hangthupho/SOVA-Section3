@@ -5,12 +5,15 @@ define([], function () {
             selectAnnotation: "SelectAnnotation",
             saveAnnotation: "SaveAnnotation",
             searchPost: "SearchPost",
-            changeMenu: "ChangeMenu"
+            changeMenu: "ChangeMenu",
+            deleteAnnotation: "DeleteAnnotation",
+            selectSearch: "SelectSearch",
+            pageNumber: "pageNumber"
         },
         menuItems: {
             search: "Search Posts",
             history: "Search History",
-            annotations: "Personal Comments",          
+            annotations: "Personal Comments",
             cloud: "Word Cloud",
             about: "About"
         }

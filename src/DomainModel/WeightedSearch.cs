@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StackOverFLow.DomainModel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -15,6 +16,10 @@ namespace DomainModel
         public double? Rank { get; set; }
         [Column("postBody")]
         public string PostBody { get; set; }
+        [Column("title")]
+        public string Title { get; set; }
 
+        public string Tag { get; set; }
+        public int Status { get; set; }
     }
 }

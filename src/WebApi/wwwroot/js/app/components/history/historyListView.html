@@ -1,0 +1,40 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="col-md-3">total</th>
+                    <th class="col-md-3"></th>
+                    <th class="col-md-3"></th>
+                    <th class="col-md-3"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="col-md-3" data-bind="text: total"></td>
+                    <td class="col-md-3">  </td>
+                    <td class="col-md-3">Jump to Page: <input data-bind="value: page" style="width: 40px"><button data-bind="click: showJump">Jump!</button></td>
+                    <td class="col-md-3"><button data-bind="enable: canPrev(), click: showPrev">Previous</button> <button data-bind="enable: canNext(),click: showNext">Next</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="col-md-4">searchString</th>
+                    <th class="col-md-4">searchTime</th>
+                    <th class="col-md-4"></th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: hdata">
+                <tr>
+                    <td class="col-md-4" data-bind="text:searchString"></td>
+                    <td class="col-md-4" data-bind="text:searchTime"></td>
+                    <td class="col-md-4"> <a href="#" data-bind="click: $parent.getDetails">Search again</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

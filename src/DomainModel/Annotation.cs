@@ -13,6 +13,7 @@ namespace DomainModel
         public int PostId { get; set; }
         public virtual Post Post { get; set; }
 
-        public string CommentBody { get; set; }
+        public string AnnotationBody { get; set; }
+        public string AnnotationCreationDate { get; set; }
     }
 }

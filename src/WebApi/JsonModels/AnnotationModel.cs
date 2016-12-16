@@ -10,6 +10,7 @@ namespace WebApi.JsonModels
         public string Url { get; set; }
         public int AnnotationId { get; set; }
         public int PostId { get; set; }
-        public string CommentBody { get; set; }
+        public string AnnotationBody { get; set; }
+        public string AnnotationCreationDate { get; set; }
     }
 }

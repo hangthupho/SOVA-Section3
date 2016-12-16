@@ -12,7 +12,6 @@
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
             <ul class="nav navbar-nav navbar-right" data-bind="foreach: menuItems">
                 <li data-bind="css: {active: $parent.isSelected($data)}">
                     <a href="#" data-bind="click: $parent.selectMenu">
@@ -23,4 +22,5 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-<div data-bind="component: currentComponent"></div>
+<!--<div data-bind="component: currentComponent"></div>-->
+<div data-bind="component: {name: currentComponent, params: currentParams}"></div>
