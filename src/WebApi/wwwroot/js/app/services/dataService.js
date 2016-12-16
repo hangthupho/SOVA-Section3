@@ -29,7 +29,7 @@
     };
 
     var getHistoryPage = function (page, callback) {
-        var pageSize = 20;
+        var pageSize = 10;
 
         $.ajax({
             url: histUrl,
