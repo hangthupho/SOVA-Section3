@@ -17,9 +17,7 @@
        
        
         var totalItemCount = ko.observable(1);
-        //var moveToPage;
-        //var nextPage;
-
+       
         
         var update = function() {
             

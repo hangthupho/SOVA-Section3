@@ -33,7 +33,7 @@ define(['knockout', 'dataservice', 'postbox', 'config', 'toastr'],
 
                 });
             }
-
+           
             // show the next page
             var showNext = function() {
                 dataService.getHistory(nextUrl(),
@@ -53,12 +53,13 @@ define(['knockout', 'dataservice', 'postbox', 'config', 'toastr'],
                     total;
 
             }
-       
+        //Jump to the selected number of page
             var showJump = function() {
                 update();
                 console.log(total());
                 console.log(page());
                 var totalPage = total() / 20;
+                //set the limit
                 if (page() < totalPage && page().match(/^-?\d+$/)) {
                     dataService.getHistoryPage(page,
                         function (result) {

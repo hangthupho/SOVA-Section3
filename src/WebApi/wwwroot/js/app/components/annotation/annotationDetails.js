@@ -2,7 +2,7 @@
     return function (params) {
         var annotation = ko.observable(params.annotation);
         var annotationsR = ko.observableArray(params.annotations);
-        
+        //change comment detail then update the object to postbox as observable pattern 
         var saveAnnotation = function () {
             postbox.publish(config.events.saveAnnotation, ko.toJS(annotation));
             toastr.success("Annotation saved!");
@@ -10,7 +10,8 @@
            dataservice.putAnno(annoPut,annoPut.annotationId,function(result) {
                 
             });
-           };
+        };
+        //delete comment then send the id of the selected comment to observable postbox
         var deleteAnnotation = function () {
             console.log(ko.toJS(annotationsR));
             var annoDel = ko.toJS(annotation);

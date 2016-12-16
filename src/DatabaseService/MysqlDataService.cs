@@ -53,7 +53,7 @@ namespace DatabaseService
             using (var db = new SovaContext())
             {
                 //annotation.AnnotationId = db.annotation.Max(c => c.AnnotationId) + 1;
-                annotation.CommentCreationDate = db.GetTimestamp();
+                annotation.AnnotationCreationDate = db.GetTimestamp();
                 db.Add(annotation);
                 db.SaveChanges();
             }
