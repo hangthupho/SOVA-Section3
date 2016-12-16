@@ -50,6 +50,7 @@ namespace DatabaseService
         {
             using (var db = new SovaContext())
             {
+                annotation.AnnotationCreationDate = db.GetTimestamp();
                 //annotation.AnnotationId = db.annotation.Max(c => c.AnnotationId) + 1;
                 db.Add(annotation);
                 db.SaveChanges();
@@ -63,6 +64,7 @@ namespace DatabaseService
 
                 try
                 {
+                    annotation.AnnotationCreationDate = db.GetTimestamp();
                     db.Attach(annotation);
                     db.Entry(annotation).State = EntityState.Modified;
                     return db.SaveChanges() > 0;
